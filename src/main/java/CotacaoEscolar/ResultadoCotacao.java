@@ -1,5 +1,7 @@
 package CotacaoEscolar;
 
+import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
+
 /**
  * Escreva a descrição da classe ResultadoCotacao aqui.
  *

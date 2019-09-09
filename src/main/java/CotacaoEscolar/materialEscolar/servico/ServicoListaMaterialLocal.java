@@ -1,4 +1,4 @@
-package servicos;
+package CotacaoEscolar.materialEscolar.servico;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import CotacaoEscolar.ListaItem;
-import CotacaoEscolar.ListaMaterial;
 import CotacaoEscolar.escola.model.Escola;
+import CotacaoEscolar.item.model.ListaItem;
 import CotacaoEscolar.item.service.ServicoItem;
+import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
 
 public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 

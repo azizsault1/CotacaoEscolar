@@ -5,9 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import CotacaoEscolar.ListaItem;
 import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
 import CotacaoEscolar.item.model.Item;
+import CotacaoEscolar.item.model.ListaItem;
 
 public class ServicoItemLocal implements ServicoItem {
 

@@ -1,6 +1,7 @@
-package CotacaoEscolar;
+package CotacaoEscolar.materialEscolar.modelo;
 
 import CotacaoEscolar.escola.model.Escola;
+import CotacaoEscolar.item.model.ListaItem;
 
 /**
  * Escreva a descrição da classe ListaMaterial aqui.

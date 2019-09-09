@@ -1,4 +1,4 @@
-package CotacaoEscolar;
+package CotacaoEscolar.item.model;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -9,8 +9,6 @@ import java.util.Iterator;
  * @version 1.0
  */
 import java.util.List;
-
-import CotacaoEscolar.item.model.Item;
 
 public class ListaItem implements Iterable<Item> {
    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio

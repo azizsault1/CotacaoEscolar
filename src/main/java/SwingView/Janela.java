@@ -13,11 +13,11 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import CotacaoEscolar.ListaItem;
-import CotacaoEscolar.ListaMaterial;
 import CotacaoEscolar.escola.model.Escola;
 import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
 import CotacaoEscolar.item.model.Item;
+import CotacaoEscolar.item.model.ListaItem;
+import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
 import SwingView.interfaces.Label;
 import SwingView.interfaces.LabelFieldConfiguration;
 import SwingView.interfaces.Posicao;

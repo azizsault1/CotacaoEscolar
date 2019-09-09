@@ -1,10 +1,10 @@
-package servicos;
+package CotacaoEscolar.materialEscolar.servico;
 
 import java.util.List;
 
-import CotacaoEscolar.ListaItem;
-import CotacaoEscolar.ListaMaterial;
 import CotacaoEscolar.escola.model.Escola;
+import CotacaoEscolar.item.model.ListaItem;
+import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
 
 public interface ServicoListaMaterial {
 

@@ -7,6 +7,8 @@ import CotacaoEscolar.escola.service.ServicoEscola;
 import CotacaoEscolar.escola.service.ServicoEscolaLocal;
 import CotacaoEscolar.item.service.ServicoItem;
 import CotacaoEscolar.item.service.ServicoItemLocal;
+import CotacaoEscolar.materialEscolar.servico.ServicoListaMaterial;
+import CotacaoEscolar.materialEscolar.servico.ServicoListaMaterialLocal;
 
 public class ListaServicos {
 

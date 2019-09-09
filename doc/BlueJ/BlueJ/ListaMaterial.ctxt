@@ -1,0 +1,7 @@
+#BlueJ class context
+comment0.target=ListaMaterial
+comment0.text=\n\ Escreva\ a\ descri\u00E7\u00E3o\ da\ classe\ ListaMaterial\ aqui.\n\n\ @author\ (seu\ nome)\n\ @version\ (n\u00FAmero\ de\ vers\u00E3o\ ou\ data)\n
+comment1.params=escola
+comment1.target=ListaMaterial(Escola)
+comment1.text=\n\ COnstrutor\ para\ objetos\ da\ classe\ ListaMaterial\n
+numComments=2

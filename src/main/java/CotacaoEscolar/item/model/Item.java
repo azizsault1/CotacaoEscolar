@@ -7,7 +7,6 @@ package CotacaoEscolar.item.model;
  * @version (número de versão ou data)
  */
 public class Item {
-   // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
    private final DescricaoMaterialEscolar materialEscolar;
    private final int quantidade;
 
@@ -19,12 +18,13 @@ public class Item {
       this.quantidade = quantidade;
    }
 
-   public DescricaoMaterialEscolar getDescricao() {
-      return this.materialEscolar;
-   }
-
    public int getQuantidade() {
       return this.quantidade;
+   }
+
+   @Override
+   public String toString() {
+      return this.materialEscolar.toString();
    }
 
 }

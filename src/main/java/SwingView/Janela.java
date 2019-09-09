@@ -3,12 +3,14 @@ package SwingView;
 import java.awt.Container;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -74,7 +76,14 @@ public class Janela extends JFrame {
       final LabelField<DescricaoMaterialEscolar> itens = this.criarItens(linha2);
       final int linha3 = this.calculaProximaLinha(linha2);
 
-      final DefaultTableModel modelo = new DefaultTableModel();
+      final DefaultTableModel modelo = new DefaultTableModel() {
+         private static final long serialVersionUID = 1L;
+
+         @Override
+         public boolean isCellEditable(final int row, final int column) {
+            return false;
+         }
+      };
       final JTable tabela = this.criarTabela(modelo);
       final JScrollPane barraRolagem = new JScrollPane(tabela);
       barraRolagem.setBounds(Dimensoes.MarginColuna1.getValor(), linha3, 575, 350);
@@ -93,10 +102,9 @@ public class Janela extends JFrame {
             modelo.setNumRows(0);
             final Integer serieEscolhida = (Integer) e.getItem();
             final ListaItem itensSelecionados = this.servicos.getServicoListaMaterial().selecionePor(this.escolaEscolhida, serieEscolhida);
+
             for (final Item item : itensSelecionados) {
-               final JButton remover = new JButton("Remover");
-               remover.addActionListener(e1 -> System.out.println("O botão do item: " + item.getDescricao() + " foi removido"));
-               modelo.addRow(new Object[] { item.getDescricao(), item.getQuantidade(), remover });
+               modelo.addRow(new Object[] { item, item.getQuantidade() });
             }
          }
       };
@@ -145,11 +153,15 @@ public class Janela extends JFrame {
    private JTable criarTabela(final DefaultTableModel modelo) {
       modelo.addColumn("Item");
       modelo.addColumn("Quantidade");
-      modelo.addColumn("Remover");
       final JTable tabela = new JTable(modelo);
-      // tabela.getColumnModel().getColumn(0).setPreferredWidth(90);
-      // tabela.getColumnModel().getColumn(1).setPreferredWidth(5);
-      // tabela.getColumnModel().getColumn(2).setPreferredWidth(5);
+      tabela.addMouseListener(new MouseAdapter() {
+         @Override
+         public void mouseClicked(final MouseEvent e) {
+            final int row = tabela.rowAtPoint(e.getPoint());
+            final int col = 0;
+            JOptionPane.showInputDialog(null, "Value in final the cell clicked :" + tabela.getValueAt(row, col).toString());
+         }
+      });
       return tabela;
    }
 

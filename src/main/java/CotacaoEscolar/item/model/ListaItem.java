@@ -1,6 +1,7 @@
 package CotacaoEscolar.item.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 /**
  * Escreva a descrição da classe ListaItems aqui.
@@ -24,7 +25,7 @@ public class ListaItem implements Iterable<Item> {
       }
    }
 
-   public void adicionarItem(final Item item) {
+   public void adicionar(final Item item) {
       this.items.add(item);
    }
 
@@ -39,6 +40,12 @@ public class ListaItem implements Iterable<Item> {
 
    @Override
    public Iterator<Item> iterator() {
-      return this.items.iterator();
+      final List<Item> result = new ArrayList<>(this.items);
+      Collections.sort(result);
+      return result.iterator();
+   }
+
+   public void remove(final Item item) {
+      this.items.remove(item);
    }
 }

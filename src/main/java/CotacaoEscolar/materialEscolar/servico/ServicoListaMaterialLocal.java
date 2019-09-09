@@ -7,6 +7,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import CotacaoEscolar.escola.model.Escola;
+import CotacaoEscolar.item.model.Item;
 import CotacaoEscolar.item.model.ListaItem;
 import CotacaoEscolar.item.service.ServicoItem;
 import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
@@ -44,6 +45,18 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 
       return materialOpt.get().getItens();
 
+   }
+
+   @Override
+   public void remover(final Escola escola, final Integer serie, final Item item) {
+      final ListaItem itens = this.selecionePor(escola, serie);
+      itens.remove(item);
+   }
+
+   @Override
+   public void adicionar(final Escola escola, final Integer serie, final Item item) {
+      final ListaItem itens = this.selecionePor(escola, serie);
+      itens.adicionar(item);
    }
 
 }

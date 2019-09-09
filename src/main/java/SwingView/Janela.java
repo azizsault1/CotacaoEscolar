@@ -10,7 +10,6 @@ import java.util.stream.Collectors;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -20,6 +19,7 @@ import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
 import CotacaoEscolar.item.model.Item;
 import CotacaoEscolar.item.model.ListaItem;
 import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
+import SwingView.CustomOptionalPalne.AcaoBotoes;
 import SwingView.interfaces.Label;
 import SwingView.interfaces.LabelFieldConfiguration;
 import SwingView.interfaces.Posicao;
@@ -38,6 +38,7 @@ public class Janela extends JFrame {
 
    private final ListaServicos servicos;
    private Escola escolaEscolhida;
+   private Integer serieEscolhida;
 
    public Janela(final ListaServicos listaServicos) {
       this.servicos = listaServicos;
@@ -99,13 +100,8 @@ public class Janela extends JFrame {
 
       final ItemListener listenerSeries = e -> {
          if (ItemEvent.SELECTED == e.getStateChange()) {
-            modelo.setNumRows(0);
-            final Integer serieEscolhida = (Integer) e.getItem();
-            final ListaItem itensSelecionados = this.servicos.getServicoListaMaterial().selecionePor(this.escolaEscolhida, serieEscolhida);
-
-            for (final Item item : itensSelecionados) {
-               modelo.addRow(new Object[] { item, item.getQuantidade() });
-            }
+            this.serieEscolhida = (Integer) e.getItem();
+            this.atualizarTabela(modelo);
          }
       };
 
@@ -119,6 +115,14 @@ public class Janela extends JFrame {
       this.getContentPane().add(barraRolagem);
 
       this.setContentPane(contentPane);
+   }
+
+   private void atualizarTabela(final DefaultTableModel modelo) {
+      modelo.setNumRows(0);
+      final ListaItem itensSelecionados = this.servicos.getServicoListaMaterial().selecionePor(this.escolaEscolhida, this.serieEscolhida);
+      for (final Item item : itensSelecionados) {
+         modelo.addRow(new Object[] { item, item.getQuantidade() });
+      }
    }
 
    private LabelField<Escola> criarEscola(final int linha1) {
@@ -154,12 +158,30 @@ public class Janela extends JFrame {
       modelo.addColumn("Item");
       modelo.addColumn("Quantidade");
       final JTable tabela = new JTable(modelo);
+
+      final AcaoBotoes acao = new AcaoBotoes() {
+
+         @Override
+         public void salvar(final Item de, final Item para) {
+            Janela.this.servicos.getServicoListaMaterial().remover(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, de);
+            Janela.this.servicos.getServicoListaMaterial().adicionar(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, para);
+            Janela.this.atualizarTabela(modelo);
+         }
+
+         @Override
+         public void remover(final Item item) {
+            Janela.this.servicos.getServicoListaMaterial().remover(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, item);
+            Janela.this.atualizarTabela(modelo);
+         }
+      };
+
       tabela.addMouseListener(new MouseAdapter() {
          @Override
          public void mouseClicked(final MouseEvent e) {
             final int row = tabela.rowAtPoint(e.getPoint());
             final int col = 0;
-            JOptionPane.showInputDialog(null, "Value in final the cell clicked :" + tabela.getValueAt(row, col).toString());
+            final Item item = (Item) tabela.getValueAt(row, col);
+            CustomOptionalPalne.displayGUI(item, acao);
          }
       });
       return tabela;

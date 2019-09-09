@@ -6,7 +6,7 @@ package CotacaoEscolar.item.model;
  * @author (seu nome)
  * @version (número de versão ou data)
  */
-public class DescricaoMaterialEscolar {
+public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEscolar> {
    private final String descricao;
 
    public DescricaoMaterialEscolar(final String descricao) {
@@ -16,6 +16,11 @@ public class DescricaoMaterialEscolar {
    @Override
    public String toString() {
       return this.descricao;
+   }
+
+   @Override
+   public int compareTo(final DescricaoMaterialEscolar o) {
+      return this.descricao.compareTo(o.descricao);
    }
 
 }

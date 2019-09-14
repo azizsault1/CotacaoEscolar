@@ -1,28 +1,30 @@
 package cotacaoEscolar.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.repository.Repository;
 
 @Service
 public class ServicoEscolaLocal implements ServicoEscola {
 
-   private static List<Escola> escolas = new ArrayList<>();
+   private final Repository repository;
 
-   public ServicoEscolaLocal() {
-      final Escola escola1 = new Escola("Escola1");
-      final Escola escola2 = new Escola("Escola2");
-      final Escola escola3 = new Escola("Escola3");
-
-      escolas = Arrays.asList(escola1, escola2, escola3);
+   public ServicoEscolaLocal(final Repository repository) {
+      this.repository = repository;
    }
 
    @Override
-   public final List<Escola> todas() {
-      return escolas;
+   public final Collection<Escola> todas() {
+      return this.repository.escolas();
+   }
+
+   @Override
+   public Escola buscar(final String escola) {
+      final Escola aProcurar = new Escola(escola);
+      final Collection<Escola> escolas = this.todas();
+      return escolas.stream().filter(encontrada -> encontrada.equals(aProcurar)).findFirst().orElseThrow(IllegalArgumentException::new);
    }
 }

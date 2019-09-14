@@ -1,7 +1,6 @@
 package cotacaoEscolar.service.impl;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -11,29 +10,33 @@ import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ListaItem;
 import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.repository.Repository;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
 @Service
 public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 
-   private final List<ListaMaterial> listaMaterialEscolar = new ArrayList<>();
+   private final Repository repository;
 
-   public ServicoListaMaterialLocal() {
+   public ServicoListaMaterialLocal(final Repository repository) {
+      this.repository = repository;
    }
 
    @Override
-   public List<ListaMaterial> selecionePor(final Escola escola) {
-      return this.listaMaterialEscolar.stream().filter(material -> material.pertenceA(escola)).collect(Collectors.toList());
+   public Collection<ListaMaterial> selecionePor(final Escola escola) {
+      final Collection<ListaMaterial> listaMaterialEscolar = this.repository.materiais();
+      return listaMaterialEscolar.stream().filter(material -> material.pertenceA(escola)).collect(Collectors.toList());
    }
 
    @Override
    public ListaItem selecionePor(final Escola escola, final Integer serie) {
-      Optional<ListaMaterial> materialOpt = this.listaMaterialEscolar.stream().filter(material -> material.pertenceA(escola) && material.pertenceA(serie))
+      final Collection<ListaMaterial> listaMaterialEscolar = this.repository.materiais();
+      Optional<ListaMaterial> materialOpt = listaMaterialEscolar.stream().filter(material -> material.pertenceA(escola) && material.pertenceA(serie))
             .findFirst();
 
       if (!materialOpt.isPresent()) {
          final ListaMaterial novaLista = new ListaMaterial(escola, serie, new ListaItem());
-         this.listaMaterialEscolar.add(novaLista);
+         this.repository.add(novaLista);
          materialOpt = Optional.of(novaLista);
       }
 
@@ -54,9 +57,9 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
    }
 
    @Override
-   public ServicoListaMaterialLocal adicionar(final Escola escola, final Integer serie, final ListaItem itens) {
-      final ListaItem itensEncontrados = this.selecionePor(escola, serie);
-      itensEncontrados.adicionar(itens);
-      return this;
+   public Collection<Integer> selecioneSeriesPor(final Escola escolaEncontrada) {
+      final Collection<ListaMaterial> materiais = this.selecionePor(escolaEncontrada);
+      return materiais.stream().map(ListaMaterial::getSerie).collect(Collectors.toList());
    }
+
 }

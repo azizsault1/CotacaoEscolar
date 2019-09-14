@@ -1,6 +1,6 @@
 package cotacaoEscolar.service;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
@@ -12,7 +12,7 @@ import cotacaoEscolar.model.ListaMaterial;
 @Service
 public interface ServicoListaMaterial {
 
-   List<ListaMaterial> selecionePor(Escola escola);
+   Collection<ListaMaterial> selecionePor(Escola escola);
 
    ListaItem selecionePor(Escola escolaEscolhida, Integer serieEscolhida);
 
@@ -20,6 +20,6 @@ public interface ServicoListaMaterial {
 
    void adicionar(Escola escola, Integer serie, Item para);
 
-   ServicoListaMaterial adicionar(Escola escola, Integer valueOf, ListaItem selecionePor);
+   Collection<Integer> selecioneSeriesPor(Escola escolaEncontrada);
 
 }

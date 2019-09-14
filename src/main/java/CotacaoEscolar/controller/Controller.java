@@ -1,5 +1,6 @@
 package cotacaoEscolar.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
@@ -10,9 +11,9 @@ import cotacaoEscolar.model.ListaMaterial;
 
 public interface Controller {
 
-   List<Escola> todasEscolas();
+   Collection<Escola> todasEscolas();
 
-   List<ListaMaterial> selecioneMaterialPor(Escola escola);
+   Collection<ListaMaterial> selecioneMaterialPor(Escola escola);
 
    ListaItem selecioneMaterialPor(Escola escola, Integer serie);
 

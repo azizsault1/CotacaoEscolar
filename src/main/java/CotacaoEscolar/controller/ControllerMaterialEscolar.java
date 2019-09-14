@@ -1,5 +1,6 @@
 package cotacaoEscolar.controller;
 
+import java.util.Collection;
 import java.util.List;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
@@ -24,12 +25,12 @@ public class ControllerMaterialEscolar implements Controller {
    }
 
    @Override
-   public List<Escola> todasEscolas() {
+   public Collection<Escola> todasEscolas() {
       return this.servicoEscola.todas();
    }
 
    @Override
-   public List<ListaMaterial> selecioneMaterialPor(final Escola escola) {
+   public Collection<ListaMaterial> selecioneMaterialPor(final Escola escola) {
       return this.servicoListaMaterial.selecionePor(escola);
    }
 

@@ -1,11 +1,14 @@
 package cotacaoEscolar.model;
 
+import com.fasterxml.jackson.annotation.JsonRootName;
+
 /**
  * Escreva a descrição da classe Item aqui.
  *
  * @author (seu nome)
  * @version (número de versão ou data)
  */
+@JsonRootName("")
 public class Item implements Comparable<Item> {
    private final DescricaoMaterialEscolar materialEscolar;
    private final int quantidade;
@@ -20,6 +23,10 @@ public class Item implements Comparable<Item> {
 
    public Item(final String descricaoMaterialEscolar, final int quantidade) {
       this(new DescricaoMaterialEscolar(descricaoMaterialEscolar), quantidade);
+   }
+
+   public DescricaoMaterialEscolar getDescricao() {
+      return this.materialEscolar;
    }
 
    public int getQuantidade() {

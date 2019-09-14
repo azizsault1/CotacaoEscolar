@@ -25,6 +25,10 @@ public class ListaMaterial {
       this.itens = itens;
    }
 
+   public Escola getEscola() {
+      return this.escola;
+   }
+
    public int getSerie() {
       return this.serie;
    }

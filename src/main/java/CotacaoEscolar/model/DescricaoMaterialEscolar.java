@@ -1,5 +1,6 @@
 package cotacaoEscolar.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
@@ -16,6 +17,7 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
       this.descricao = descricao;
    }
 
+   @JsonValue
    public String getDescricao() {
       return this.descricao;
    }

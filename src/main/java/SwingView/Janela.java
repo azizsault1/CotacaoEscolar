@@ -5,6 +5,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,6 +23,8 @@ import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ListaItem;
 import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.repository.LocalDb;
+import cotacaoEscolar.repository.Repository;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoEscolaLocal;
 import cotacaoEscolar.service.ServicoItem;
@@ -77,7 +80,7 @@ public class Janela extends JFrame {
 
       final int linha1 = this.calculaProximaLinha(Y_INICIAL);
 
-      final List<Escola> escolas = this.controller.todasEscolas();
+      final Collection<Escola> escolas = this.controller.todasEscolas();
 
       final LabelField<Escola> escola = this.criarEscola(linha1);
       final LabelField<Integer> series = this.criarSeries(linha1);
@@ -100,7 +103,7 @@ public class Janela extends JFrame {
       final ItemListener listenerEscola = e -> {
          if (ItemEvent.SELECTED == e.getStateChange()) {
             this.escolaEscolhida = (Escola) e.getItem();
-            final List<ListaMaterial> listaMateriais = this.controller.selecioneMaterialPor(this.escolaEscolhida);
+            final Collection<ListaMaterial> listaMateriais = this.controller.selecioneMaterialPor(this.escolaEscolhida);
             final List<Integer> listaSeries = listaMateriais.stream().map(ListaMaterial::getSerie).collect(Collectors.toList());
             series.atualizarLista(listaSeries);
          }
@@ -120,7 +123,7 @@ public class Janela extends JFrame {
 
       escola.addListeners(listenerEscola);
       series.addListeners(listenerSeries);
-      escola.atualizarLista(escolas);
+      escola.atualizarLista(escolas.stream().collect(Collectors.toList()));
 
       this.getContentPane().add(escola);
       this.getContentPane().add(series);
@@ -201,19 +204,10 @@ public class Janela extends JFrame {
    }
 
    public static void main(final String[] args) {
-      final ServicoEscola servicoEscola = new ServicoEscolaLocal();
-      final List<Escola> escolas = servicoEscola.todas();
-      final ServicoItem servicoItem = new ServicoItemLocal();
-      final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal();
-      servicoListaMaterial.adicionar(escolas.get(0), Integer.valueOf(1), servicoItem.selecionePor(1))
-            .adicionar(escolas.get(0), Integer.valueOf(2), servicoItem.selecionePor(2))
-            .adicionar(escolas.get(0), Integer.valueOf(3), servicoItem.selecionePor(3))
-            .adicionar(escolas.get(1), Integer.valueOf(3), servicoItem.selecionePor(3))
-            .adicionar(escolas.get(1), Integer.valueOf(2), servicoItem.selecionePor(2))
-            .adicionar(escolas.get(1), Integer.valueOf(1), servicoItem.selecionePor(1))
-            .adicionar(escolas.get(2), Integer.valueOf(2), servicoItem.selecionePor(2))
-            .adicionar(escolas.get(2), Integer.valueOf(1), servicoItem.selecionePor(1))
-            .adicionar(escolas.get(2), Integer.valueOf(4), servicoItem.selecionePor(4));
+      final Repository repository = new LocalDb();
+      final ServicoEscola servicoEscola = new ServicoEscolaLocal(repository);
+      final ServicoItem servicoItem = new ServicoItemLocal(repository);
+      final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal(repository);
 
       final Controller controller = new ControllerMaterialEscolar(servicoEscola, servicoItem, servicoListaMaterial);
       new Janela(controller);

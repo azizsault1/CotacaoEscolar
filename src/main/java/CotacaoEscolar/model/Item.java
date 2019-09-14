@@ -1,4 +1,4 @@
-package CotacaoEscolar.item.model;
+package cotacaoEscolar.model;
 
 /**
  * Escreva a descrição da classe Item aqui.

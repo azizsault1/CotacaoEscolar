@@ -1,4 +1,4 @@
-package CotacaoEscolar.item.model;
+package cotacaoEscolar.model;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,5 +47,9 @@ public class ListaItem implements Iterable<Item> {
 
    public void remove(final Item item) {
       this.items.remove(item);
+   }
+
+   public void adicionar(final ListaItem itens) {
+      this.items.addAll(itens.getItems());
    }
 }

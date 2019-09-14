@@ -1,4 +1,4 @@
-package SwingView;
+package swingView;
 
 import java.awt.Color;
 
@@ -12,8 +12,8 @@ import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
-import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
-import CotacaoEscolar.item.model.Item;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.Item;
 
 public class CustomOptionalPalne {
 

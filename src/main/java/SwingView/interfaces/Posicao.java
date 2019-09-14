@@ -1,4 +1,4 @@
-package SwingView.interfaces;
+package swingView.interfaces;
 
 public interface Posicao {
    public int x();

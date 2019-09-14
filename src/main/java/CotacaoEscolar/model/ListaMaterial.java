@@ -1,7 +1,7 @@
-package CotacaoEscolar.materialEscolar.modelo;
+package cotacaoEscolar.model;
 
-import CotacaoEscolar.escola.model.Escola;
-import CotacaoEscolar.item.model.ListaItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Escreva a descrição da classe ListaMaterial aqui.
@@ -9,6 +9,7 @@ import CotacaoEscolar.item.model.ListaItem;
  * @author (seu nome)
  * @version (número de versão ou data)
  */
+@JsonSerialize
 public class ListaMaterial {
    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
    private final Escola escola;
@@ -28,6 +29,7 @@ public class ListaMaterial {
       return this.serie;
    }
 
+   @JsonIgnore
    public boolean pertenceA(final Escola escola) {
       return this.escola.equals(escola);
    }
@@ -36,6 +38,7 @@ public class ListaMaterial {
       return this.itens;
    }
 
+   @JsonIgnore
    public boolean pertenceA(final Integer serie) {
       return this.serie.equals(serie);
    }

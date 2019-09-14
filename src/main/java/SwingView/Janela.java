@@ -1,4 +1,4 @@
-package SwingView;
+package swingView;
 
 import java.awt.Container;
 import java.awt.event.ItemEvent;
@@ -8,22 +8,30 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import CotacaoEscolar.escola.model.Escola;
-import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
-import CotacaoEscolar.item.model.Item;
-import CotacaoEscolar.item.model.ListaItem;
-import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
-import SwingView.CustomOptionalPalne.AcaoBotoes;
-import SwingView.interfaces.Label;
-import SwingView.interfaces.LabelFieldConfiguration;
-import SwingView.interfaces.Posicao;
-import servicos.ListaServicos;
+import cotacaoEscolar.controller.Controller;
+import cotacaoEscolar.controller.ControllerMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.ListaItem;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.service.ServicoEscola;
+import cotacaoEscolar.service.ServicoEscolaLocal;
+import cotacaoEscolar.service.ServicoItem;
+import cotacaoEscolar.service.ServicoListaMaterial;
+import cotacaoEscolar.service.impl.ServicoItemLocal;
+import cotacaoEscolar.service.impl.ServicoListaMaterialLocal;
+import swingView.CustomOptionalPalne.AcaoBotoes;
+import swingView.interfaces.Label;
+import swingView.interfaces.LabelFieldConfiguration;
+import swingView.interfaces.Posicao;
 
 public class Janela extends JFrame {
    private static final long serialVersionUID = 1L;
@@ -36,12 +44,12 @@ public class Janela extends JFrame {
 
    private static final int Y_INICIAL = 20;
 
-   private final ListaServicos servicos;
+   private final Controller controller;
    private Escola escolaEscolhida;
    private Integer serieEscolhida;
 
-   public Janela(final ListaServicos listaServicos) {
-      this.servicos = listaServicos;
+   public Janela(final Controller controller) {
+      this.controller = controller;
       this.addComponents();
       this.configureWindow();
    }
@@ -69,7 +77,7 @@ public class Janela extends JFrame {
 
       final int linha1 = this.calculaProximaLinha(Y_INICIAL);
 
-      final List<Escola> escolas = this.servicos.getServicoEscola().todas();
+      final List<Escola> escolas = this.controller.todasEscolas();
 
       final LabelField<Escola> escola = this.criarEscola(linha1);
       final LabelField<Integer> series = this.criarSeries(linha1);
@@ -92,7 +100,7 @@ public class Janela extends JFrame {
       final ItemListener listenerEscola = e -> {
          if (ItemEvent.SELECTED == e.getStateChange()) {
             this.escolaEscolhida = (Escola) e.getItem();
-            final List<ListaMaterial> listaMateriais = this.servicos.getServicoListaMaterial().selecionePor(this.escolaEscolhida);
+            final List<ListaMaterial> listaMateriais = this.controller.selecioneMaterialPor(this.escolaEscolhida);
             final List<Integer> listaSeries = listaMateriais.stream().map(ListaMaterial::getSerie).collect(Collectors.toList());
             series.atualizarLista(listaSeries);
          }
@@ -104,6 +112,11 @@ public class Janela extends JFrame {
             this.atualizarTabela(modelo);
          }
       };
+
+      final JButton pesquisar = new JButton("Pesquisar");
+      pesquisar.addActionListener(action -> {
+
+      });
 
       escola.addListeners(listenerEscola);
       series.addListeners(listenerSeries);
@@ -119,7 +132,7 @@ public class Janela extends JFrame {
 
    private void atualizarTabela(final DefaultTableModel modelo) {
       modelo.setNumRows(0);
-      final ListaItem itensSelecionados = this.servicos.getServicoListaMaterial().selecionePor(this.escolaEscolhida, this.serieEscolhida);
+      final ListaItem itensSelecionados = this.controller.selecioneMaterialPor(this.escolaEscolhida, this.serieEscolhida);
       for (final Item item : itensSelecionados) {
          modelo.addRow(new Object[] { item, item.getQuantidade() });
       }
@@ -150,7 +163,7 @@ public class Janela extends JFrame {
       final Label label = Label.Factory.create(50, "Itens:");
       final LabelFieldConfiguration configuration = LabelFieldConfiguration.Factory.create(posicao, label);
       final LabelField<DescricaoMaterialEscolar> itens = new LabelField<>(configuration);
-      itens.atualizarLista(this.servicos.getServicoItem().todasDescricoes());
+      itens.atualizarLista(this.controller.todasDescricoes());
       return itens;
    }
 
@@ -163,14 +176,14 @@ public class Janela extends JFrame {
 
          @Override
          public void salvar(final Item de, final Item para) {
-            Janela.this.servicos.getServicoListaMaterial().remover(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, de);
-            Janela.this.servicos.getServicoListaMaterial().adicionar(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, para);
+            Janela.this.controller.remover(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, de);
+            Janela.this.controller.adicionar(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, para);
             Janela.this.atualizarTabela(modelo);
          }
 
          @Override
          public void remover(final Item item) {
-            Janela.this.servicos.getServicoListaMaterial().remover(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, item);
+            Janela.this.controller.remover(Janela.this.escolaEscolhida, Janela.this.serieEscolhida, item);
             Janela.this.atualizarTabela(modelo);
          }
       };
@@ -188,7 +201,21 @@ public class Janela extends JFrame {
    }
 
    public static void main(final String[] args) {
-      final ListaServicos servicos = new ListaServicos();
-      new Janela(servicos);
+      final ServicoEscola servicoEscola = new ServicoEscolaLocal();
+      final List<Escola> escolas = servicoEscola.todas();
+      final ServicoItem servicoItem = new ServicoItemLocal();
+      final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal();
+      servicoListaMaterial.adicionar(escolas.get(0), Integer.valueOf(1), servicoItem.selecionePor(1))
+            .adicionar(escolas.get(0), Integer.valueOf(2), servicoItem.selecionePor(2))
+            .adicionar(escolas.get(0), Integer.valueOf(3), servicoItem.selecionePor(3))
+            .adicionar(escolas.get(1), Integer.valueOf(3), servicoItem.selecionePor(3))
+            .adicionar(escolas.get(1), Integer.valueOf(2), servicoItem.selecionePor(2))
+            .adicionar(escolas.get(1), Integer.valueOf(1), servicoItem.selecionePor(1))
+            .adicionar(escolas.get(2), Integer.valueOf(2), servicoItem.selecionePor(2))
+            .adicionar(escolas.get(2), Integer.valueOf(1), servicoItem.selecionePor(1))
+            .adicionar(escolas.get(2), Integer.valueOf(4), servicoItem.selecionePor(4));
+
+      final Controller controller = new ControllerMaterialEscolar(servicoEscola, servicoItem, servicoListaMaterial);
+      new Janela(controller);
    }
 }

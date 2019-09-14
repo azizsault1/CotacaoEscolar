@@ -1,4 +1,6 @@
-package CotacaoEscolar.escola.model;
+package cotacaoEscolar.model;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * Escreva a descrição da classe Escola aqui.
@@ -6,6 +8,7 @@ package CotacaoEscolar.escola.model;
  * @author (seu nome)
  * @version (número de versão ou data)
  */
+@JsonSerialize
 public class Escola {
    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
    private final String nome;
@@ -15,6 +18,10 @@ public class Escola {
     */
    public Escola(final String nome) {
       this.nome = nome;
+   }
+
+   public String getNome() {
+      return this.nome;
    }
 
    @Override

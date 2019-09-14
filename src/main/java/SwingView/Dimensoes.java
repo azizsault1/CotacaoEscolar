@@ -1,4 +1,4 @@
-package SwingView;
+package swingView;
 
 public enum Dimensoes {
    AlturaComponentPadrao(30),

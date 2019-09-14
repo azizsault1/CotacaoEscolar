@@ -1,4 +1,4 @@
-package SwingView;
+package swingView;
 
 import java.awt.event.ItemListener;
 import java.util.List;
@@ -7,7 +7,7 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import SwingView.interfaces.LabelFieldConfiguration;
+import swingView.interfaces.LabelFieldConfiguration;
 
 public class LabelField<E> extends JPanel {
    private static final long serialVersionUID = 1L;

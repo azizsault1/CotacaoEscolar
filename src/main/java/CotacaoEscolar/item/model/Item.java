@@ -1,11 +1,8 @@
-package CotacaoEscolar.item.model;
+package cotacaoEscolar.item.model;
 
-/**
- * Escreva a descrição da classe Item aqui.
- *
- * @author (seu nome)
- * @version (número de versão ou data)
- */
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+@JsonSerialize
 public class Item implements Comparable<Item> {
    private final DescricaoMaterialEscolar materialEscolar;
    private final int quantidade;

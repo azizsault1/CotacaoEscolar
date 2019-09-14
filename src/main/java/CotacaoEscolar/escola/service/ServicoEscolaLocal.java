@@ -1,11 +1,14 @@
-package CotacaoEscolar.escola.service;
+package cotacaoEscolar.escola.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import CotacaoEscolar.escola.model.Escola;
+import org.springframework.stereotype.Service;
 
+import cotacaoEscolar.escola.model.Escola;
+
+@Service("servicoEscolaLocal")
 public class ServicoEscolaLocal implements ServicoEscola {
 
    private static List<Escola> escolas = new ArrayList<>();

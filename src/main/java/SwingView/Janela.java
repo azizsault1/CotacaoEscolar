@@ -1,4 +1,4 @@
-package SwingView;
+package swingView;
 
 import java.awt.Container;
 import java.awt.event.ItemEvent;
@@ -8,22 +8,23 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import CotacaoEscolar.escola.model.Escola;
-import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
-import CotacaoEscolar.item.model.Item;
-import CotacaoEscolar.item.model.ListaItem;
-import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
-import SwingView.CustomOptionalPalne.AcaoBotoes;
-import SwingView.interfaces.Label;
-import SwingView.interfaces.LabelFieldConfiguration;
-import SwingView.interfaces.Posicao;
+import cotacaoEscolar.escola.model.Escola;
+import cotacaoEscolar.item.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.item.model.Item;
+import cotacaoEscolar.item.model.ListaItem;
+import cotacaoEscolar.materialEscolar.modelo.ListaMaterial;
 import servicos.ListaServicos;
+import swingView.CustomOptionalPalne.AcaoBotoes;
+import swingView.interfaces.Label;
+import swingView.interfaces.LabelFieldConfiguration;
+import swingView.interfaces.Posicao;
 
 public class Janela extends JFrame {
    private static final long serialVersionUID = 1L;
@@ -105,6 +106,9 @@ public class Janela extends JFrame {
          }
       };
 
+      JButton cotar = new JButton("Cotar");
+      cotar.setBounds(100, 520, 100, 20);
+      
       escola.addListeners(listenerEscola);
       series.addListeners(listenerSeries);
       escola.atualizarLista(escolas);
@@ -113,6 +117,7 @@ public class Janela extends JFrame {
       this.getContentPane().add(series);
       this.getContentPane().add(itens);
       this.getContentPane().add(barraRolagem);
+      this.getContentPane().add(cotar);
 
       this.setContentPane(contentPane);
    }
@@ -127,7 +132,7 @@ public class Janela extends JFrame {
 
    private LabelField<Escola> criarEscola(final int linha1) {
       final Posicao posicao = Posicao.Factory.create(Dimensoes.MarginColuna1.getValor(), linha1);
-      final Label label = Label.Factory.create(70, "Colégio:");
+      final Label label = Label.Factory.create(70, "Colegio:");
 
       final LabelFieldConfiguration configuration = LabelFieldConfiguration.Factory.create(posicao, label);
       final LabelField<Escola> colegio = new LabelField<>(configuration);

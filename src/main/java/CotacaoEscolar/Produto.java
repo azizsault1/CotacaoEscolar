@@ -1,6 +1,6 @@
-package CotacaoEscolar;
+package cotacaoEscolar;
 
-import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.item.model.DescricaoMaterialEscolar;
 
 /**
  * Escreva a descrição da classe Produto aqui.

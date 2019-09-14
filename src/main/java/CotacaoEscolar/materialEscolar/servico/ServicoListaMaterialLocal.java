@@ -1,4 +1,4 @@
-package CotacaoEscolar.materialEscolar.servico;
+package cotacaoEscolar.materialEscolar.servico;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import CotacaoEscolar.escola.model.Escola;
-import CotacaoEscolar.item.model.Item;
-import CotacaoEscolar.item.model.ListaItem;
-import CotacaoEscolar.item.service.ServicoItem;
-import CotacaoEscolar.materialEscolar.modelo.ListaMaterial;
+import cotacaoEscolar.escola.model.Escola;
+import cotacaoEscolar.item.model.Item;
+import cotacaoEscolar.item.model.ListaItem;
+import cotacaoEscolar.item.service.ServicoItem;
+import cotacaoEscolar.materialEscolar.modelo.ListaMaterial;
 
 public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 

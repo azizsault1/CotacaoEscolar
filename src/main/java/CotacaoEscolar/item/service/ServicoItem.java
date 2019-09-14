@@ -1,10 +1,13 @@
-package CotacaoEscolar.item.service;
+package cotacaoEscolar.item.service;
 
 import java.util.List;
 
-import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
-import CotacaoEscolar.item.model.ListaItem;
+import org.springframework.stereotype.Service;
 
+import cotacaoEscolar.item.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.item.model.ListaItem;
+
+@Service
 public interface ServicoItem {
    public ListaItem selecionePor(final int serie);
 

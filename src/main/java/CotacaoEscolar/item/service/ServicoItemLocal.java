@@ -1,14 +1,17 @@
-package CotacaoEscolar.item.service;
+package cotacaoEscolar.item.service;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import CotacaoEscolar.item.model.DescricaoMaterialEscolar;
-import CotacaoEscolar.item.model.Item;
-import CotacaoEscolar.item.model.ListaItem;
+import org.springframework.stereotype.Service;
 
+import cotacaoEscolar.item.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.item.model.Item;
+import cotacaoEscolar.item.model.ListaItem;
+
+@Service("servicoItemLocal")
 public class ServicoItemLocal implements ServicoItem {
 
    private final List<DescricaoMaterialEscolar> itens;

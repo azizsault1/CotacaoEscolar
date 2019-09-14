@@ -1,4 +1,4 @@
-package CotacaoEscolar;
+package cotacaoEscolar;
 
 import java.util.ArrayList;
 /**

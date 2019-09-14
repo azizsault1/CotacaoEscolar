@@ -1,9 +1,12 @@
-package CotacaoEscolar.escola.service;
+package cotacaoEscolar.escola.service;
 
 import java.util.List;
 
-import CotacaoEscolar.escola.model.Escola;
+import org.springframework.stereotype.Service;
 
+import cotacaoEscolar.escola.model.Escola;
+
+@Service
 public interface ServicoEscola {
 
    public List<Escola> todas();

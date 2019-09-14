@@ -1,4 +1,4 @@
-package CotacaoEscolar;
+package cotacaoEscolar;
 
 /**
  * Escreva a descrição da classe Estabelecimento aqui.

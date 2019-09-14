@@ -2,13 +2,13 @@ package servicos;
 
 import java.util.List;
 
-import CotacaoEscolar.escola.model.Escola;
-import CotacaoEscolar.escola.service.ServicoEscola;
-import CotacaoEscolar.escola.service.ServicoEscolaLocal;
-import CotacaoEscolar.item.service.ServicoItem;
-import CotacaoEscolar.item.service.ServicoItemLocal;
-import CotacaoEscolar.materialEscolar.servico.ServicoListaMaterial;
-import CotacaoEscolar.materialEscolar.servico.ServicoListaMaterialLocal;
+import cotacaoEscolar.escola.model.Escola;
+import cotacaoEscolar.escola.service.ServicoEscola;
+import cotacaoEscolar.escola.service.ServicoEscolaLocal;
+import cotacaoEscolar.item.service.ServicoItem;
+import cotacaoEscolar.item.service.ServicoItemLocal;
+import cotacaoEscolar.materialEscolar.servico.ServicoListaMaterial;
+import cotacaoEscolar.materialEscolar.servico.ServicoListaMaterialLocal;
 
 public class ListaServicos {
 

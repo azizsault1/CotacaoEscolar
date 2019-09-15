@@ -1,7 +1,6 @@
 package cotacaoEscolar.controller;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,8 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.ListaItem;
-import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoItem;
 import cotacaoEscolar.service.ServicoListaMaterial;
@@ -83,7 +82,7 @@ public class ControllerRest {
    }
 
    @GetMapping(value = "descricoes")
-   public List<DescricaoMaterialEscolar> todasDescricoes() {
+   public Collection<DescricaoMaterialEscolar> todasDescricoes() {
       return this.servicoItem.todasDescricoes();
    }
 

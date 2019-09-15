@@ -1,26 +1,23 @@
-package cotacaoEscolar.model;
+package cotacaoEscolar.model.listas;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
-/**
- * Escreva a descrição da classe ListaItems aqui.
- *
- * @author Aziz
- * @version 1.0
- */
 import java.util.List;
+
+import cotacaoEscolar.model.Item;
 
 public class ListaItem implements Iterable<Item> {
    private final List<Item> itens;
 
-   /**
-    * COnstrutor para objetos da classe ListaItems
-    */
-   public ListaItem(final Item... itens) {
+   public ListaItem() {
       this.itens = new ArrayList<>();
+   }
+
+   public ListaItem(final Item... itens) {
+      this();
       for (final Item item : itens) {
-         this.itens.add(item);
+         this.adicionar(item);
       }
    }
 
@@ -43,7 +40,4 @@ public class ListaItem implements Iterable<Item> {
       this.itens.remove(item);
    }
 
-   public void adicionar(final ListaItem itens) {
-      this.itens.addAll(itens.getItens());
-   }
 }

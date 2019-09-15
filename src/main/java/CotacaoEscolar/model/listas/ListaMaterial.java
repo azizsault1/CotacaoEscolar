@@ -1,7 +1,11 @@
-package cotacaoEscolar.model;
+package cotacaoEscolar.model.listas;
+
+import java.io.Serializable;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import cotacaoEscolar.model.Escola;
 
 /**
  * Escreva a descrição da classe ListaMaterial aqui.
@@ -10,7 +14,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * @version (número de versão ou data)
  */
 @JsonSerialize
-public class ListaMaterial {
+public class ListaMaterial implements Serializable {
+   private static final long serialVersionUID = 1L;
    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
    private final Escola escola;
    private final Integer serie;

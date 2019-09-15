@@ -25,8 +25,8 @@ public class Item implements Comparable<Item> {
       this(new DescricaoMaterialEscolar(descricaoMaterialEscolar), quantidade);
    }
 
-   public DescricaoMaterialEscolar getDescricao() {
-      return this.materialEscolar;
+   public String getDescricao() {
+      return this.materialEscolar.getDescricao();
    }
 
    public int getQuantidade() {

@@ -6,8 +6,8 @@ import org.springframework.stereotype.Service;
 
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.ListaItem;
-import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.listas.ListaMaterial;
 
 @Service
 public interface ServicoListaMaterial {

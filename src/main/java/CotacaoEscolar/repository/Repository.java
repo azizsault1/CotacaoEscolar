@@ -1,19 +1,18 @@
 package cotacaoEscolar.repository;
 
 import java.util.Collection;
-import java.util.List;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.ListaItem;
-import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.listas.ListaMaterial;
 
 @org.springframework.stereotype.Repository
 public interface Repository {
 
    ListaItem selecionePor(int serie);
 
-   List<DescricaoMaterialEscolar> todasDescricoes();
+   Collection<DescricaoMaterialEscolar> todasDescricoes();
 
    Collection<Escola> escolas();
 

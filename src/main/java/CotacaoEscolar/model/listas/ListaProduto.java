@@ -1,4 +1,4 @@
-package cotacaoEscolar.model;
+package cotacaoEscolar.model.listas;
 
 import java.util.ArrayList;
 /**
@@ -8,6 +8,11 @@ import java.util.ArrayList;
  * @version (número de versão ou data)
  */
 import java.util.List;
+import java.util.Optional;
+import java.util.function.Consumer;
+
+import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.Produto;
 
 public class ListaProduto {
    private final List<Produto> produtos;
@@ -21,6 +26,14 @@ public class ListaProduto {
 
    public void add(final Produto produto) {
       this.produtos.add(produto);
+   }
+
+   public Optional<Produto> quero(final Item item) {
+      return this.produtos.stream().filter(produto -> produto.equivale(item)).findFirst();
+   }
+
+   public Consumer<? super Produto> add(final Item item) {
+      return null;
    }
 
 }

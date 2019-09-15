@@ -8,8 +8,8 @@ import org.springframework.stereotype.Service;
 
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.ListaItem;
-import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.repository.Repository;
 import cotacaoEscolar.service.ServicoListaMaterial;
 

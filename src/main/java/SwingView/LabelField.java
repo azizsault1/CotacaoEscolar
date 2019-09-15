@@ -1,7 +1,7 @@
 package swingView;
 
 import java.awt.event.ItemListener;
-import java.util.List;
+import java.util.Collection;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -43,11 +43,11 @@ public class LabelField<E> extends JPanel {
       this.combo.addItemListener(itemListener);
    }
 
-   public void atualizarLista(final List<E> novaLista) {
+   public void atualizarLista(final Collection<E> novaLista) {
       this.combo.removeAllItems();
       novaLista.forEach(this.combo::addItem);
       if (!novaLista.isEmpty()) {
-         this.combo.setSelectedItem(novaLista.get(0));
+         this.combo.setSelectedItem(novaLista.stream().findFirst());
       }
    }
 

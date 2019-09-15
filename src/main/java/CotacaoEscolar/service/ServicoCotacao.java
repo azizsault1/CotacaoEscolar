@@ -1,8 +1,8 @@
 package cotacaoEscolar.service;
 
-import cotacaoEscolar.model.ListaEstabelecimento;
-import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.ResultadoCotacao;
+import cotacaoEscolar.model.listas.ListaEstabelecimento;
+import cotacaoEscolar.model.listas.ListaMaterial;
 
 public interface ServicoCotacao {
 

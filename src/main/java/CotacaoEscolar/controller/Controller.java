@@ -1,13 +1,12 @@
 package cotacaoEscolar.controller;
 
 import java.util.Collection;
-import java.util.List;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.ListaItem;
-import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.listas.ListaMaterial;
 
 public interface Controller {
 
@@ -21,6 +20,6 @@ public interface Controller {
 
    void adicionar(Escola escola, Integer serie, Item item);
 
-   List<DescricaoMaterialEscolar> todasDescricoes();
+   Collection<DescricaoMaterialEscolar> todasDescricoes();
 
 }

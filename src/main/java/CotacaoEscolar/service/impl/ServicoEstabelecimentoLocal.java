@@ -3,7 +3,7 @@ package cotacaoEscolar.service.impl;
 import java.util.List;
 
 import cotacaoEscolar.model.Estabelecimento;
-import cotacaoEscolar.model.ListaEstabelecimento;
+import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 
 public class ServicoEstabelecimentoLocal implements ServicoEstabelecimento {

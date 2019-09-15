@@ -1,0 +1,14 @@
+
+.cm-icon-trash{
+    color: red; 
+    font-size: 17px; 
+    cursor: pointer;
+  }
+
+  .cm-lst{
+    list-style: none;
+  }
+
+  .cm-label {
+    font-size: 18px !important;
+  }

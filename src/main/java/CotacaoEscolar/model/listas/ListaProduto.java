@@ -9,7 +9,6 @@ import java.util.ArrayList;
  */
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Consumer;
 
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.Produto;
@@ -30,10 +29,6 @@ public class ListaProduto {
 
    public Optional<Produto> quero(final Item item) {
       return this.produtos.stream().filter(produto -> produto.equivale(item)).findFirst();
-   }
-
-   public Consumer<? super Produto> add(final Item item) {
-      return null;
    }
 
 }

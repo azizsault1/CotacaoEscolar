@@ -26,7 +26,7 @@ public class Produto {
    }
 
    public boolean equivale(final Item item) {
-      return this.materialEscolar.equals(item.getDescricao());
+      return this.materialEscolar.getDescricao().equals(item.getDescricao());
    }
 
    public BigDecimal getValor() {

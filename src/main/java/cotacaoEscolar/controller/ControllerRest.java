@@ -17,7 +17,7 @@ import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoItem;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
-@RestController("/")
+@RestController("/v1")
 public class ControllerRest {
 
    private final ServicoEscola servicoEscola;

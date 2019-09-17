@@ -31,11 +31,13 @@ public class ControllerRest {
       this.servicoListaMaterial = servicoListaMaterial;
    }
 
+	@CrossOrigin(origins = "*")
    @GetMapping(value = "escolas", produces = "application/json")
    public Collection<Escola> todasEscolas() {
       return this.servicoEscola.todas();
    }
 
+	@CrossOrigin(origins = "*")
    @GetMapping(value = "escola/{nomeEscola}", produces = "application/json")
    public ResponseEntity<Object> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola) {
       try {
@@ -51,6 +53,7 @@ public class ControllerRest {
       }
    }
 
+	@CrossOrigin(origins = "*")
    @GetMapping(value = "series/{nomeEscola}", produces = "application/json")
    public ResponseEntity<Object> selecionarSerie(@PathVariable("nomeEscola") final String nomeEscola) {
       try {
@@ -66,6 +69,7 @@ public class ControllerRest {
       }
    }
 
+	@CrossOrigin(origins = "*")
    @GetMapping(value = "itens/{nomeEscola}/{serie}", produces = "application/json")
    public ResponseEntity<Object> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
       try {
@@ -81,6 +85,7 @@ public class ControllerRest {
       }
    }
 
+	@CrossOrigin(origins = "*")
    @GetMapping(value = "descricoes")
    public Collection<DescricaoMaterialEscolar> todasDescricoes() {
       return this.servicoItem.todasDescricoes();

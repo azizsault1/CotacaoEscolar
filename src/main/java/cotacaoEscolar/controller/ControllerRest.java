@@ -5,6 +5,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -17,7 +18,7 @@ import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoItem;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
-@RestController("/")
+@RestController("/v1")
 public class ControllerRest {
 
    private final ServicoEscola servicoEscola;
@@ -31,11 +32,13 @@ public class ControllerRest {
       this.servicoListaMaterial = servicoListaMaterial;
    }
 
+   @CrossOrigin(origins = "*")
    @GetMapping(value = "escolas", produces = "application/json")
    public Collection<Escola> todasEscolas() {
       return this.servicoEscola.todas();
    }
 
+   @CrossOrigin(origins = "*")
    @GetMapping(value = "escola/{nomeEscola}", produces = "application/json")
    public ResponseEntity<Object> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola) {
       try {
@@ -51,6 +54,7 @@ public class ControllerRest {
       }
    }
 
+   @CrossOrigin(origins = "*")
    @GetMapping(value = "series/{nomeEscola}", produces = "application/json")
    public ResponseEntity<Object> selecionarSerie(@PathVariable("nomeEscola") final String nomeEscola) {
       try {
@@ -66,6 +70,7 @@ public class ControllerRest {
       }
    }
 
+   @CrossOrigin(origins = "*")
    @GetMapping(value = "itens/{nomeEscola}/{serie}", produces = "application/json")
    public ResponseEntity<Object> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
       try {
@@ -81,6 +86,7 @@ public class ControllerRest {
       }
    }
 
+   @CrossOrigin(origins = "*")
    @GetMapping(value = "descricoes")
    public Collection<DescricaoMaterialEscolar> todasDescricoes() {
       return this.servicoItem.todasDescricoes();

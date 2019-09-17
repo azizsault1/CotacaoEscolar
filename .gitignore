@@ -9,5 +9,6 @@ build
 .classpath
 .project
 .settings/*
+.idea
 gradlew
 /.metadata/

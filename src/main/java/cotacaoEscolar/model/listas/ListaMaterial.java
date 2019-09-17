@@ -2,7 +2,9 @@ package cotacaoEscolar.model.listas;
 
 import java.io.Serializable;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import cotacaoEscolar.model.Escola;
@@ -21,10 +23,8 @@ public class ListaMaterial implements Serializable {
    private final Integer serie;
    private final ListaItem itens;
 
-   /**
-    * COnstrutor para objetos da classe ListaMaterial
-    */
-   public ListaMaterial(final Escola escola, final Integer serie, final ListaItem itens) {
+   @JsonCreator
+   public ListaMaterial(@JsonProperty("escola") final Escola escola, @JsonProperty("serie") final Integer serie, @JsonProperty("itens") final ListaItem itens) {
       this.escola = escola;
       this.serie = serie;
       this.itens = itens;

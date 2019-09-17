@@ -3,6 +3,8 @@ package cotacaoEscolar.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
@@ -24,7 +26,8 @@ public class Item implements Comparable<Item> {
       this.quantidade = quantidade;
    }
 
-   public Item(final String descricaoMaterialEscolar, final int quantidade) {
+   @JsonCreator
+   public Item(@JsonProperty("descricao") final String descricaoMaterialEscolar, @JsonProperty("quantidade") final int quantidade) {
       this(new DescricaoMaterialEscolar(descricaoMaterialEscolar), quantidade);
    }
 

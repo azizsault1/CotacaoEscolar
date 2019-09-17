@@ -1,4 +1,4 @@
-package app;
+package cotacaoEscolar.app;
 
 import cotacaoEscolar.controller.ControllerCotacao;
 import cotacaoEscolar.controller.ControllerMaterialEscolar;

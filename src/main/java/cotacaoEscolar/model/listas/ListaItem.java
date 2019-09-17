@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 
 import cotacaoEscolar.model.Item;
@@ -16,7 +18,8 @@ public class ListaItem implements Iterable<Item> {
       this.itens = new ArrayList<>();
    }
 
-   public ListaItem(final Item... itens) {
+   @JsonCreator
+   public ListaItem(final @JsonProperty("item") Item... itens) {
       this();
       for (final Item item : itens) {
          this.adicionar(item);

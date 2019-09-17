@@ -34,4 +34,13 @@ public class ListaProdutoTest {
       Assert.assertFalse(produto.isPresent());
    }
 
+   @Test
+   public void ESeRepetirOProduto() {
+      this.produtos.add(new Produto("Produto2", BigDecimal.valueOf(2)));
+      final Item item = new Item("Produto2", 1);
+      final Optional<Produto> produto = this.produtos.quero(item);
+      Assert.assertTrue(produto.isPresent());
+      Assert.assertEquals(BigDecimal.valueOf(4), produto.get().getValor());
+   }
+
 }

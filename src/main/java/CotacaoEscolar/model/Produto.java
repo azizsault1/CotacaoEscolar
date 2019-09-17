@@ -33,4 +33,39 @@ public class Produto {
       return this.valor;
    }
 
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = (prime * result) + ((this.materialEscolar == null) ? 0 : this.materialEscolar.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(final Object obj) {
+      if (this == obj) {
+         return true;
+      }
+      if (obj == null) {
+         return false;
+      }
+      if (this.getClass() != obj.getClass()) {
+         return false;
+      }
+      final Produto other = (Produto) obj;
+      if (this.materialEscolar == null) {
+         if (other.materialEscolar != null) {
+            return false;
+         }
+      } else if (!this.materialEscolar.equals(other.materialEscolar)) {
+         return false;
+      }
+      return true;
+   }
+
+   @Override
+   public String toString() {
+      return "Produto [materialEscolar=" + this.materialEscolar + ", valor=" + this.valor + "]";
+   }
+
 }

@@ -13,10 +13,13 @@ import java.util.stream.Collectors;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Estabelecimento;
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.Produto;
+import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.model.listas.ListaItem;
 import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.listas.ListaProduto;
 
 @org.springframework.stereotype.Repository
 public class LocalDb implements Repository {
@@ -24,6 +27,7 @@ public class LocalDb implements Repository {
    private Set<DescricaoMaterialEscolar> itens;
    private Map<String, ListaItem> listasEstaticas;
    private final List<ListaMaterial> listaMaterialEscolar = new ArrayList<>();
+   private ListaEstabelecimento estabelecimentos;
 
    private Set<Produto> produtos;
 
@@ -56,7 +60,10 @@ public class LocalDb implements Repository {
       final DescricaoMaterialEscolar cadernoDesc = new DescricaoMaterialEscolar("Caderno");
       final Item caderno = new Item(cadernoDesc, 1);
 
+      final List<DescricaoMaterialEscolar> itensFabricados = DescricaoMaterialEscolar.create(20);
+
       this.itens = new HashSet<>(Arrays.asList(lapisDesc, lapisDeCorDesc, classificadorDesc, cadernoDesc));
+      this.itens.addAll(itensFabricados);
 
       final ListaItem lista1 = new ListaItem(lapis, lapisDeCor);
       final ListaItem lista2 = new ListaItem(lapis, classificador);
@@ -88,17 +95,46 @@ public class LocalDb implements Repository {
    private void initProdutos() {
       final List<DescricaoMaterialEscolar> listaItens = this.itens.stream().collect(Collectors.toList());
       final Produto produto1 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto2 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto3 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto4 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto5 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto6 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto7 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto8 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto9 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto10 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
+      final Produto produto2 = new Produto(listaItens.get(1), BigDecimal.valueOf(7.0));
+      final Produto produto3 = new Produto(listaItens.get(2), BigDecimal.valueOf(17.0));
+      final Produto produto4 = new Produto(listaItens.get(3), BigDecimal.valueOf(22.0));
+      final Produto produto5 = new Produto(listaItens.get(4), BigDecimal.valueOf(74.0));
+      final Produto produto6 = new Produto(listaItens.get(5), BigDecimal.valueOf(12.0));
+      final Produto produto7 = new Produto(listaItens.get(6), BigDecimal.valueOf(25.0));
+      final Produto produto8 = new Produto(listaItens.get(7), BigDecimal.valueOf(19.0));
+      final Produto produto9 = new Produto(listaItens.get(8), BigDecimal.valueOf(33.0));
+      final Produto produto10 = new Produto(listaItens.get(9), BigDecimal.valueOf(44.0));
 
-      this.produtos = new HashSet<>(Arrays.asList(produto1));
+      this.produtos = new HashSet<>(Arrays.asList(produto1, produto2, produto3, produto4, produto5, produto6, produto7, produto8, produto9, produto10));
+
+      this.initEstabelecimentos();
+   }
+
+   private void initEstabelecimentos() {
+
+      final List<Produto> todos = this.produtos.stream().collect(Collectors.toList());
+
+      // Estabelecimento1
+      final ListaProduto produtosEstabelecimento1 = new ListaProduto(todos.get(0), todos.get(1), todos.get(2));
+      final Estabelecimento estabelecimento1 = new Estabelecimento("Estabelecimento1", produtosEstabelecimento1);
+
+      // Estabelecimento2
+      final ListaProduto produtosEstabelecimento2 = new ListaProduto(todos);
+      final Estabelecimento estabelecimento2 = new Estabelecimento("Estabelecimento2", produtosEstabelecimento2);
+
+      // Estabelecimento3
+      final ListaProduto produtosEstabelecimento3 = new ListaProduto(todos.get(9), todos.get(8), todos.get(7), todos.get(6), todos.get(5), todos.get(4));
+      final Estabelecimento estabelecimento3 = new Estabelecimento("Estabelecimento3", produtosEstabelecimento3);
+
+      // Estabelecimento4
+      final ListaProduto produtosEstabelecimento4 = new ListaProduto(todos.get(0), todos.get(2), todos.get(4), todos.get(6), todos.get(8));
+      final Estabelecimento estabelecimento4 = new Estabelecimento("Estabelecimento4", produtosEstabelecimento4);
+
+      // Estabelecimento5
+      final ListaProduto produtosEstabelecimento5 = new ListaProduto(todos.get(1), todos.get(3), todos.get(5), todos.get(7), todos.get(9));
+      final Estabelecimento estabelecimento5 = new Estabelecimento("Estabelecimento5", produtosEstabelecimento5);
+
+      this.estabelecimentos = new ListaEstabelecimento(Arrays.asList(estabelecimento1, estabelecimento2, estabelecimento3, estabelecimento4, estabelecimento5));
    }
 
    @Override
@@ -131,6 +167,11 @@ public class LocalDb implements Repository {
    @Override
    public void add(final ListaMaterial novaLista) {
       this.listaMaterialEscolar.add(novaLista);
+   }
+
+   @Override
+   public ListaEstabelecimento estabelecimentos() {
+      return this.estabelecimentos;
    }
 
 }

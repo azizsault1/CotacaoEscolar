@@ -14,4 +14,9 @@ public class ResultadoCotacao {
       return this.resultado;
    }
 
+   @Override
+   public String toString() {
+      return "ResultadoCotacao [resultado=" + this.resultado + "]";
+   }
+
 }

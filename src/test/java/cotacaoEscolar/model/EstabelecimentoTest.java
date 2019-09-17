@@ -43,7 +43,7 @@ public class EstabelecimentoTest {
       final ResultadoCotacaoEstabelecimento resultado = this.estabelecimento.cotar(lista);
       Assert.assertEquals("Estabelecimento1", resultado.getNome());
 
-      final List<Cotacao> encontrados = resultado.encontrados();
+      final List<Cotacao> encontrados = resultado.getEncontrados();
       Assert.assertEquals(2, encontrados.size());
 
       // Produto 1 encontrado
@@ -54,7 +54,7 @@ public class EstabelecimentoTest {
       Assert.assertEquals(BigDecimal.valueOf(2), encontrado1.getValorUnitario());
 
       // Produto 2 Nao encontrado
-      final List<Item> itemNaoEncontrado = resultado.naoEncontrados().getItens();
+      final List<Item> itemNaoEncontrado = resultado.getNaoEncontrados().getItens();
       Assert.assertEquals(1, itemNaoEncontrado.size());
       Assert.assertEquals("Item2", itemNaoEncontrado.get(0).getDescricao());
 

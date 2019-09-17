@@ -70,7 +70,7 @@ public class ControllerRest {
    public ResponseEntity<Object> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
       try {
          final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
-         final ListaItem itens = this.servicoListaMaterial.selecionePor(escolaEncontrada, serie);
+         final ListaItem itens = this.servicoListaMaterial.selecionePor(escolaEncontrada, serie).getItens();
          return ResponseEntity.ok(itens);
       } catch (final IllegalArgumentException e) {
          e.printStackTrace();

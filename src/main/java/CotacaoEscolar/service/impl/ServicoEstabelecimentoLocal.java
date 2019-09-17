@@ -1,21 +1,20 @@
 package cotacaoEscolar.service.impl;
 
-import java.util.List;
-
-import cotacaoEscolar.model.Estabelecimento;
 import cotacaoEscolar.model.listas.ListaEstabelecimento;
+import cotacaoEscolar.repository.Repository;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 
 public class ServicoEstabelecimentoLocal implements ServicoEstabelecimento {
 
-   private final ListaEstabelecimento estabelecimentos;
+   private final Repository repository;
 
-   public ServicoEstabelecimentoLocal(final List<Estabelecimento> estabelecimento) {
-      this.estabelecimentos = new ListaEstabelecimento(estabelecimento);
+   public ServicoEstabelecimentoLocal(final Repository repository) {
+      this.repository = repository;
    }
 
+   @Override
    public ListaEstabelecimento todos() {
-      return this.estabelecimentos;
+      return this.repository.estabelecimentos();
    }
 
 }

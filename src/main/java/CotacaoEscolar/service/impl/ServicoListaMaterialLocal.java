@@ -29,7 +29,7 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
    }
 
    @Override
-   public ListaItem selecionePor(final Escola escola, final Integer serie) {
+   public ListaMaterial selecionePor(final Escola escola, final Integer serie) {
       final Collection<ListaMaterial> listaMaterialEscolar = this.repository.materiais();
       Optional<ListaMaterial> materialOpt = listaMaterialEscolar.stream().filter(material -> material.pertenceA(escola) && material.pertenceA(serie))
             .findFirst();
@@ -40,19 +40,19 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
          materialOpt = Optional.of(novaLista);
       }
 
-      return materialOpt.get().getItens();
+      return materialOpt.get();
 
    }
 
    @Override
    public void remover(final Escola escola, final Integer serie, final Item item) {
-      final ListaItem itens = this.selecionePor(escola, serie);
+      final ListaItem itens = this.selecionePor(escola, serie).getItens();
       itens.remove(item);
    }
 
    @Override
    public void adicionar(final Escola escola, final Integer serie, final Item item) {
-      final ListaItem itens = this.selecionePor(escola, serie);
+      final ListaItem itens = this.selecionePor(escola, serie).getItens();
       itens.adicionar(item);
    }
 

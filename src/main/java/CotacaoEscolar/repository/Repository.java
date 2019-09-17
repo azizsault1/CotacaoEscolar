@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.model.listas.ListaItem;
 import cotacaoEscolar.model.listas.ListaMaterial;
 
@@ -19,5 +20,7 @@ public interface Repository {
    Collection<ListaMaterial> materiais();
 
    void add(ListaMaterial novaLista);
+
+   ListaEstabelecimento estabelecimentos();
 
 }

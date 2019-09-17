@@ -34,16 +34,26 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
       return this.nome;
    }
 
+   public BigDecimal getTotal() {
+      return this.total;
+   }
+
    @Override
    public int compareTo(final ResultadoCotacaoEstabelecimento o) {
       return this.total.compareTo(o.total);
    }
 
-   public List<Cotacao> encontrados() {
+   public List<Cotacao> getEncontrados() {
       return this.produtosEncontrados;
    }
 
-   public ListaItem naoEncontrados() {
+   public ListaItem getNaoEncontrados() {
       return this.itensNaoEncontrados;
+   }
+
+   @Override
+   public String toString() {
+      return "ResultadoCotacaoEstabelecimento [nome=" + this.nome + ", produtosEncontrados=" + this.produtosEncontrados + ", itensNaoEncontrados="
+            + this.itensNaoEncontrados + ", total=" + this.total + "]";
    }
 }

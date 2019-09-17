@@ -1,5 +1,8 @@
 package cotacaoEscolar.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonRootName;
 
 /**
@@ -75,6 +78,18 @@ public class Item implements Comparable<Item> {
    @Override
    public int compareTo(final Item o) {
       return this.materialEscolar.compareTo(o.materialEscolar);
+   }
+
+   public static Item create(final String descricao, final int quantidade) {
+      return new Item(descricao, quantidade);
+   }
+
+   public static List<Item> create(final int quantidade) {
+      final List<Item> result = new ArrayList<>();
+      for (int i = 0; i < quantidade; i++) {
+         result.add(create("Item" + i, i));
+      }
+      return result;
    }
 
 }

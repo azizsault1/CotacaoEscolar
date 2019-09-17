@@ -16,21 +16,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import cotacaoEscolar.controller.Controller;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import cotacaoEscolar.controller.ControllerCotacao;
 import cotacaoEscolar.controller.ControllerMaterialEscolar;
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.ResultadoCotacao;
 import cotacaoEscolar.model.listas.ListaMaterial;
-import cotacaoEscolar.repository.LocalDb;
-import cotacaoEscolar.repository.Repository;
-import cotacaoEscolar.service.ServicoEscola;
-import cotacaoEscolar.service.ServicoEscolaLocal;
-import cotacaoEscolar.service.ServicoItem;
-import cotacaoEscolar.service.ServicoListaMaterial;
-import cotacaoEscolar.service.impl.ServicoItemLocal;
-import cotacaoEscolar.service.impl.ServicoListaMaterialLocal;
 import swingView.CustomOptionalPalne.AcaoBotoes;
 import swingView.interfaces.Label;
 import swingView.interfaces.LabelFieldConfiguration;
@@ -47,12 +42,14 @@ public class Janela extends JFrame {
 
    private static final int Y_INICIAL = 20;
 
-   private final Controller controller;
+   private final ControllerMaterialEscolar controller;
+   private final ControllerCotacao controllerCotacao;
    private Escola escolaEscolhida;
    private Integer serieEscolhida;
 
-   public Janela(final Controller controller) {
-      this.controller = controller;
+   public Janela(final ControllerMaterialEscolar controllerMateriais, final ControllerCotacao controllerCotacao) {
+      this.controller = controllerMateriais;
+      this.controllerCotacao = controllerCotacao;
       this.addComponents();
       this.configureWindow();
    }
@@ -121,6 +118,19 @@ public class Janela extends JFrame {
 
       });
 
+      final JButton cotar = new JButton("Cotar");
+      cotar.setBounds(100, 520, 100, 20);
+      cotar.addActionListener(listener -> {
+         final ResultadoCotacao resultado = this.controllerCotacao.cotar(this.controller.selecioneMaterialPor(this.escolaEscolhida, this.serieEscolhida));
+         try {
+            final String result = new ObjectMapper().writeValueAsString(resultado);
+            System.out.println(result);
+         } catch (final JsonProcessingException e1) {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+         }
+      });
+
       escola.addListeners(listenerEscola);
       series.addListeners(listenerSeries);
       escola.atualizarLista(escolas.stream().collect(Collectors.toList()));
@@ -129,14 +139,15 @@ public class Janela extends JFrame {
       this.getContentPane().add(series);
       this.getContentPane().add(itens);
       this.getContentPane().add(barraRolagem);
+      this.getContentPane().add(cotar);
 
       this.setContentPane(contentPane);
    }
 
    private void atualizarTabela(final DefaultTableModel modelo) {
       modelo.setNumRows(0);
-      final ListaItem itensSelecionados = this.controller.selecioneMaterialPor(this.escolaEscolhida, this.serieEscolhida);
-      for (final Item item : itensSelecionados) {
+      final ListaMaterial material = this.controller.selecioneMaterialPor(this.escolaEscolhida, this.serieEscolhida);
+      for (final Item item : material.getItens()) {
          modelo.addRow(new Object[] { item, item.getQuantidade() });
       }
    }
@@ -203,13 +214,4 @@ public class Janela extends JFrame {
       return tabela;
    }
 
-   public static void main(final String[] args) {
-      final Repository repository = new LocalDb();
-      final ServicoEscola servicoEscola = new ServicoEscolaLocal(repository);
-      final ServicoItem servicoItem = new ServicoItemLocal(repository);
-      final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal(repository);
-
-      final Controller controller = new ControllerMaterialEscolar(servicoEscola, servicoItem, servicoListaMaterial);
-      new Janela(controller);
-   }
 }

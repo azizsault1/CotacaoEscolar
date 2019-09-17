@@ -23,6 +23,17 @@ public class ListaProduto {
       this.produtos = new ArrayList<>();
    }
 
+   public ListaProduto(final Produto... produtos) {
+      this.produtos = new ArrayList<>();
+      for (final Produto produto : produtos) {
+         this.produtos.add(produto);
+      }
+   }
+
+   public ListaProduto(final List<Produto> produtos) {
+      this.produtos = produtos;
+   }
+
    public void add(final Produto produto) {
       this.produtos.add(produto);
    }

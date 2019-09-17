@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 import cotacaoEscolar.model.Item;
 
 public class ListaItem implements Iterable<Item> {
@@ -25,6 +27,7 @@ public class ListaItem implements Iterable<Item> {
       this.itens.add(item);
    }
 
+   @JsonValue
    public List<Item> getItens() {
       return this.itens;
    }
@@ -38,6 +41,11 @@ public class ListaItem implements Iterable<Item> {
 
    public void remove(final Item item) {
       this.itens.remove(item);
+   }
+
+   @Override
+   public String toString() {
+      return "ListaItem [itens=" + this.itens + "]";
    }
 
 }

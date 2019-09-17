@@ -28,4 +28,9 @@ public class Cotacao {
       return this.produto.getValor().multiply(BigDecimal.valueOf(this.item.getQuantidade()));
    }
 
+   @Override
+   public String toString() {
+      return "Cotacao [item=" + this.item + ", produto=" + this.produto + "]";
+   }
+
 }

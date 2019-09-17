@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
+import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.repository.Repository;
 
@@ -25,6 +26,7 @@ public class ServicoEscolaLocal implements ServicoEscola {
    public Escola buscar(final String escola) {
       final Escola aProcurar = new Escola(escola);
       final Collection<Escola> escolas = this.todas();
-      return escolas.stream().filter(encontrada -> encontrada.equals(aProcurar)).findFirst().orElseThrow(IllegalArgumentException::new);
+      return escolas.stream().filter(encontrada -> encontrada.equals(aProcurar)).findFirst()
+            .orElseThrow(() -> new IllegalError("Nao achei a escola: " + escola + "."));
    }
 }

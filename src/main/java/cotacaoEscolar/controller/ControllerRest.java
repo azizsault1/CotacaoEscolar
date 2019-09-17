@@ -3,14 +3,13 @@ package cotacaoEscolar.controller;
 import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.listas.ListaItem;
@@ -46,50 +45,23 @@ public class ControllerRest {
 
    @CrossOrigin(origins = "*")
    @GetMapping(value = "escola/{nomeEscola}", produces = "application/json")
-   public ResponseEntity<Object> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola) {
-      try {
-         final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
-         final Collection<ListaMaterial> materiais = this.servicoListaMaterial.selecionePor(escolaEncontrada);
-         return ResponseEntity.ok(materiais);
-      } catch (final IllegalArgumentException e) {
-         e.printStackTrace();
-         return ResponseEntity.badRequest().body("Nao achei a escola: " + nomeEscola + ".");
-      } catch (final Exception e) {
-         e.printStackTrace();
-         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro nao identificado.");
-      }
+   public Collection<ListaMaterial> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola) throws IllegalError {
+      final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
+      return this.servicoListaMaterial.selecionePor(escolaEncontrada);
    }
 
    @CrossOrigin(origins = "*")
    @GetMapping(value = "series/{nomeEscola}", produces = "application/json")
-   public ResponseEntity<Object> selecionarSerie(@PathVariable("nomeEscola") final String nomeEscola) {
-      try {
-         final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
-         final Collection<Integer> itens = this.servicoListaMaterial.selecioneSeriesPor(escolaEncontrada);
-         return ResponseEntity.ok(itens);
-      } catch (final IllegalArgumentException e) {
-         e.printStackTrace();
-         return ResponseEntity.badRequest().body("Nao achei a escola: " + nomeEscola + ".");
-      } catch (final Exception e) {
-         e.printStackTrace();
-         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro nao identificado.");
-      }
+   public Collection<Integer> selecionarSerie(@PathVariable("nomeEscola") final String nomeEscola) {
+      final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
+      return this.servicoListaMaterial.selecioneSeriesPor(escolaEncontrada);
    }
 
    @CrossOrigin(origins = "*")
    @GetMapping(value = "itens/{nomeEscola}/{serie}", produces = "application/json")
-   public ResponseEntity<Object> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
-      try {
-         final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
-         final ListaItem itens = this.servicoListaMaterial.selecionePor(escolaEncontrada, serie).getItens();
-         return ResponseEntity.ok(itens);
-      } catch (final IllegalArgumentException e) {
-         e.printStackTrace();
-         return ResponseEntity.badRequest().body("Nao achei a escola: " + nomeEscola + ".");
-      } catch (final Exception e) {
-         e.printStackTrace();
-         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro nao identificado.");
-      }
+   public ListaItem selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
+      final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
+      return this.servicoListaMaterial.selecionePor(escolaEncontrada, serie).getItens();
    }
 
    @CrossOrigin(origins = "*")

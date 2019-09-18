@@ -28,16 +28,13 @@ public class ListaItemTest {
 
         final ListaItem lista = new ListaItem(lapis, lapisDeCor, classificador, caderno);
         final String result = new ObjectMapper().writeValueAsString(lista);
-        String expected = "[{\"descricao\":\"Lapis 123\",\"quantidade\":5},{\"descricao\":\"Lapis de cor\"," +
-                "\"quantidade\":30},{\"descricao\":\"Classificador\",\"quantidade\":2},{\"descricao\":\"Caderno\",\"quantidade\":1}]";
+        String expected = "{\"itens\":[{\"descricao\":{\"descricao\":\"Lapis 123\"},\"quantidade\":5},{\"descricao\":{\"descricao\":\"Lapis de cor\"},\"quantidade\":30},{\"descricao\":{\"descricao\":\"Classificador\"},\"quantidade\":2},{\"descricao\":{\"descricao\":\"Caderno\"},\"quantidade\":1}]}";
         Assert.assertEquals(expected, result);
     }
 
     @Test
     public void fromJson() throws IOException {
-        String json = "[{\"descricao\":\"Lapis 123\",\"quantidade\":5},{\"descricao\":\"Lapis de cor\"," +
-                "\"quantidade\":30},{\"descricao\":\"Classificador\",\"quantidade\":2},{\"descricao\":\"Caderno\"," +
-                "\"quantidade\":1}]";
+        String json = "{\"itens\":[{\"descricao\":{\"descricao\":\"Lapis 123\"},\"quantidade\":5},{\"descricao\":{\"descricao\":\"Lapis de cor\"},\"quantidade\":30},{\"descricao\":{\"descricao\":\"Classificador\"},\"quantidade\":2},{\"descricao\":{\"descricao\":\"Caderno\"},\"quantidade\":1}]}";
 
         final ListaItem listaItem = new ObjectMapper().readValue(json, ListaItem.class);
         Assert.assertFalse(listaItem.isEmpty());

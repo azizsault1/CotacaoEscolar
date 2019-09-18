@@ -12,9 +12,6 @@ public class Produto {
    private final DescricaoMaterialEscolar materialEscolar;
    private final BigDecimal valor;
 
-   /**
-    * COnstrutor para objetos da classe Produto
-    */
    public Produto(final DescricaoMaterialEscolar descricao, final BigDecimal valor) {
       this.materialEscolar = descricao;
       this.valor = valor;
@@ -26,7 +23,7 @@ public class Produto {
    }
 
    public boolean equivale(final Item item) {
-      return this.materialEscolar.getDescricao().equals(item.getDescricao());
+      return this.materialEscolar.equals(item.getDescricao());
    }
 
    public BigDecimal getValor() {

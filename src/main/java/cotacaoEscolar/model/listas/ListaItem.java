@@ -7,7 +7,6 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import cotacaoEscolar.model.Item;
@@ -27,8 +26,8 @@ public class ListaItem implements Iterable<Item> {
 
    public ListaItem(final Item... item) {
       this();
-      for (int i = 0; i < item.length ; i++) {
-         this.adicionar(item[i]);
+      for (Item value : item) {
+         this.adicionar(value);
       }
    }
 
@@ -36,7 +35,6 @@ public class ListaItem implements Iterable<Item> {
       this.itens.add(item);
    }
 
-   @JsonValue
    public List<Item> getItens() {
       return this.itens;
    }

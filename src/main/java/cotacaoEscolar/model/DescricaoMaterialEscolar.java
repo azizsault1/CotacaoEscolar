@@ -20,7 +20,6 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
       this.descricao = descricao;
    }
 
-   @JsonValue
    public String getDescricao() {
       return this.descricao;
    }

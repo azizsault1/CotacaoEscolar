@@ -12,7 +12,7 @@ public class Cotacao {
       this.produto = produto;
    }
 
-   public String getDescricao() {
+   public DescricaoMaterialEscolar getDescricao() {
       return this.item.getDescricao();
    }
 

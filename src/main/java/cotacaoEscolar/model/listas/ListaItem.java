@@ -6,11 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonValue;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import cotacaoEscolar.model.Item;
 
+@JsonSerialize
 public class ListaItem implements Iterable<Item> {
    private final List<Item> itens;
 
@@ -19,10 +21,14 @@ public class ListaItem implements Iterable<Item> {
    }
 
    @JsonCreator
-   public ListaItem(final @JsonProperty("item") Item... itens) {
+   public ListaItem(List<Item> itens) {
+      this.itens = itens;
+   }
+
+   public ListaItem(final Item... item) {
       this();
-      for (final Item item : itens) {
-         this.adicionar(item);
+      for (int i = 0; i < item.length ; i++) {
+         this.adicionar(item[i]);
       }
    }
 
@@ -51,4 +57,8 @@ public class ListaItem implements Iterable<Item> {
       return "ListaItem [itens=" + this.itens + "]";
    }
 
+   @JsonIgnore
+   public boolean isEmpty() {
+      return this.itens.isEmpty();
+   }
 }

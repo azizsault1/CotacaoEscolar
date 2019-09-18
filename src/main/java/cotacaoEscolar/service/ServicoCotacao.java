@@ -9,6 +9,6 @@ import cotacaoEscolar.model.listas.ListaMaterial;
 @Service
 public interface ServicoCotacao {
 
-   public ResultadoCotacao cotar(ListaMaterial lista, ListaEstabelecimento estabelecimentos);
+   ResultadoCotacao cotar(ListaMaterial lista, ListaEstabelecimento estabelecimentos);
 
 }

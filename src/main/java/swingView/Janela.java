@@ -126,7 +126,6 @@ public class Janela extends JFrame {
             final String result = new ObjectMapper().writeValueAsString(resultado);
             System.out.println(result);
          } catch (final JsonProcessingException e1) {
-            // TODO Auto-generated catch block
             e1.printStackTrace();
          }
       });

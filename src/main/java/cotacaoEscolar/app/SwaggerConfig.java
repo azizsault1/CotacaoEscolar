@@ -19,7 +19,11 @@ public class SwaggerConfig extends WebMvcConfigurationSupport {
    /* @formatter:off  */
    @Bean
    public Docket greetingApi() {
-      return new Docket(DocumentationType.SWAGGER_2).select().apis(RequestHandlerSelectors.basePackage("cotacaoEscolar")).build().apiInfo(this.metaData());
+      return new Docket(DocumentationType.SWAGGER_2)
+              .select()
+              .apis(RequestHandlerSelectors.basePackage("cotacaoEscolar"))
+              .build()
+              .apiInfo(this.metaData());
 
    }
 

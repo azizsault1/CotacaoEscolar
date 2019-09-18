@@ -59,4 +59,7 @@ public class Escola {
       return true;
    }
 
+    public boolean validate() {
+      return !this.getNome().isEmpty();
+    }
 }

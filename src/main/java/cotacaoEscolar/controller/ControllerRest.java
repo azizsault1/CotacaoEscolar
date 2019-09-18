@@ -1,7 +1,9 @@
 package cotacaoEscolar.controller;
 
 import java.util.Collection;
+import java.util.List;
 
+import cotacaoEscolar.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,7 +14,6 @@ import org.springframework.web.bind.annotation.RestController;
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.listas.ListaItem;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoItem;
@@ -59,7 +60,8 @@ public class ControllerRest {
 
    @CrossOrigin(origins = "*")
    @GetMapping(value = "itens/{nomeEscola}/{serie}", produces = "application/json")
-   public ListaItem selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
+   public List<Item> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola,
+                                          @PathVariable("serie") final Integer serie) {
       final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
       return this.servicoListaMaterial.selecionePor(escolaEncontrada, serie).getItens();
    }

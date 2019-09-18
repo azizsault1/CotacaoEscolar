@@ -4,18 +4,16 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-import cotacaoEscolar.model.listas.ListaItem;
-
 public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCotacaoEstabelecimento> {
 
    private final String nome;
    private final List<Cotacao> produtosEncontrados;
-   private final ListaItem itensNaoEncontrados;
+   private final List<Item> itensNaoEncontrados;
    private BigDecimal total;
 
    public ResultadoCotacaoEstabelecimento(final String nome) {
       this.produtosEncontrados = new ArrayList<>();
-      this.itensNaoEncontrados = new ListaItem();
+      this.itensNaoEncontrados = new ArrayList<>();
       this.nome = nome;
       this.total = BigDecimal.ZERO;
    }
@@ -27,7 +25,7 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
    }
 
    public void naoEncontrei(final Item item) {
-      this.itensNaoEncontrados.adicionar(item);
+      this.itensNaoEncontrados.add(item);
    }
 
    public String getNome() {
@@ -47,7 +45,7 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
       return this.produtosEncontrados;
    }
 
-   public ListaItem getNaoEncontrados() {
+   public List<Item> getNaoEncontrados() {
       return this.itensNaoEncontrados;
    }
 

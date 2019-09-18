@@ -1,13 +1,13 @@
 package cotacaoEscolar.service.impl;
 
-import java.util.Collection;
-
-import org.springframework.stereotype.Service;
-
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.repository.Repository;
 import cotacaoEscolar.service.ServicoItem;
+import org.springframework.stereotype.Service;
+
+import java.util.Collection;
+import java.util.List;
 
 @Service
 public class ServicoItemLocal implements ServicoItem {
@@ -20,7 +20,7 @@ public class ServicoItemLocal implements ServicoItem {
    }
 
    @Override
-   public ListaItem selecionePor(final int serie) {
+   public List<Item> selecionePor(final int serie) {
       return this.repository.selecionePor(serie);
    }
 

@@ -1,17 +1,17 @@
 package cotacaoEscolar.service.impl;
 
-import java.util.Collection;
-import java.util.Optional;
-import java.util.stream.Collectors;
-
-import org.springframework.stereotype.Service;
-
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.listas.ListaItem;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.repository.Repository;
 import cotacaoEscolar.service.ServicoListaMaterial;
+import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ServicoListaMaterialLocal implements ServicoListaMaterial {
@@ -35,7 +35,7 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
             .findFirst();
 
       if (!materialOpt.isPresent()) {
-         final ListaMaterial novaLista = new ListaMaterial(escola, serie, new ListaItem());
+         final ListaMaterial novaLista = new ListaMaterial(escola, serie, new ArrayList<>());
          this.repository.add(novaLista);
          materialOpt = Optional.of(novaLista);
       }
@@ -46,14 +46,14 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 
    @Override
    public void remover(final Escola escola, final Integer serie, final Item item) {
-      final ListaItem itens = this.selecionePor(escola, serie).getItens();
+      final List<Item> itens = this.selecionePor(escola, serie).getItens();
       itens.remove(item);
    }
 
    @Override
    public void adicionar(final Escola escola, final Integer serie, final Item item) {
-      final ListaItem itens = this.selecionePor(escola, serie).getItens();
-      itens.adicionar(item);
+      final List<Item> itens = this.selecionePor(escola, serie).getItens();
+      itens.add(item);
    }
 
    @Override

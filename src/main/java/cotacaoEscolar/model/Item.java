@@ -16,17 +16,19 @@ public class Item implements Comparable<Item> {
    private final DescricaoMaterialEscolar materialEscolar;
    private final int quantidade;
 
-   public Item(final DescricaoMaterialEscolar descricaoMaterialEscolar, final int quantidade) {
+   @JsonCreator
+   public Item(@JsonProperty("materialEscolar") final DescricaoMaterialEscolar descricaoMaterialEscolar,
+               @JsonProperty("quantidade")final int quantidade) {
       this.materialEscolar = descricaoMaterialEscolar;
       this.quantidade = quantidade;
    }
 
-   @JsonCreator
-   public Item(@JsonProperty("descricao") final String descricao, @JsonProperty("quantidade") final int quantidade) {
+
+   public Item(String descricao, final int quantidade) {
       this(new DescricaoMaterialEscolar(descricao), quantidade);
    }
 
-   public DescricaoMaterialEscolar getDescricao() {
+   public DescricaoMaterialEscolar getMaterialEscolar() {
       return this.materialEscolar;
    }
 

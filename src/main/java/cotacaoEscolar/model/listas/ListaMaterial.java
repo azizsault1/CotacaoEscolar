@@ -1,6 +1,7 @@
 package cotacaoEscolar.model.listas;
 
 import java.io.Serializable;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -8,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Item;
 
 /**
  * Escreva a descrição da classe ListaMaterial aqui.
@@ -21,10 +23,11 @@ public class ListaMaterial implements Serializable {
    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
    private final Escola escola;
    private final Integer serie;
-   private final ListaItem itens;
+   private final List<Item> itens;
 
    @JsonCreator
-   public ListaMaterial(@JsonProperty("escola") final Escola escola, @JsonProperty("serie") final Integer serie, @JsonProperty("itens") final ListaItem itens) {
+   public ListaMaterial(@JsonProperty("escola") final Escola escola, @JsonProperty("serie") final Integer serie,
+                        @JsonProperty("itens") final List<Item> itens) {
       this.escola = escola;
       this.serie = serie;
       this.itens = itens;
@@ -43,7 +46,7 @@ public class ListaMaterial implements Serializable {
       return this.escola.equals(escola);
    }
 
-   public ListaItem getItens() {
+   public List<Item> getItens() {
       return this.itens;
    }
 

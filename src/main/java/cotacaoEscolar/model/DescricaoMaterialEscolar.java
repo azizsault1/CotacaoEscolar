@@ -3,6 +3,8 @@ package cotacaoEscolar.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
@@ -16,12 +18,13 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEscolar> {
    private final String descricao;
 
-   public DescricaoMaterialEscolar(final String descricao) {
+   @JsonCreator
+   public DescricaoMaterialEscolar(@JsonProperty("descricao") final String descricao) {
       this.descricao = descricao;
    }
 
    public String getDescricao() {
-      return this.descricao;
+      return descricao;
    }
 
    @Override
@@ -46,4 +49,18 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
       return result;
    }
 
+   @Override
+   public boolean equals(Object o) {
+      if (this == o) return true;
+      if (o == null || getClass() != o.getClass()) return false;
+
+      DescricaoMaterialEscolar that = (DescricaoMaterialEscolar) o;
+
+      return descricao != null ? descricao.equals(that.descricao) : that.descricao == null;
+   }
+
+   @Override
+   public int hashCode() {
+      return descricao != null ? descricao.hashCode() : 0;
+   }
 }

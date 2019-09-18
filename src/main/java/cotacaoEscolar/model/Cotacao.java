@@ -12,8 +12,8 @@ public class Cotacao {
       this.produto = produto;
    }
 
-   public DescricaoMaterialEscolar getDescricao() {
-      return this.item.getDescricao();
+   public DescricaoMaterialEscolar getMaterialEscolar() {
+      return this.item.getMaterialEscolar();
    }
 
    public int getQuantidade() {

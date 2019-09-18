@@ -2,7 +2,7 @@ package cotacaoEscolar.controller;
 
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.listas.ListaItem;
+import cotacaoEscolar.model.Item;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +16,8 @@ import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.service.ServicoCotacao;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 import io.swagger.annotations.Api;
+
+import java.util.List;
 
 @Api(value = "Cotação")
 @RestController
@@ -41,7 +43,7 @@ public class ControllerCotacaoRest {
 
    private void validate(ListaMaterial lista){
       Escola escola = lista.getEscola();
-      if(escola == null || escola.validate()){
+      if(escola == null || !escola.validate()){
          throw  new IllegalError("Escola invalida");
       }
 
@@ -50,7 +52,7 @@ public class ControllerCotacaoRest {
          throw new IllegalError("Serie invalida");
       }
 
-      ListaItem itens = lista.getItens();
+      List<Item> itens = lista.getItens();
       if(itens == null || itens.isEmpty()){
          throw new IllegalError("A lista de itens procurados nao pode ser vazia.");
       }

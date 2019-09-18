@@ -1,31 +1,19 @@
 package cotacaoEscolar.repository;
 
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
-
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Estabelecimento;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.Produto;
+import cotacaoEscolar.model.*;
 import cotacaoEscolar.model.listas.ListaEstabelecimento;
-import cotacaoEscolar.model.listas.ListaItem;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.model.listas.ListaProduto;
+
+import java.math.BigDecimal;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Repository
 public class LocalDb implements Repository {
    private Set<Escola> escolas;
    private Set<DescricaoMaterialEscolar> itens;
-   private Map<String, ListaItem> listasEstaticas;
+   private Map<String, List<Item>> listasEstaticas;
    private final List<ListaMaterial> listaMaterialEscolar = new ArrayList<>();
    private ListaEstabelecimento estabelecimentos;
 
@@ -65,9 +53,9 @@ public class LocalDb implements Repository {
       this.itens = new HashSet<>(Arrays.asList(lapisDesc, lapisDeCorDesc, classificadorDesc, cadernoDesc));
       this.itens.addAll(itensFabricados);
 
-      final ListaItem lista1 = new ListaItem(lapis, lapisDeCor);
-      final ListaItem lista2 = new ListaItem(lapis, classificador);
-      final ListaItem lista3 = new ListaItem(caderno, classificador);
+      final List<Item> lista1 = Arrays.asList(lapis, lapisDeCor);
+      final List<Item> lista2 = Arrays.asList(lapis, classificador);
+      final List<Item> lista3 = Arrays.asList(caderno, classificador);
 
       this.listasEstaticas = new HashMap<>();
       this.listasEstaticas.put("Lista1", lista1);
@@ -143,7 +131,7 @@ public class LocalDb implements Repository {
    }
 
    @Override
-   public ListaItem selecionePor(final int serie) {
+   public List<Item> selecionePor(final int serie) {
       switch (serie) {
       case 1:
          return this.listasEstaticas.get("Lista1");

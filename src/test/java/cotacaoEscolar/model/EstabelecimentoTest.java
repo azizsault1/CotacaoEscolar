@@ -1,6 +1,7 @@
 package cotacaoEscolar.model;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -8,7 +9,6 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import cotacaoEscolar.model.listas.ListaItem;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.model.listas.ListaProduto;
 
@@ -28,7 +28,7 @@ public class EstabelecimentoTest {
       final Item item1 = new Item("Item1", 3);
       final Item item2 = new Item("Item2", 5);
       final Item item3 = new Item("Item3", 7);
-      final ListaItem itens = new ListaItem(item1, item2, item3);
+      final List<Item> itens = Arrays.asList(item1, item2, item3);
       final Produto produto1 = new Produto("Produto1", BigDecimal.valueOf(2));
       final Produto produto3 = new Produto("Produto3", BigDecimal.valueOf(30));
       final Optional<Produto> optionalTem1 = Optional.of(produto1);
@@ -48,19 +48,19 @@ public class EstabelecimentoTest {
 
       // Produto 1 encontrado
       final Cotacao encontrado1 = encontrados.get(0);
-      Assert.assertEquals("Item1", encontrado1.getDescricao());
+      Assert.assertEquals(new DescricaoMaterialEscolar("Item1"), encontrado1.getMaterialEscolar());
       Assert.assertEquals(3, encontrado1.getQuantidade());
       Assert.assertEquals(BigDecimal.valueOf(6), encontrado1.getValorTotal());
       Assert.assertEquals(BigDecimal.valueOf(2), encontrado1.getValorUnitario());
 
       // Produto 2 Nao encontrado
-      final List<Item> itemNaoEncontrado = resultado.getNaoEncontrados().getItens();
+      final List<Item> itemNaoEncontrado = resultado.getNaoEncontrados();
       Assert.assertEquals(1, itemNaoEncontrado.size());
-      Assert.assertEquals("Item2", itemNaoEncontrado.get(0).getDescricao());
+      Assert.assertEquals(new DescricaoMaterialEscolar("Item2"), itemNaoEncontrado.get(0).getMaterialEscolar());
 
       // Produto3 encontrado
       final Cotacao encontrado3 = encontrados.get(1);
-      Assert.assertEquals("Item3", encontrado3.getDescricao());
+      Assert.assertEquals(new DescricaoMaterialEscolar("Item3"), encontrado3.getMaterialEscolar());
       Assert.assertEquals(7, encontrado3.getQuantidade());
       Assert.assertEquals(BigDecimal.valueOf(210), encontrado3.getValorTotal());
       Assert.assertEquals(BigDecimal.valueOf(30), encontrado3.getValorUnitario());

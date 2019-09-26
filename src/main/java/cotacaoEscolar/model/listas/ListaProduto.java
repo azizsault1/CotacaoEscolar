@@ -39,7 +39,7 @@ public class ListaProduto {
    }
 
    public Optional<Produto> quero(final Item item) {
-      return this.produtos.stream().filter(produto -> produto.equivale(item)).findFirst();
+      return this.produtos.stream().filter(produto -> produto.equivale(item)).findAny();
    }
 
 }

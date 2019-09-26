@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import io.swagger.annotations.ApiModel;
+
 /**
  * Escreva a descrição da classe Escola aqui.
  *
@@ -11,7 +13,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
  * @version (número de versão ou data)
  */
 @JsonSerialize
-public class Escola {
+@ApiModel(description = "Entidade educacional.")
+public class Escola implements Comparable<Escola> {
    // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
    private final String nome;
 
@@ -59,7 +62,12 @@ public class Escola {
       return true;
    }
 
-    public boolean validate() {
+   public boolean validate() {
       return !this.getNome().isEmpty();
-    }
+   }
+
+   @Override
+   public int compareTo(final Escola o) {
+      return this.nome.compareTo(o.getNome());
+   }
 }

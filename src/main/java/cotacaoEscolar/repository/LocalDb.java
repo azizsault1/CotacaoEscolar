@@ -1,13 +1,25 @@
 package cotacaoEscolar.repository;
 
-import cotacaoEscolar.model.*;
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Estabelecimento;
+import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.Produto;
 import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.model.listas.ListaProduto;
-
-import java.math.BigDecimal;
-import java.util.*;
-import java.util.stream.Collectors;
 
 @org.springframework.stereotype.Repository
 public class LocalDb implements Repository {
@@ -51,7 +63,7 @@ public class LocalDb implements Repository {
       final List<DescricaoMaterialEscolar> itensFabricados = DescricaoMaterialEscolar.create(20);
 
       this.itens = new HashSet<>(Arrays.asList(lapisDesc, lapisDeCorDesc, classificadorDesc, cadernoDesc));
-      this.itens.addAll(itensFabricados);
+      itensFabricados.forEach(itemEntrontrado -> this.itens.add(itemEntrontrado));
 
       final List<Item> lista1 = Arrays.asList(lapis, lapisDeCor);
       final List<Item> lista2 = Arrays.asList(lapis, classificador);
@@ -82,18 +94,12 @@ public class LocalDb implements Repository {
 
    private void initProdutos() {
       final List<DescricaoMaterialEscolar> listaItens = this.itens.stream().collect(Collectors.toList());
-      final Produto produto1 = new Produto(listaItens.get(0), BigDecimal.valueOf(2.0));
-      final Produto produto2 = new Produto(listaItens.get(1), BigDecimal.valueOf(7.0));
-      final Produto produto3 = new Produto(listaItens.get(2), BigDecimal.valueOf(17.0));
-      final Produto produto4 = new Produto(listaItens.get(3), BigDecimal.valueOf(22.0));
-      final Produto produto5 = new Produto(listaItens.get(4), BigDecimal.valueOf(74.0));
-      final Produto produto6 = new Produto(listaItens.get(5), BigDecimal.valueOf(12.0));
-      final Produto produto7 = new Produto(listaItens.get(6), BigDecimal.valueOf(25.0));
-      final Produto produto8 = new Produto(listaItens.get(7), BigDecimal.valueOf(19.0));
-      final Produto produto9 = new Produto(listaItens.get(8), BigDecimal.valueOf(33.0));
-      final Produto produto10 = new Produto(listaItens.get(9), BigDecimal.valueOf(44.0));
+      this.produtos = new HashSet<>();
 
-      this.produtos = new HashSet<>(Arrays.asList(produto1, produto2, produto3, produto4, produto5, produto6, produto7, produto8, produto9, produto10));
+      for (int i = 0; i < listaItens.size(); i++) {
+         final Produto produto = Produto.create(listaItens.get(i), BigDecimal.valueOf(i + 1), Integer.valueOf(i + 1));
+         this.produtos.add(produto);
+      }
 
       this.initEstabelecimentos();
    }
@@ -103,7 +109,7 @@ public class LocalDb implements Repository {
       final List<Produto> todos = this.produtos.stream().collect(Collectors.toList());
 
       // Estabelecimento1
-      final ListaProduto produtosEstabelecimento1 = new ListaProduto(todos.get(0), todos.get(1), todos.get(2));
+      final ListaProduto produtosEstabelecimento1 = new ListaProduto(todos.get(0), todos.get(1));
       final Estabelecimento estabelecimento1 = new Estabelecimento("Estabelecimento1", produtosEstabelecimento1);
 
       // Estabelecimento2
@@ -160,6 +166,18 @@ public class LocalDb implements Repository {
    @Override
    public ListaEstabelecimento estabelecimentos() {
       return this.estabelecimentos;
+   }
+
+   @Override
+   public DescricaoMaterialEscolar selecionarPor(final DescricaoMaterialEscolar materialEscolar) {
+
+      if (!this.itens.contains(materialEscolar)) {
+         this.itens.add(materialEscolar);
+      }
+
+      return this.itens.stream().filter(materialEscolar::equals).findAny()
+            .orElseThrow(() -> new IllegalError("Não foi possível encontrar o material escolar: [" + materialEscolar + "]"));
+
    }
 
 }

@@ -13,10 +13,10 @@ public class LabelField<E> extends JPanel {
    private static final long serialVersionUID = 1L;
    private static final int ESPACO = 5;
    private static final int ALTURA_COMPONENTES_PADRAO = Dimensoes.AlturaComponentPadrao.getValor();
-   private static final int LARGURA_COMPONENTE_PADRAO = Dimensoes.LarguraComponentPadrao.getValor();
+   private static final int LARGURA_COMPONENTE_PADRAO = Dimensoes.LarguraLabel.getValor();
 
    private final LabelFieldConfiguration conf;
-   private final JComboBox<E> combo;
+   protected final JComboBox<E> combo;
 
    public LabelField(final LabelFieldConfiguration conf) {
       this.conf = conf;
@@ -39,16 +39,12 @@ public class LabelField<E> extends JPanel {
       this.setBounds(this.conf.x(), this.conf.y(), larguraComponente, ALTURA_COMPONENTES_PADRAO);
    }
 
-   public void addListeners(final ItemListener itemListener) {
+   protected void addListeners(final ItemListener itemListener) {
       this.combo.addItemListener(itemListener);
    }
 
-   public void atualizarLista(final Collection<E> novaLista) {
+   protected void atualizarLista(final Collection<E> novaLista) {
       this.combo.removeAllItems();
       novaLista.forEach(this.combo::addItem);
-      if (!novaLista.isEmpty()) {
-         this.combo.setSelectedItem(novaLista.stream().findFirst());
-      }
    }
-
 }

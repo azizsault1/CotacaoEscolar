@@ -1,6 +1,9 @@
 package cotacaoEscolar.controller;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
@@ -23,7 +26,9 @@ public class ControllerMaterialEscolar {
    }
 
    public Collection<Escola> todasEscolas() {
-      return this.servicoEscola.todas();
+      final List<Escola> escolas = new ArrayList<>(this.servicoEscola.todas());
+      Collections.sort(escolas);
+      return escolas;
    }
 
    public Collection<ListaMaterial> selecioneMaterialPor(final Escola escola) {

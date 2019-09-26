@@ -5,26 +5,21 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonRootName;
 
-/**
- * Escreva a descrição da classe Item aqui.
- *
- * @author Aziz Sault
- */
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(description = "Representa um Item na lista de material escolar, que contém uma Descrição e uma quantidade.")
 public class Item implements Comparable<Item> {
    private final DescricaoMaterialEscolar materialEscolar;
    private final int quantidade;
 
    @JsonCreator
-   public Item(@JsonProperty("materialEscolar") final DescricaoMaterialEscolar descricaoMaterialEscolar,
-               @JsonProperty("quantidade")final int quantidade) {
+   public Item(@JsonProperty("materialEscolar") final DescricaoMaterialEscolar descricaoMaterialEscolar, @JsonProperty("quantidade") final int quantidade) {
       this.materialEscolar = descricaoMaterialEscolar;
       this.quantidade = quantidade;
    }
 
-
-   public Item(String descricao, final int quantidade) {
+   public Item(final String descricao, final int quantidade) {
       this(new DescricaoMaterialEscolar(descricao), quantidade);
    }
 
@@ -41,7 +36,6 @@ public class Item implements Comparable<Item> {
       final int prime = 31;
       int result = 1;
       result = (prime * result) + ((this.materialEscolar == null) ? 0 : this.materialEscolar.hashCode());
-      result = (prime * result) + this.quantidade;
       return result;
    }
 
@@ -62,9 +56,6 @@ public class Item implements Comparable<Item> {
             return false;
          }
       } else if (!this.materialEscolar.equals(other.materialEscolar)) {
-         return false;
-      }
-      if (this.quantidade != other.quantidade) {
          return false;
       }
       return true;
@@ -90,6 +81,17 @@ public class Item implements Comparable<Item> {
          result.add(create("Item" + i, i));
       }
       return result;
+   }
+
+   //@formatter:off
+   public String toReport() {
+      final StringBuffer report = new StringBuffer("Item: " + this.getMaterialEscolar())
+      .append(System.getProperty("line.separator"))
+      .append("Quantidade procurada: ").append(this.getQuantidade())
+      .append(System.getProperty("line.separator"))
+      .append("---")
+      .append(System.getProperty("line.separator"));
+      return report.toString();
    }
 
 }

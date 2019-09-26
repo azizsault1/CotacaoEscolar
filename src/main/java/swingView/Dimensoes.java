@@ -2,10 +2,12 @@ package swingView;
 
 public enum Dimensoes {
    AlturaComponentPadrao(30),
-   LarguraComponentPadrao(200),
+   LarguraLabel(200),
+   LarguraLinha(660),
    LarguraTela(800),
    AlturaTela(600),
    MarginColuna1(80),
+   Espaco(5),
    MarginColuna2(400);
 
    private int valor;

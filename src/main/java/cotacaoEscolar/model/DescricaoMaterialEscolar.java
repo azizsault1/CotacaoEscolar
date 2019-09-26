@@ -5,16 +5,13 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-/**
- * Escreva a descrição da classe DescricaoMaterialEscolar aqui.
- *
- * @author (seu nome)
- * @version (número de versão ou data)
- */
+import cotacaoEscolar.app.IllegalError;
+import io.swagger.annotations.ApiModel;
+
 @JsonSerialize
+@ApiModel("A descrição de um material escolar é a descrição ou de um um Produto ou de um Item. Exemplo: \"Lapis de cor.\"")
 public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEscolar> {
    private final String descricao;
 
@@ -24,7 +21,7 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
    }
 
    public String getDescricao() {
-      return descricao;
+      return this.descricao;
    }
 
    @Override
@@ -38,6 +35,10 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
    }
 
    public static DescricaoMaterialEscolar create(final String descricao) {
+      if ((descricao == null) || descricao.trim().isEmpty()) {
+         throw new IllegalError("A descrição do material escolar não pode ser vazia.");
+      }
+
       return new DescricaoMaterialEscolar(descricao);
    }
 
@@ -50,17 +51,34 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
    }
 
    @Override
-   public boolean equals(Object o) {
-      if (this == o) return true;
-      if (o == null || getClass() != o.getClass()) return false;
-
-      DescricaoMaterialEscolar that = (DescricaoMaterialEscolar) o;
-
-      return descricao != null ? descricao.equals(that.descricao) : that.descricao == null;
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = (prime * result) + ((this.descricao == null) ? 0 : this.descricao.hashCode());
+      return result;
    }
 
    @Override
-   public int hashCode() {
-      return descricao != null ? descricao.hashCode() : 0;
+   public boolean equals(final Object obj) {
+
+      if (this == obj) {
+         return true;
+      }
+      if (obj == null) {
+         return false;
+      }
+      if (this.getClass() != obj.getClass()) {
+         return false;
+      }
+      final DescricaoMaterialEscolar other = (DescricaoMaterialEscolar) obj;
+      if (this.descricao == null) {
+         if (other.descricao != null) {
+            return false;
+         }
+      } else if (!this.descricao.equals(other.descricao)) {
+         return false;
+      }
+      return true;
    }
+
 }

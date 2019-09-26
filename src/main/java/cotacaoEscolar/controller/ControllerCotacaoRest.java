@@ -1,8 +1,7 @@
 package cotacaoEscolar.controller;
 
-import cotacaoEscolar.app.IllegalError;
-import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Item;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,14 +9,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ResultadoCotacao;
 import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.service.ServicoCotacao;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 import io.swagger.annotations.Api;
-
-import java.util.List;
 
 @Api(value = "Cotação")
 @RestController
@@ -41,19 +41,19 @@ public class ControllerCotacaoRest {
       return this.servicoCotacao.cotar(lista, estabelecimentos);
    }
 
-   private void validate(ListaMaterial lista){
-      Escola escola = lista.getEscola();
-      if(escola == null || !escola.validate()){
-         throw  new IllegalError("Escola invalida");
+   private void validate(final ListaMaterial lista) {
+      final Escola escola = lista.getEscola();
+      if ((escola == null) || !escola.validate()) {
+         throw new IllegalError("Escola invalida");
       }
 
-      Integer serie = lista.getSerie();
-      if(serie == null || serie == 0){
+      final Integer serie = lista.getSerie();
+      if ((serie == null) || (serie == 0)) {
          throw new IllegalError("Serie invalida");
       }
 
-      List<Item> itens = lista.getItens();
-      if(itens == null || itens.isEmpty()){
+      final List<Item> itens = lista.getItens();
+      if ((itens == null) || itens.isEmpty()) {
          throw new IllegalError("A lista de itens procurados nao pode ser vazia.");
       }
    }

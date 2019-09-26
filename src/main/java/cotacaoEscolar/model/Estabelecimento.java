@@ -4,7 +4,9 @@ import java.util.Optional;
 
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.model.listas.ListaProduto;
+import io.swagger.annotations.ApiModel;
 
+@ApiModel(description = "Establecimento é uma entidade que comercializa materiais escolares como por exemplo uma papelaria.")
 public class Estabelecimento {
 
    private final String nome;

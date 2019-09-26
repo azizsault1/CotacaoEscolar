@@ -1,8 +1,5 @@
 package swingView;
 
-import java.awt.Color;
-
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
@@ -10,6 +7,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
@@ -34,24 +32,24 @@ public class CustomOptionalPalne {
    }
 
    private static JPanel getPanel(final Item item, final JDialog dialog, final AcaoBotoes acao) {
-      final JPanel panel = new JPanel();
-      panel.setLayout(null);
       final JLabel label = new JLabel("Descricao:");
       label.setBounds(5, 5, 90, 20);
-      panel.add(label);
 
       final JTextField descricao = new JTextField(item.toString());
       descricao.setBounds(3, 25, 120, 20);
-      panel.add(descricao);
 
       final JLabel labelQuantidade = new JLabel("Quantidade:");
       labelQuantidade.setBounds(150, 5, 90, 20);
-      panel.add(labelQuantidade);
 
-      final JSpinner quantidade = new JSpinner();
+      final Integer current = 5;
+      final Integer min = 1;
+      final Integer max = 100;
+      final Integer step = 1;
+      final SpinnerNumberModel m_numberSpinnerModel = new SpinnerNumberModel(current, min, max, step);
+
+      final JSpinner quantidade = new JSpinner(m_numberSpinnerModel);
       quantidade.setValue(item.getQuantidade());
       quantidade.setBounds(150, 25, 120, 20);
-      panel.add(quantidade);
 
       final JButton salvar = new JButton("Salvar");
       salvar.setBounds(5, 150, 100, 100);
@@ -61,14 +59,12 @@ public class CustomOptionalPalne {
          acao.salvar(item, novoItem);
          dialog.dispose();
       });
-      panel.add(salvar);
 
       final JButton cancelar = new JButton("Cancela");
       cancelar.setBounds(115, 150, 100, 100);
       cancelar.addActionListener(action -> {
          dialog.dispose();
       });
-      panel.add(cancelar);
 
       final JButton apagar = new JButton("Remover Item da Lista");
       apagar.setBounds(225, 150, 100, 100);
@@ -76,9 +72,16 @@ public class CustomOptionalPalne {
          acao.remover(item);
          dialog.dispose();
       });
-      panel.add(apagar);
 
-      panel.setBorder(BorderFactory.createLineBorder(Color.blue));
+      final JPanel panel = new JPanel();
+      panel.setLayout(null);
+      panel.add(label);
+      panel.add(descricao);
+      panel.add(labelQuantidade);
+      panel.add(quantidade);
+      panel.add(salvar);
+      panel.add(cancelar);
+      panel.add(apagar);
       panel.setBounds(3, 3, 343, 273);
       return panel;
    }

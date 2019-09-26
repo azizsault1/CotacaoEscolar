@@ -29,8 +29,8 @@ public class EstabelecimentoTest {
       final Item item2 = new Item("Item2", 5);
       final Item item3 = new Item("Item3", 7);
       final List<Item> itens = Arrays.asList(item1, item2, item3);
-      final Produto produto1 = new Produto("Produto1", BigDecimal.valueOf(2));
-      final Produto produto3 = new Produto("Produto3", BigDecimal.valueOf(30));
+      final Produto produto1 = Produto.create("Produto1", BigDecimal.valueOf(2), Integer.valueOf(5));
+      final Produto produto3 = Produto.create("Produto3", BigDecimal.valueOf(30), Integer.valueOf(5));
       final Optional<Produto> optionalTem1 = Optional.of(produto1);
       final Optional<Produto> optionalTem3 = Optional.of(produto3);
       final Optional<Produto> optionalNaoTem = Optional.empty();

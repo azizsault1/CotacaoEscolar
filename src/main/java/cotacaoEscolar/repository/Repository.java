@@ -24,4 +24,6 @@ public interface Repository {
 
    ListaEstabelecimento estabelecimentos();
 
+   DescricaoMaterialEscolar selecionarPor(DescricaoMaterialEscolar materialEscolar);
+
 }

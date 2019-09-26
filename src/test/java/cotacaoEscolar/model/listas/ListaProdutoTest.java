@@ -15,8 +15,8 @@ public class ListaProdutoTest {
 
    public ListaProdutoTest() {
       this.produtos = new ListaProduto();
-      this.produtos.add(new Produto("Produto1", BigDecimal.valueOf(2)));
-      this.produtos.add(new Produto("Produto2", BigDecimal.valueOf(4)));
+      this.produtos.add(Produto.create("Produto1", BigDecimal.valueOf(2), Integer.valueOf(5)));
+      this.produtos.add(Produto.create("Produto2", BigDecimal.valueOf(4), Integer.valueOf(5)));
    }
 
    @Test
@@ -36,7 +36,7 @@ public class ListaProdutoTest {
 
    @Test
    public void ESeRepetirOProduto() {
-      this.produtos.add(new Produto("Produto2", BigDecimal.valueOf(2)));
+      this.produtos.add(Produto.create("Produto2", BigDecimal.valueOf(2), Integer.valueOf(5)));
       final Item item = new Item("Produto2", 1);
       final Optional<Produto> produto = this.produtos.quero(item);
       Assert.assertTrue(produto.isPresent());

@@ -46,23 +46,30 @@ public class ControllerRest {
 
    @CrossOrigin(origins = "*")
    @GetMapping(value = "escola/{nomeEscola}", produces = "application/json")
-   public Collection<ListaMaterial> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola) throws IllegalError {
+   public Collection<ListaMaterial> ListaDeMateriaisEscolaresDa(@PathVariable("nomeEscola") final String nomeEscola) throws IllegalError {
       final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
       return this.servicoListaMaterial.selecionePor(escolaEncontrada);
    }
 
    @CrossOrigin(origins = "*")
    @GetMapping(value = "series/{nomeEscola}", produces = "application/json")
-   public Collection<Integer> selecionarSerie(@PathVariable("nomeEscola") final String nomeEscola) {
+   public Collection<Integer> SeriesDa(@PathVariable("nomeEscola") final String nomeEscola) {
       final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
       return this.servicoListaMaterial.selecioneSeriesPor(escolaEncontrada);
    }
 
    @CrossOrigin(origins = "*")
    @GetMapping(value = "itens/{nomeEscola}/{serie}", produces = "application/json")
-   public List<Item> selecioneMaterialPor(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
+   public List<Item> itensDaListaDa(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
       final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
       return this.servicoListaMaterial.selecionePor(escolaEncontrada, serie).getItens();
+   }
+
+   @CrossOrigin(origins = "*")
+   @GetMapping(value = "materialEscolar/{nomeEscola}/{serie}", produces = "application/json")
+   public ListaMaterial listaDeMateriais(@PathVariable("nomeEscola") final String nomeEscola, @PathVariable("serie") final Integer serie) {
+      final Escola escolaEncontrada = this.servicoEscola.buscar(nomeEscola);
+      return this.servicoListaMaterial.selecionePor(escolaEncontrada, serie);
    }
 
    @CrossOrigin(origins = "*")

@@ -42,4 +42,8 @@ public class ListaProduto {
       return this.produtos.stream().filter(produto -> produto.equivale(item)).findAny();
    }
 
+   public List<Produto> getProdutos() {
+      return this.produtos;
+   }
+
 }

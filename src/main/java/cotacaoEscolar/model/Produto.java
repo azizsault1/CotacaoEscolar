@@ -17,6 +17,10 @@ public class Produto {
       this.quantidadeEstoque = quantidade;
    }
 
+   public String getDescricao() {
+      return this.materialEscolar.getDescricao();
+   }
+
    public boolean equivale(final Item item) {
       final boolean result = this.materialEscolar.equals(item.getMaterialEscolar());
       return result;
@@ -72,7 +76,7 @@ public class Produto {
 
    private static void validar(final BigDecimal valor, final Integer quantidade) {
       if (valor == null) {
-         throw new IllegalError("Você precisa definir uma qu");
+         throw new IllegalError("Você precisa definir uma quantidade");
       }
       if (valor.intValue() <= 0) {
          throw new IllegalError("O valor de um prduto não poder ser menor ou igual a zero.");

@@ -30,11 +30,6 @@ public interface LabelFieldConfiguration extends Posicao, Label {
                return label.labelText();
             }
 
-            @Override
-            public int largura() {
-               return posicao.largura();
-            }
-
          };
       }
    }

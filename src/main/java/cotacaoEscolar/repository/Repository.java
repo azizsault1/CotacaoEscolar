@@ -1,29 +1,22 @@
 package cotacaoEscolar.repository;
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.repository.pojos.ParserToModel;
 
-@org.springframework.stereotype.Repository
-public interface Repository {
+public interface Repository<Model> {
 
-   List<Item> selecionePor(int serie);
+   public void salvaSaPorra(Model model);
 
-   Collection<DescricaoMaterialEscolar> todasDescricoes();
+   default List<Model> toModels(final List<ParserToModel<Model>> pojos) {
+      final List<Model> models = new ArrayList<>();
+      pojos.forEach(pojo -> models.add(this.toModel(pojo)));
+      return models;
+   }
 
-   Collection<Escola> escolas();
-
-   Collection<ListaMaterial> materiais();
-
-   void add(ListaMaterial novaLista);
-
-   ListaEstabelecimento estabelecimentos();
-
-   DescricaoMaterialEscolar selecionarPor(DescricaoMaterialEscolar materialEscolar);
+   default Model toModel(final ParserToModel<Model> pojo) {
+      return pojo.toModel();
+   }
 
 }

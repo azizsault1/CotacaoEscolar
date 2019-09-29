@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
 
@@ -16,12 +17,24 @@ import cotacaoEscolar.model.Item;
 public class ListaMaterial implements Serializable {
    private static final long serialVersionUID = 1L;
    private final Escola escola;
-   private final Integer serie;
+   private final String serie;
    private final List<Item> itens;
 
    @JsonCreator
-   public ListaMaterial(@JsonProperty("escola") final Escola escola, @JsonProperty("serie") final Integer serie,
-         @JsonProperty("itens") final List<Item> itens) {
+   public ListaMaterial(@JsonProperty("escola") final Escola escola, @JsonProperty("serie") final String serie, @JsonProperty("itens") final List<Item> itens) {
+
+      if (escola == null) {
+         throw new IllegalError("Opps... essa escola não existe");
+      }
+
+      if ((serie == null) || serie.trim().isEmpty()) {
+         throw new IllegalError("Opps... essa serie não existe");
+      }
+
+      if (itens == null) {
+         throw new IllegalError("Me passe uma lista vazia mais não me passe nulo, por favor!!");
+      }
+
       this.escola = escola;
       this.serie = serie;
       this.itens = itens;
@@ -31,7 +44,7 @@ public class ListaMaterial implements Serializable {
       return this.escola;
    }
 
-   public int getSerie() {
+   public String getSerie() {
       return this.serie;
    }
 
@@ -45,7 +58,7 @@ public class ListaMaterial implements Serializable {
    }
 
    @JsonIgnore
-   public boolean pertenceA(final Integer serie) {
+   public boolean pertenceASerie(final String serie) {
       return this.serie.equals(serie);
    }
 
@@ -58,7 +71,7 @@ public class ListaMaterial implements Serializable {
       }
 
       public static ListaMaterial criarListaVazia() {
-         return new ListaMaterial(new Escola("EscolaInexistente"), 1, Collections.emptyList());
+         return new ListaMaterial(new Escola("EscolaInexistente"), "1", Collections.emptyList());
       }
    }
 

@@ -13,4 +13,6 @@ public interface ServicoEscola {
 
    public Escola buscar(String escola);
 
+   public void salvar(Escola escola);
+
 }

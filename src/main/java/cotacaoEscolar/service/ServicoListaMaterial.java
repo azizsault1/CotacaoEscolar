@@ -11,14 +11,16 @@ import cotacaoEscolar.model.listas.ListaMaterial;
 @Service
 public interface ServicoListaMaterial {
 
+   ListaMaterial salvar(Escola escola, String serie);
+
    Collection<ListaMaterial> selecionePor(Escola escola);
 
-   ListaMaterial selecionePor(Escola escolaEscolhida, Integer serieEscolhida);
+   ListaMaterial selecionePor(Escola escolaEscolhida, String serieEscolhida);
 
-   void remover(Escola escola, Integer serie, Item de);
+   void remover(Escola escola, String serie, Item de);
 
-   void adicionar(Escola escola, Integer serie, Item para);
+   void adicionar(Escola escola, String serie, Item para);
 
-   Collection<Integer> selecioneSeriesPor(Escola escolaEncontrada);
+   Collection<String> selecioneSeriesPor(Escola escolaEncontrada);
 
 }

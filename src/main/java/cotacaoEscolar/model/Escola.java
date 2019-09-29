@@ -4,14 +4,10 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import cotacaoEscolar.app.IllegalError;
+import io.jsondb.annotation.Id;
 import io.swagger.annotations.ApiModel;
 
-/**
- * Escreva a descrição da classe Escola aqui.
- *
- * @author (seu nome)
- * @version (número de versão ou data)
- */
 @JsonSerialize
 @ApiModel(description = "Entidade educacional.")
 public class Escola implements Comparable<Escola> {
@@ -20,9 +16,22 @@ public class Escola implements Comparable<Escola> {
 
    @JsonCreator
    public Escola(@JsonProperty("nome") final String nome) {
+      if ((nome == null) || nome.trim().isEmpty()) {
+         throw new IllegalError("Uma escola não pode ser criada sem nome.");
+      }
+
+      if (nome.trim().length() < 4) {
+         throw new IllegalError("Ahhh qual é uma escola tem mais de 4 letras.");
+      }
+
+      if (nome.length() > 100) {
+         throw new IllegalError("Acho uma melhor ideia dar uma abreviada no nome dessa escola.");
+      }
+
       this.nome = nome;
    }
 
+   @Id
    public String getNome() {
       return this.nome;
    }
@@ -70,4 +79,5 @@ public class Escola implements Comparable<Escola> {
    public int compareTo(final Escola o) {
       return this.nome.compareTo(o.getNome());
    }
+
 }

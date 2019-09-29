@@ -47,8 +47,8 @@ public class ControllerCotacaoRest {
          throw new IllegalError("Escola invalida");
       }
 
-      final Integer serie = lista.getSerie();
-      if ((serie == null) || (serie == 0)) {
+      final String serie = lista.getSerie();
+      if ((serie == null) || (serie.trim().isEmpty())) {
          throw new IllegalError("Serie invalida");
       }
 

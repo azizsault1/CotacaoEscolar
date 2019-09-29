@@ -9,20 +9,21 @@ import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;
 import cotacaoEscolar.service.ServicoEscola;
-import cotacaoEscolar.service.ServicoItem;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
 public class ControllerMaterialEscolar {
 
    private final ServicoEscola servicoEscola;
    private final ServicoListaMaterial servicoListaMaterial;
-   private final ServicoItem servicoItem;
+   private final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar;
 
-   public ControllerMaterialEscolar(final ServicoEscola servicoEscola, final ServicoItem servicoItem, final ServicoListaMaterial servicoListaMaterial) {
+   public ControllerMaterialEscolar(final ServicoEscola servicoEscola, final ServicoListaMaterial servicoListaMaterial,
+         final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar) {
       this.servicoEscola = servicoEscola;
-      this.servicoItem = servicoItem;
       this.servicoListaMaterial = servicoListaMaterial;
+      this.servicoDescricaoMaterialEscolar = servicoDescricaoMaterialEscolar;
    }
 
    public Collection<Escola> todasEscolas() {
@@ -35,20 +36,20 @@ public class ControllerMaterialEscolar {
       return this.servicoListaMaterial.selecionePor(escola);
    }
 
-   public ListaMaterial selecioneMaterialPor(final Escola escola, final Integer serie) {
+   public ListaMaterial selecioneMaterialPor(final Escola escola, final String serie) {
       return this.servicoListaMaterial.selecionePor(escola, serie);
    }
 
-   public void remover(final Escola escola, final Integer serie, final Item item) {
+   public void remover(final Escola escola, final String serie, final Item item) {
       this.servicoListaMaterial.remover(escola, serie, item);
    }
 
-   public void adicionar(final Escola escola, final Integer serie, final Item item) {
+   public void adicionar(final Escola escola, final String serie, final Item item) {
       this.servicoListaMaterial.adicionar(escola, serie, item);
    }
 
    public Collection<DescricaoMaterialEscolar> todasDescricoes() {
-      return this.servicoItem.todasDescricoes();
+      return this.servicoDescricaoMaterialEscolar.todasDescricoes();
    }
 
 }

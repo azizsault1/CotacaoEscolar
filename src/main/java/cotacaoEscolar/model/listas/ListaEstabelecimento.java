@@ -33,4 +33,8 @@ public class ListaEstabelecimento {
       return new ResultadoCotacao(resultados);
    }
 
+   public void add(final Estabelecimento estabelecimento) {
+      this.estabelecimentos.add(estabelecimento);
+   }
+
 }

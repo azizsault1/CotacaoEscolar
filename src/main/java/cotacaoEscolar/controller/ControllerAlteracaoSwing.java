@@ -9,14 +9,14 @@ import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
-public class ControllerCotacao {
+public class ControllerAlteracaoSwing {
 
    private final ServicoCotacao servicoCotacao;
    private final ServicoEstabelecimento servicoEstabelecimento;
    private final ServicoEscola servicoEscola;
    private final ServicoListaMaterial servicoListaMaterial;
 
-   public ControllerCotacao(final ServicoCotacao servicoCotacao, final ServicoEstabelecimento servicoEstabelecimento, final ServicoEscola servicoEscola,
+   public ControllerAlteracaoSwing(final ServicoCotacao servicoCotacao, final ServicoEstabelecimento servicoEstabelecimento, final ServicoEscola servicoEscola,
          final ServicoListaMaterial servicoListaMaterial) {
       this.servicoEscola = servicoEscola;
       this.servicoListaMaterial = servicoListaMaterial;

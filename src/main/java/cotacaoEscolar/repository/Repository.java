@@ -5,7 +5,7 @@ import java.util.List;
 
 import cotacaoEscolar.repository.pojos.ParserToModel;
 
-public interface Repository<Model> {
+interface Repository<Model> {
 
    public void salvaSaPorra(Model model);
 

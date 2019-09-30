@@ -2,6 +2,8 @@ package cotacaoEscolar.service.impl;
 
 import java.util.Collection;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.repository.DescricaoMaterialEscolarRepository;
 
@@ -9,6 +11,7 @@ public class ServicoDescricaoMaterialEscolarLocal implements cotacaoEscolar.serv
 
    private final DescricaoMaterialEscolarRepository repository;
 
+   @Autowired
    public ServicoDescricaoMaterialEscolarLocal(final DescricaoMaterialEscolarRepository repository) {
       this.repository = repository;
    }

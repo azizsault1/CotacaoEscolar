@@ -22,7 +22,6 @@ import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.model.listas.ListaProduto;
 
-@org.springframework.stereotype.Repository
 public class LocalDb implements EscolhaUmBancoNessaPorra {
    private Set<Escola> escolas;
    private Set<DescricaoMaterialEscolar> itens;

@@ -1,16 +1,16 @@
 package cotacaoEscolar.service.impl;
 
-import org.springframework.stereotype.Service;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.repository.EstabelecimentoRepository;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 
-@Service
 public class ServicoEstabelecimentoLocal implements ServicoEstabelecimento {
 
    private final EstabelecimentoRepository repository;
 
+   @Autowired
    public ServicoEstabelecimentoLocal(final EstabelecimentoRepository repository) {
       this.repository = repository;
    }

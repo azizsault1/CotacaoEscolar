@@ -24,14 +24,14 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "Material Escolar")
 @RestController
 @RequestMapping("v1")
-public class ControllerRest {
+public class ControllerBuscaRest {
 
    private final ServicoEscola servicoEscola;
    private final ServicoListaMaterial servicoListaMaterial;
    private final ServicoDescricaoMaterialEscolar servicoItem;
 
    @Autowired
-   public ControllerRest(final ServicoEscola servicoEscola, final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar,
+   public ControllerBuscaRest(final ServicoEscola servicoEscola, final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar,
          final ServicoListaMaterial servicoListaMaterial) {
       this.servicoEscola = servicoEscola;
       this.servicoItem = servicoDescricaoMaterialEscolar;

@@ -9,9 +9,8 @@ import io.jsondb.annotation.Id;
 import io.swagger.annotations.ApiModel;
 
 @JsonSerialize
-@ApiModel(description = "Entidade educacional.")
+@ApiModel(description = "Instituição pública ou privada destinado ao ensino coletivo.")
 public class Escola implements Comparable<Escola> {
-   // variáveis de instância - substitua o exemplo abaixo pelo seu próprio
    private final String nome;
 
    @JsonCreator

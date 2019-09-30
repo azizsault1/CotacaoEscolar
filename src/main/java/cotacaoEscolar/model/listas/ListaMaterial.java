@@ -24,11 +24,11 @@ public class ListaMaterial implements Serializable {
    public ListaMaterial(@JsonProperty("escola") final Escola escola, @JsonProperty("serie") final String serie, @JsonProperty("itens") final List<Item> itens) {
 
       if (escola == null) {
-         throw new IllegalError("Opps... essa escola não existe");
+         throw new IllegalError("Opps... essa escola não existe.");
       }
 
       if ((serie == null) || serie.trim().isEmpty()) {
-         throw new IllegalError("Opps... essa serie não existe");
+         throw new IllegalError("Opps... essa serie não existe.");
       }
 
       if (itens == null) {

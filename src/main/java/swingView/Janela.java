@@ -13,8 +13,8 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import cotacaoEscolar.app.IllegalError;
-import cotacaoEscolar.controller.ControllerCotacao;
-import cotacaoEscolar.controller.ControllerMaterialEscolar;
+import cotacaoEscolar.controller.ControllerAlteracaoSwing;
+import cotacaoEscolar.controller.ControllerBuscaSwing;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ResultadoCotacao;
@@ -35,15 +35,15 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
 
    private static final int Y_INICIAL = 20;
 
-   private final ControllerMaterialEscolar controller;
-   private final ControllerCotacao controllerCotacao;
+   private final ControllerBuscaSwing controller;
+   private final ControllerAlteracaoSwing controllerCotacao;
 
    private LabelFieldEscola escolas;
    private LabelFieldSeries series;
    private LinhaItens itens;
    private TabelaMaterialEscolar tabelaMaterial;
 
-   public Janela(final ControllerMaterialEscolar controllerMateriais, final ControllerCotacao controllerCotacao) {
+   public Janela(final ControllerBuscaSwing controllerMateriais, final ControllerAlteracaoSwing controllerCotacao) {
       this.controller = controllerMateriais;
       this.controllerCotacao = controllerCotacao;
 

@@ -13,13 +13,13 @@ import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
-public class ControllerMaterialEscolar {
+public class ControllerBuscaSwing {
 
    private final ServicoEscola servicoEscola;
    private final ServicoListaMaterial servicoListaMaterial;
    private final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar;
 
-   public ControllerMaterialEscolar(final ServicoEscola servicoEscola, final ServicoListaMaterial servicoListaMaterial,
+   public ControllerBuscaSwing(final ServicoEscola servicoEscola, final ServicoListaMaterial servicoListaMaterial,
          final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar) {
       this.servicoEscola = servicoEscola;
       this.servicoListaMaterial = servicoListaMaterial;

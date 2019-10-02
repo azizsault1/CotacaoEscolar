@@ -1,5 +1,6 @@
 package cotacaoEscolar.model;
 
+import java.util.List;
 import java.util.Optional;
 
 import cotacaoEscolar.model.listas.ListaMaterial;
@@ -19,6 +20,10 @@ public class Estabelecimento {
    public Estabelecimento(final String nome, final ListaProduto produtos) {
       this.produtos = produtos;
       this.nome = nome;
+   }
+
+   public String getNome() {
+      return this.nome;
    }
 
    public ResultadoCotacaoEstabelecimento cotar(final ListaMaterial lista) {
@@ -65,6 +70,10 @@ public class Estabelecimento {
          return false;
       }
       return true;
+   }
+
+   public List<Produto> getProdutos() {
+      return this.produtos.getProdutos();
    }
 
 }

@@ -12,8 +12,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-import cotacaoEscolar.controller.ControllerCotacao;
-import cotacaoEscolar.controller.ControllerMaterialEscolar;
+import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.controller.ControllerAlteracaoSwing;
+import cotacaoEscolar.controller.ControllerBuscaSwing;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ResultadoCotacao;
@@ -34,15 +35,15 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
 
    private static final int Y_INICIAL = 20;
 
-   private final ControllerMaterialEscolar controller;
-   private final ControllerCotacao controllerCotacao;
+   private final ControllerBuscaSwing controller;
+   private final ControllerAlteracaoSwing controllerCotacao;
 
    private LabelFieldEscola escolas;
    private LabelFieldSeries series;
    private LinhaItens itens;
    private TabelaMaterialEscolar tabelaMaterial;
 
-   public Janela(final ControllerMaterialEscolar controllerMateriais, final ControllerCotacao controllerCotacao) {
+   public Janela(final ControllerBuscaSwing controllerMateriais, final ControllerAlteracaoSwing controllerCotacao) {
       this.controller = controllerMateriais;
       this.controllerCotacao = controllerCotacao;
 
@@ -86,7 +87,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       cotar.setBounds(Dimensoes.MarginColuna1.getValor(), 520, 575, 40);
       cotar.addActionListener(listener -> {
          final Optional<Escola> escola = this.escolas.getEscolaEscolhida();
-         final Optional<Integer> serie = this.series.getSerieEscolhida();
+         final Optional<String> serie = this.series.getSerieEscolhida();
          final List<Item> itensEscohidos = this.tabelaMaterial.getItens();
 
          final ListaMaterial material;
@@ -119,15 +120,15 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
    @Override
    public void escolaSelecionada(final Escola escola) {
       final Collection<ListaMaterial> listaMateriais = this.queroAListaDeMateriaisDaEscola(Optional.of(escola));
-      final List<Integer> listaSeries = this.queroAsSeriesDaListaDeMateriais(listaMateriais);
+      final List<String> listaSeries = this.queroAsSeriesDaListaDeMateriais(listaMateriais);
       this.series.atualizarLista(listaSeries);
 
    }
 
    @Override
-   public void serieSelecionada(final Integer serie) {
+   public void serieSelecionada(final String serie) {
       final Optional<Escola> escolaEscolhida = this.escolas.getEscolaEscolhida();
-      final Optional<Integer> seriesEscolhida = Optional.of(serie);
+      final Optional<String> seriesEscolhida = Optional.of(serie);
       final ListaMaterial material = this.queroAListaDeMaterial(escolaEscolhida, seriesEscolhida);
       this.tabelaMaterial.atualizar(material.getItens());
 
@@ -146,18 +147,42 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       }
    }
 
-   private List<Integer> queroAsSeriesDaListaDeMateriais(final Collection<ListaMaterial> listaMateriais) {
-      final List<Integer> series = listaMateriais.stream().map(ListaMaterial::getSerie).collect(Collectors.toList());
+   private List<String> queroAsSeriesDaListaDeMateriais(final Collection<ListaMaterial> listaMateriais) {
+      final List<String> series = listaMateriais.stream().map(ListaMaterial::getSerie).collect(Collectors.toList());
       Collections.sort(series);
       return series;
    }
 
-   private ListaMaterial queroAListaDeMaterial(final Optional<Escola> escola, final Optional<Integer> serie) {
+   private ListaMaterial queroAListaDeMaterial(final Optional<Escola> escola, final Optional<String> serie) {
       if (!escola.isPresent() || !serie.isPresent()) {
          return ListaMaterial.Factory.criarListaVazia();
       }
 
       return this.controller.selecioneMaterialPor(escola.get(), serie.get());
+   }
+
+   @Override
+   public void maisSeries(final String serie) {
+      final Optional<Escola> escola = this.escolas.getEscolaEscolhida();
+
+      if (escola.isPresent()) {
+         final Escola e = escola.get();
+         this.controllerCotacao.salvarSerie(e, serie);
+         this.escolas.atualizar(this.controller.todasEscolas());
+         this.escolas.escolaSelecionada(e);
+         this.series.selecionaSerie(serie);
+
+      } else {
+         throw new IllegalError("Escola inválida. Tente salvar primeiro a escola.");
+      }
+
+   }
+
+   @Override
+   public void maisEscolas(final Escola escola) {
+      this.controllerCotacao.salvarEscola(escola);
+      this.escolas.atualizar(this.controller.todasEscolas());
+      this.escolas.escolaSelecionada(escola);
    }
 
 }

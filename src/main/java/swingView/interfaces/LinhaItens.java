@@ -14,6 +14,8 @@ import swingView.Dimensoes;
 public class LinhaItens extends JPanel {
 
    private static final long serialVersionUID = 1L;
+   private static final int LARGURA_LABEL = 50;
+   private static final int LARGURA_DO_COMBO = 300;
 
    public interface EventoItemSelecionado {
       public void adicioneMaisUmItem(Item de);
@@ -33,24 +35,24 @@ public class LinhaItens extends JPanel {
 
    private void addComponents(final EventoItemSelecionado itemSelecionado) {
       final JLabel label = new JLabel("Itens:");
-      final int larguraLabel = 50;
 
-      label.setBounds(Dimensoes.MarginColuna1.getValor(), 0, larguraLabel, Dimensoes.AlturaComponentPadrao.getValor());
+      label.setBounds(Dimensoes.MarginColuna1.getValor(), 0, LARGURA_LABEL, Dimensoes.AlturaComponentPadrao.getValor());
 
-      final int maginMaisLabelMaisEspaco = Dimensoes.MarginColuna1.getValor() + larguraLabel + Dimensoes.Espaco.getValor();
-      final int larguraCombo = 300;
+      final int maginMaisLabelMaisEspaco = Dimensoes.MarginColuna1.getValor() + LARGURA_LABEL + Dimensoes.Espaco.getValor();
 
-      this.combo.setBounds(maginMaisLabelMaisEspaco, 0, larguraCombo, Dimensoes.AlturaComponentPadrao.getValor());
+      this.combo.setBounds(maginMaisLabelMaisEspaco, 0, LARGURA_DO_COMBO, Dimensoes.AlturaComponentPadrao.getValor());
       this.atualizarDescricoes(this.descricoes);
 
       final JButton adicionarItem = new JButton("Adicionar Item");
-      final int marginMaisLabelMaisEspacoMaisComboMaisEspaco = maginMaisLabelMaisEspaco + larguraCombo + Dimensoes.Espaco.getValor();
+      final int marginMaisLabelMaisEspacoMaisComboMaisEspaco = maginMaisLabelMaisEspaco + LARGURA_DO_COMBO + Dimensoes.Espaco.getValor();
       final int larguraAdicionar = (Dimensoes.LarguraLinha.getValor() - marginMaisLabelMaisEspacoMaisComboMaisEspaco);
       adicionarItem.setBounds(marginMaisLabelMaisEspacoMaisComboMaisEspaco, 0, larguraAdicionar, Dimensoes.AlturaComponentPadrao.getValor());
       adicionarItem.addActionListener(evento -> {
          final DescricaoMaterialEscolar material = (DescricaoMaterialEscolar) this.combo.getSelectedItem();
-         final Item de = new Item(material, 1);
-         itemSelecionado.adicioneMaisUmItem(de);
+         if (material != null) {
+            final Item de = new Item(material, 1);
+            itemSelecionado.adicioneMaisUmItem(de);
+         }
       });
 
       this.add(label);

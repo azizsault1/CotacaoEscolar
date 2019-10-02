@@ -11,7 +11,7 @@ import cotacaoEscolar.app.IllegalError;
 import io.swagger.annotations.ApiModel;
 
 @JsonSerialize
-@ApiModel("A descrição de um material escolar é a descrição ou de um um Produto ou de um Item. Exemplo: \"Lapis de cor.\"")
+@ApiModel(description = "A descrição de um material escolar é a descrição ou de um um Produto ou de um Item. Exemplo: \"Lapis de cor.\"")
 public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEscolar> {
    private final String descricao;
 

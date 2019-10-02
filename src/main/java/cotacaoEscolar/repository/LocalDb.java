@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import cotacaoEscolar.app.EscolhaUmBancoNessaPorra;
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
@@ -21,8 +22,7 @@ import cotacaoEscolar.model.listas.ListaEstabelecimento;
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.model.listas.ListaProduto;
 
-@org.springframework.stereotype.Repository
-public class LocalDb implements Repository {
+public class LocalDb implements EscolhaUmBancoNessaPorra {
    private Set<Escola> escolas;
    private Set<DescricaoMaterialEscolar> itens;
    private Map<String, List<Item>> listasEstaticas;
@@ -78,18 +78,18 @@ public class LocalDb implements Repository {
    private void initMateriais(final Escola escola1, final Escola escola2, final Escola escola3) {
 
       // Escola1
-      this.listaMaterialEscolar.add(new ListaMaterial(escola1, Integer.valueOf(1), this.selecionePor(1)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola1, Integer.valueOf(2), this.selecionePor(2)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola1, Integer.valueOf(3), this.selecionePor(3)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola1, "1", this.selecionePor(1)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola1, "2", this.selecionePor(2)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola1, "3", this.selecionePor(3)));
       // Escola2
-      this.listaMaterialEscolar.add(new ListaMaterial(escola2, Integer.valueOf(3), this.selecionePor(3)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola2, Integer.valueOf(2), this.selecionePor(2)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola2, Integer.valueOf(1), this.selecionePor(1)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola2, "3", this.selecionePor(3)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola2, "2", this.selecionePor(2)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola2, "1", this.selecionePor(1)));
 
       // Escola3
-      this.listaMaterialEscolar.add(new ListaMaterial(escola3, Integer.valueOf(2), this.selecionePor(2)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola3, Integer.valueOf(1), this.selecionePor(1)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola3, Integer.valueOf(4), this.selecionePor(4)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola3, "2", this.selecionePor(2)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola3, "1", this.selecionePor(1)));
+      this.listaMaterialEscolar.add(new ListaMaterial(escola3, "4", this.selecionePor(4)));
    }
 
    private void initProdutos() {
@@ -131,13 +131,7 @@ public class LocalDb implements Repository {
       this.estabelecimentos = new ListaEstabelecimento(Arrays.asList(estabelecimento1, estabelecimento2, estabelecimento3, estabelecimento4, estabelecimento5));
    }
 
-   @Override
-   public Collection<Escola> escolas() {
-      return this.escolas;
-   }
-
-   @Override
-   public List<Item> selecionePor(final int serie) {
+   private List<Item> selecionePor(final int serie) {
       switch (serie) {
       case 1:
          return this.listasEstaticas.get("Lista1");
@@ -149,35 +143,79 @@ public class LocalDb implements Repository {
    }
 
    @Override
-   public Collection<DescricaoMaterialEscolar> todasDescricoes() {
-      return this.itens;
+   public DescricaoMaterialEscolarRepository meDaUmBancoDeMaterial() {
+      return new DescricaoMaterialEscolarRepository() {
+
+         @Override
+         public void salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) {
+            LocalDb.this.itens.add(descricaoMaterialEscolar);
+         }
+
+         @Override
+         public Collection<DescricaoMaterialEscolar> meDaTudo() {
+            return LocalDb.this.itens;
+         }
+
+         @Override
+         public DescricaoMaterialEscolar selecionarPor(final DescricaoMaterialEscolar materialEscolar) {
+            if (!LocalDb.this.itens.contains(materialEscolar)) {
+               LocalDb.this.itens.add(materialEscolar);
+            }
+
+            return LocalDb.this.itens.stream().filter(materialEscolar::equals).findAny()
+                  .orElseThrow(() -> new IllegalError("Não foi possível encontrar o material escolar: [" + materialEscolar + "]"));
+         }
+      };
    }
 
    @Override
-   public Collection<ListaMaterial> materiais() {
-      return this.listaMaterialEscolar;
+   public EscolaRepository meDaUmBancoDeEscola() {
+      return new EscolaRepository() {
+
+         @Override
+         public void salvaSaPorra(final Escola escola) {
+            LocalDb.this.escolas.add(escola);
+
+         }
+
+         @Override
+         public Collection<Escola> escolas() {
+            return LocalDb.this.escolas;
+         }
+      };
    }
 
    @Override
-   public void add(final ListaMaterial novaLista) {
-      this.listaMaterialEscolar.add(novaLista);
+   public ListaMaterialRepository meDaUmBancoDeListaMaterial() {
+      return new ListaMaterialRepository() {
+
+         @Override
+         public Collection<ListaMaterial> materiais() {
+            return LocalDb.this.listaMaterialEscolar;
+         }
+
+         @Override
+         public void salvaSaPorra(final ListaMaterial listaMaterial) {
+            LocalDb.this.listaMaterialEscolar.add(listaMaterial);
+         }
+
+      };
    }
 
    @Override
-   public ListaEstabelecimento estabelecimentos() {
-      return this.estabelecimentos;
-   }
+   public EstabelecimentoRepository meDaUmBancoDeestabelecimentos() {
+      return new EstabelecimentoRepository() {
 
-   @Override
-   public DescricaoMaterialEscolar selecionarPor(final DescricaoMaterialEscolar materialEscolar) {
+         @Override
+         public void salvaSaPorra(final Estabelecimento estabelecimento) {
+            LocalDb.this.estabelecimentos.add(estabelecimento);
+         }
 
-      if (!this.itens.contains(materialEscolar)) {
-         this.itens.add(materialEscolar);
-      }
-
-      return this.itens.stream().filter(materialEscolar::equals).findAny()
-            .orElseThrow(() -> new IllegalError("Não foi possível encontrar o material escolar: [" + materialEscolar + "]"));
-
+         @Override
+         public ListaEstabelecimento estabelecimentos() {
+            return LocalDb.this.estabelecimentos;
+         }
+      };
    }
 
 }

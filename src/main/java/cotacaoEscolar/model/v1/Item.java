@@ -1,4 +1,4 @@
-package cotacaoEscolar.model;
+package cotacaoEscolar.model.v1;
 
 import java.util.ArrayList;
 import java.util.List;

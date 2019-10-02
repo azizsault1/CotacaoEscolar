@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.repository.ListaMaterialRepository;
 import cotacaoEscolar.repository.pojos.ListaMaterialPojo;
 

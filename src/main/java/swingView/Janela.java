@@ -16,9 +16,10 @@ import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.controller.ControllerAlteracaoSwing;
 import cotacaoEscolar.controller.ControllerBuscaSwing;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.ResultadoCotacao;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ResultadoCotacao;
+import cotacaoEscolar.model.v1.Serie;
 import swingView.LabelFieldEscola.EventoEscolaSelecionada;
 import swingView.LabelFieldSeries.EventoSerieSelecionada;
 import swingView.interfaces.LinhaItens;
@@ -42,10 +43,12 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
    private LabelFieldSeries series;
    private LinhaItens itens;
    private TabelaMaterialEscolar tabelaMaterial;
+   private final ListaMaterial materialEscolar;
 
-   public Janela(final ControllerBuscaSwing controllerMateriais, final ControllerAlteracaoSwing controllerCotacao) {
+   public Janela(final ControllerBuscaSwing controllerMateriais, final ControllerAlteracaoSwing controllerCotacao, final ListaMaterial materialEscolar) {
       this.controller = controllerMateriais;
       this.controllerCotacao = controllerCotacao;
+      this.materialEscolar = materialEscolar;
 
       this.addComponents();
       this.configureWindow();
@@ -87,14 +90,14 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       cotar.setBounds(Dimensoes.MarginColuna1.getValor(), 520, 575, 40);
       cotar.addActionListener(listener -> {
          final Optional<Escola> escola = this.escolas.getEscolaEscolhida();
-         final Optional<String> serie = this.series.getSerieEscolhida();
+         final Optional<Serie> serie = this.series.getSerieEscolhida();
          final List<Item> itensEscohidos = this.tabelaMaterial.getItens();
 
          final ListaMaterial material;
          if ((!escola.isPresent()) || !serie.isPresent()) {
-            material = ListaMaterial.Factory.criarListaVazia();
+            material = ListaMaterial.criarListaVazia();
          } else {
-            material = new ListaMaterial(escola.get(), serie.get(), itensEscohidos);
+            material = ListaMaterial.create(escola.get(), serie.get(), itensEscohidos);
          }
          final ResultadoCotacao resultado = this.controllerCotacao.cotar(material);
          Relatorio.displayGUI(resultado);
@@ -120,15 +123,15 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
    @Override
    public void escolaSelecionada(final Escola escola) {
       final Collection<ListaMaterial> listaMateriais = this.queroAListaDeMateriaisDaEscola(Optional.of(escola));
-      final List<String> listaSeries = this.queroAsSeriesDaListaDeMateriais(listaMateriais);
+      final List<Serie> listaSeries = this.queroAsSeriesDaListaDeMateriais(listaMateriais);
       this.series.atualizarLista(listaSeries);
 
    }
 
    @Override
-   public void serieSelecionada(final String serie) {
+   public void serieSelecionada(final Serie serie) {
       final Optional<Escola> escolaEscolhida = this.escolas.getEscolaEscolhida();
-      final Optional<String> seriesEscolhida = Optional.of(serie);
+      final Optional<Serie> seriesEscolhida = Optional.of(serie);
       final ListaMaterial material = this.queroAListaDeMaterial(escolaEscolhida, seriesEscolhida);
       this.tabelaMaterial.atualizar(material.getItens());
 
@@ -147,22 +150,28 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       }
    }
 
-   private List<String> queroAsSeriesDaListaDeMateriais(final Collection<ListaMaterial> listaMateriais) {
-      final List<String> series = listaMateriais.stream().map(ListaMaterial::getSerie).collect(Collectors.toList());
+   private List<Serie> queroAsSeriesDaListaDeMateriais(final Collection<ListaMaterial> listaMateriais) {
+      //@formatter:off
+      final List<Serie> series = listaMateriais
+                   .stream()
+                   .map(ListaMaterial::getSerie)
+                   .collect(Collectors.toList());
       Collections.sort(series);
+
+      //@formatter:on
       return series;
    }
 
-   private ListaMaterial queroAListaDeMaterial(final Optional<Escola> escola, final Optional<String> serie) {
+   private ListaMaterial queroAListaDeMaterial(final Optional<Escola> escola, final Optional<Serie> serie) {
       if (!escola.isPresent() || !serie.isPresent()) {
-         return ListaMaterial.Factory.criarListaVazia();
+         return ListaMaterial.criarListaVazia();
       }
 
       return this.controller.selecioneMaterialPor(escola.get(), serie.get());
    }
 
    @Override
-   public void maisSeries(final String serie) {
+   public void maisSeries(final Serie serie) {
       final Optional<Escola> escola = this.escolas.getEscolaEscolhida();
 
       if (escola.isPresent()) {

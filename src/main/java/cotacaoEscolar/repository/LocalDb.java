@@ -13,14 +13,16 @@ import java.util.stream.Collectors;
 
 import cotacaoEscolar.app.EscolhaUmBancoNessaPorra;
 import cotacaoEscolar.app.IllegalError;
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Estabelecimento;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.Produto;
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
-import cotacaoEscolar.model.listas.ListaMaterial;
-import cotacaoEscolar.model.listas.ListaProduto;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.EscolaReal;
+import cotacaoEscolar.model.v1.Estabelecimento;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ListaEstabelecimento;
+import cotacaoEscolar.model.v1.ListaProduto;
+import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.Serie;
 
 public class LocalDb implements EscolhaUmBancoNessaPorra {
    private Set<Escola> escolas;
@@ -36,11 +38,13 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
    }
 
    private void initEscolas() {
-      final Escola escola1 = new Escola("Escola1");
-      final Escola escola2 = new Escola("Escola2");
-      final Escola escola3 = new Escola("Escola3");
+      this.escolas = new HashSet<>();
+      final EscolaRepository escolaRepository = this.meDaUmBancoDeEscola();
+      final Escola escola1 = EscolaReal.create(escolaRepository, "Escola1");
+      final Escola escola2 = EscolaReal.create(escolaRepository, "Escola2");
+      final Escola escola3 = EscolaReal.create(escolaRepository, "Escola3");
+      this.escolas.addAll(Arrays.asList(escola1, escola2, escola3));
 
-      this.escolas = new HashSet<>(Arrays.asList(escola1, escola2, escola3));
       this.initItens();
       this.initMateriais(escola1, escola2, escola3);
       this.initProdutos();
@@ -78,18 +82,18 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
    private void initMateriais(final Escola escola1, final Escola escola2, final Escola escola3) {
 
       // Escola1
-      this.listaMaterialEscolar.add(new ListaMaterial(escola1, "1", this.selecionePor(1)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola1, "2", this.selecionePor(2)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola1, "3", this.selecionePor(3)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola1, Serie.create("1"), this.selecionePor(1)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola1, Serie.create("2"), this.selecionePor(2)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola1, Serie.create("3"), this.selecionePor(3)));
       // Escola2
-      this.listaMaterialEscolar.add(new ListaMaterial(escola2, "3", this.selecionePor(3)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola2, "2", this.selecionePor(2)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola2, "1", this.selecionePor(1)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola2, Serie.create("3"), this.selecionePor(3)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola2, Serie.create("2"), this.selecionePor(2)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola2, Serie.create("1"), this.selecionePor(1)));
 
       // Escola3
-      this.listaMaterialEscolar.add(new ListaMaterial(escola3, "2", this.selecionePor(2)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola3, "1", this.selecionePor(1)));
-      this.listaMaterialEscolar.add(new ListaMaterial(escola3, "4", this.selecionePor(4)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola3, Serie.create("2"), this.selecionePor(2)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola3, Serie.create("1"), this.selecionePor(1)));
+      this.listaMaterialEscolar.add(ListaMaterial.create(escola3, Serie.create("4"), this.selecionePor(4)));
    }
 
    private void initProdutos() {

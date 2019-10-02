@@ -1,6 +1,6 @@
 package cotacaoEscolar.repository.pojos;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 

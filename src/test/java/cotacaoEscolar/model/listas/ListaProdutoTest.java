@@ -6,8 +6,9 @@ import java.util.Optional;
 import org.junit.Assert;
 import org.junit.Test;
 
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.Produto;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ListaProduto;
+import cotacaoEscolar.model.v1.Produto;
 
 public class ListaProdutoTest {
 

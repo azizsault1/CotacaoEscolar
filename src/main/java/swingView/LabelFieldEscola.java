@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.v1.EscolaReal;
 import swingView.interfaces.Label;
 import swingView.interfaces.LabelFieldConfiguration;
 import swingView.interfaces.Posicao;
@@ -18,16 +19,16 @@ public class LabelFieldEscola extends LabelField<Escola> {
    private static final long serialVersionUID = 1L;
 
    public interface EventoEscolaSelecionada {
-      public void escolaSelecionada(Escola escola);
+      public void escolaSelecionada(EscolaReal escola);
 
-      public void maisEscolas(Escola escola);
+      public void maisEscolas(EscolaReal escola);
    }
 
    public LabelFieldEscola(final int linha1, final EventoEscolaSelecionada escolaSelecionada) {
       super(LabelFieldConfiguration.Factory.create(Posicao.Factory.create(Dimensoes.MarginColuna1.getValor(), linha1), Label.Factory.create(70, "Colégio:")));
       super.addListeners(e -> {
          if (ItemEvent.SELECTED == e.getStateChange()) {
-            final Escola escolaEscolhida = (Escola) e.getItem();
+            final EscolaReal escolaEscolhida = (EscolaReal) e.getItem();
             escolaSelecionada.escolaSelecionada(escolaEscolhida);
          }
       });
@@ -35,7 +36,7 @@ public class LabelFieldEscola extends LabelField<Escola> {
       this.botaUmAe.addActionListener(ActionListener -> {
          final String escolaDigitada = JOptionPane.showInputDialog("Qual o nome de escola?");
          try {
-            final Escola escola = new Escola(escolaDigitada);
+            final Escola escola = EscolaReal.create(escolaDigitada);
             escolaSelecionada.maisEscolas(escola);
          } catch (final IllegalError e) {
             final JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);

@@ -5,7 +5,7 @@ import java.util.List;
 
 import cotacaoEscolar.repository.pojos.ParserToModel;
 
-interface Repository<Model> {
+public interface Repository<Model> {
 
    public void salvaSaPorra(Model model);
 
@@ -16,7 +16,7 @@ interface Repository<Model> {
    }
 
    default Model toModel(final ParserToModel<Model> pojo) {
-      return pojo.toModel();
+      return pojo.toModel(this);
    }
 
 }

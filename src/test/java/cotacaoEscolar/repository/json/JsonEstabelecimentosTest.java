@@ -13,10 +13,10 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
-import cotacaoEscolar.model.Estabelecimento;
-import cotacaoEscolar.model.Produto;
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
-import cotacaoEscolar.model.listas.ListaProduto;
+import cotacaoEscolar.model.v1.Estabelecimento;
+import cotacaoEscolar.model.v1.ListaEstabelecimento;
+import cotacaoEscolar.model.v1.ListaProduto;
+import cotacaoEscolar.model.v1.Produto;
 
 public class JsonEstabelecimentosTest {
 

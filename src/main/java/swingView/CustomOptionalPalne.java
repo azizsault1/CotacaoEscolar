@@ -10,8 +10,8 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.Item;
 
 public class CustomOptionalPalne {
 

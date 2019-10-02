@@ -15,4 +15,6 @@ public interface ServicoEscola {
 
    public void salvar(Escola escola);
 
+   public Escola meMaUmaEscola();
+
 }

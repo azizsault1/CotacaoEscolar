@@ -9,8 +9,14 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import cotacaoEscolar.model.listas.ListaMaterial;
-import cotacaoEscolar.model.listas.ListaProduto;
+import cotacaoEscolar.model.v1.Cotacao;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.Estabelecimento;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ListaMaterialReal;
+import cotacaoEscolar.model.v1.ListaProduto;
+import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.ResultadoCotacaoEstabelecimento;
 
 public class EstabelecimentoTest {
 
@@ -24,7 +30,7 @@ public class EstabelecimentoTest {
 
    @Test
    public void testCotar() {
-      final ListaMaterial lista = Mockito.mock(ListaMaterial.class);
+      final ListaMaterialReal lista = Mockito.mock(ListaMaterialReal.class);
       final Item item1 = new Item("Item1", 3);
       final Item item2 = new Item("Item2", 5);
       final Item item3 = new Item("Item3", 7);

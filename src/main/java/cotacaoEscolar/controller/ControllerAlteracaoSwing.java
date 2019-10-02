@@ -1,9 +1,10 @@
 package cotacaoEscolar.controller;
 
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.ResultadoCotacao;
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.ListaEstabelecimento;
+import cotacaoEscolar.model.v1.ResultadoCotacao;
+import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.service.ServicoCotacao;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoEstabelecimento;
@@ -29,7 +30,7 @@ public class ControllerAlteracaoSwing {
       return this.servicoCotacao.cotar(lista, estabelecimentos);
    }
 
-   public ListaMaterial salvarSerie(final Escola escola, final String serie) {
+   public ListaMaterial salvarSerie(final Escola escola, final Serie serie) {
       return this.servicoListaMaterial.salvar(escola, serie);
    }
 

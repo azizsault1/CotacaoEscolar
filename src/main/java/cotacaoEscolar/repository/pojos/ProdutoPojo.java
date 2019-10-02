@@ -2,7 +2,7 @@ package cotacaoEscolar.repository.pojos;
 
 import java.math.BigDecimal;
 
-import cotacaoEscolar.model.Produto;
+import cotacaoEscolar.model.v1.Produto;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 

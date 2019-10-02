@@ -2,7 +2,7 @@ package cotacaoEscolar.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
+import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.repository.EstabelecimentoRepository;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 

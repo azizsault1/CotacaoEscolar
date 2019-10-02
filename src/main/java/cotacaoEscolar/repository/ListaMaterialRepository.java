@@ -2,7 +2,7 @@ package cotacaoEscolar.repository;
 
 import java.util.Collection;
 
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
 
 public interface ListaMaterialRepository extends Repository<ListaMaterial> {
 

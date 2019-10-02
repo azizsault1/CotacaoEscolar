@@ -1,7 +1,9 @@
 package cotacaoEscolar.repository.pojos;
 
+import cotacaoEscolar.repository.Repository;
+
 public interface ParserToModel<Model> {
 
-   Model toModel();
+   Model toModel(Repository<Model> repository);
 
 }

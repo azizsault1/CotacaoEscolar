@@ -3,8 +3,8 @@ package cotacaoEscolar.repository.json;
 import java.util.ArrayList;
 import java.util.List;
 
-import cotacaoEscolar.model.Estabelecimento;
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
+import cotacaoEscolar.model.v1.Estabelecimento;
+import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.repository.EstabelecimentoRepository;
 import cotacaoEscolar.repository.pojos.EstabelecimentoPojo;
 

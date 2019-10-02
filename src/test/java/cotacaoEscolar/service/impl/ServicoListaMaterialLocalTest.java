@@ -18,8 +18,10 @@ import org.mockito.Mockito;
 
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.EscolaReal;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.repository.ListaMaterialRepository;
 
 public class ServicoListaMaterialLocalTest {
@@ -45,8 +47,8 @@ public class ServicoListaMaterialLocalTest {
       this.expectedException.expect(IllegalError.class);
       this.expectedException.expectMessage("Opps... essa escola não existe.");
 
-      final Escola escola = null;
-      final String serie = "1a serie";
+      final EscolaReal escola = null;
+      final Serie serie = Serie.create("1a serie");
       final Collection<ListaMaterial> lista = null;
 
       Mockito.when(this.repository.materiais()).thenReturn(lista);
@@ -59,8 +61,8 @@ public class ServicoListaMaterialLocalTest {
       this.expectedException.expect(IllegalError.class);
       this.expectedException.expectMessage("Opps... essa serie não existe.");
 
-      final Escola escola = new Escola("Escola");
-      final String serie = null;
+      final EscolaReal escola = EscolaReal.create("Escola");
+      final Serie serie = null;
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 
@@ -71,8 +73,8 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaEUmaSerieSeNaoEncontrarAEscolaSignificaQueTemQueCriarUmaListaNova() {
-      final Escola escola = Mockito.mock(Escola.class);
-      final String serie = "1a serie";
+      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+      final Serie serie = Serie.create("1a serie");
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 
@@ -88,8 +90,8 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaEUmaSerieSeEncontrarASerieSignificaQueTemQueCriarUmaListaNova() {
-      final Escola escola = Mockito.mock(Escola.class);
-      final String serie = "1a serie";
+      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+      final Serie serie = Serie.create("1a serie");
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 
@@ -106,8 +108,8 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaEUmaSerieSeEncontrarRetornaAListaEncontrada() {
-      final Escola escola = Mockito.mock(Escola.class);
-      final String serie = "1a serie";
+      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+      final Serie serie = Serie.create("1a serie");
       final Item item = Mockito.mock(Item.class);
       final List<Item> itens = Arrays.asList(item);
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
@@ -129,7 +131,7 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaEOBancoRetornaNuloOSistemaNaoDeveApresentarErroERetornarUmaListaVazia() {
-      final Escola escola = Mockito.mock(Escola.class);
+      final Escola escola = Mockito.mock(EscolaReal.class);
 
       Mockito.when(this.repository.materiais()).thenReturn(null);
 
@@ -140,7 +142,7 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaSemMaterialEscolarAoSelecionarPorEscolaVaiRetornarUmaListaVazia() {
-      final Escola escola = Mockito.mock(Escola.class);
+      final Escola escola = Mockito.mock(EscolaReal.class);
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 
@@ -154,7 +156,7 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaComMaterialEscolarAoSelecionarPorEscolaVaiRetornarALista() {
-      final Escola escola = Mockito.mock(Escola.class);
+      final Escola escola = Mockito.mock(EscolaReal.class);
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 
@@ -168,8 +170,8 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaSerieEItemQuandoRemoverVaiRemoverOItemDoMaterial() {
-      final Escola escola = Mockito.mock(Escola.class);
-      final String serie = "Serie1";
+      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+      final Serie serie = Serie.create("1a serie");
       final Item itemARemover = Mockito.mock(Item.class);
       final List<Item> itens = new ArrayList<>(Arrays.asList(itemARemover));
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
@@ -187,8 +189,8 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void dadoUmaEscolaSerieEItemQuandoAdicionarVaiOItemNoMaterial() {
-      final Escola escola = Mockito.mock(Escola.class);
-      final String serie = "Serie1";
+      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+      final Serie serie = Serie.create("1a serie");
       final Item itemAAdicionar = Mockito.mock(Item.class);
       final List<Item> itens = new ArrayList<>();
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
@@ -206,10 +208,10 @@ public class ServicoListaMaterialLocalTest {
 
    @Test
    public void DadoUmaEscolaAoBuscarAsSeriesVaiRetornarAListaDeSeries() {
-      final Escola escola = Mockito.mock(Escola.class);
-      final String serie1 = "Serie1";
-      final String serie2 = "Serie2";
-      final String serie3 = "Serie3";
+      final Escola escola = Mockito.mock(EscolaReal.class);
+      final Serie serie1 = Serie.create("Serie1");
+      final Serie serie2 = Serie.create("Serie2");
+      final Serie serie3 = Serie.create("Serie3");
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial, listaMaterial, listaMaterial);
 
@@ -217,9 +219,9 @@ public class ServicoListaMaterialLocalTest {
       Mockito.when(listaMaterial.pertenceA(escola)).thenReturn(true);
       Mockito.when(listaMaterial.getSerie()).thenReturn(serie1).thenReturn(serie2).thenReturn(serie3);
 
-      final Collection<String> series = this.servico.selecioneSeriesPor(escola);
+      final Collection<Serie> series = this.servico.selecioneSeriesPor(escola);
       assertFalse(series.isEmpty());
-      final List<String> seriesEmLista = new ArrayList<>(series);
+      final List<Serie> seriesEmLista = new ArrayList<>(series);
       assertEquals(serie1, seriesEmLista.get(0));
       assertEquals(serie2, seriesEmLista.get(1));
       assertEquals(serie3, seriesEmLista.get(2));

@@ -1,10 +1,9 @@
-package cotacaoEscolar.model;
+package cotacaoEscolar.model.v1;
 
 import java.util.List;
 import java.util.Optional;
 
-import cotacaoEscolar.model.listas.ListaMaterial;
-import cotacaoEscolar.model.listas.ListaProduto;
+import cotacaoEscolar.model.ListaMaterial;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Establecimento é uma entidade que comercializa materiais escolares como por exemplo uma papelaria.")

@@ -1,6 +1,7 @@
 package cotacaoEscolar.repository.json;
 
 import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.mock;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,8 +14,11 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.EscolaReal;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.Serie;
+import cotacaoEscolar.repository.Repository;
 
 public class JsonListaMaterialTest {
    private final String dbTest = "src/test/resources/dbfiles/";
@@ -32,14 +36,16 @@ public class JsonListaMaterialTest {
 
    @Test
    public void testSalvaSaPorra() {
-      final Escola escola = new Escola("Escola1");
-      final String serie = "1";
+      final Repository<Escola> repositoryEscola = mock(Repository.class);
+
+      final Escola escola = EscolaReal.create(repositoryEscola, "Escola1");
+      final Serie serie = Serie.create("1");
       final Item item1 = new Item("Item1", 10);
       final Item item2 = new Item("Item2", 20);
 
       final List<Item> itens = java.util.Arrays.asList(item1, item2);
 
-      final ListaMaterial listaMaterial = new ListaMaterial(escola, serie, itens);
+      final ListaMaterial listaMaterial = ListaMaterial.create(escola, serie, itens);
 
       this.tamburete.salvaSaPorra(listaMaterial);
       final Collection<ListaMaterial> seraQueVoltou = this.tamburete.materiais();

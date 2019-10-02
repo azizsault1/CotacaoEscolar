@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-import cotacaoEscolar.model.ResultadoCotacao;
+import cotacaoEscolar.model.v1.ResultadoCotacao;
 
 public class Relatorio {
    private static final Integer LARGURA_TELA = 400;

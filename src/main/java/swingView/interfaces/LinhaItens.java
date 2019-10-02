@@ -7,8 +7,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.Item;
 import swingView.Dimensoes;
 
 public class LinhaItens extends JPanel {

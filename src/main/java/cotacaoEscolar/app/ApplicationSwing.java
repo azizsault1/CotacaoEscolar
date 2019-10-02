@@ -5,6 +5,8 @@ import java.security.GeneralSecurityException;
 
 import cotacaoEscolar.controller.ControllerAlteracaoSwing;
 import cotacaoEscolar.controller.ControllerBuscaSwing;
+import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.repository.LocalDb;
 import cotacaoEscolar.repository.json.JsonRepository;
 import cotacaoEscolar.service.ServicoCotacao;
@@ -41,11 +43,16 @@ public class ApplicationSwing {
       final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal(oowww.meDaUmBancoDeListaMaterial());
       final ServicoCotacao servicoCotacao = new ServicoCotacaoLocal();
       final ServicoEstabelecimento servicoProduto = new ServicoEstabelecimentoLocal(oowww.meDaUmBancoDeestabelecimentos());
-      final ServicoDescricaoMaterialEscolar material = new ServicoDescricaoMaterialEscolarLocal(oowww.meDaUmBancoDeMaterial());
+      final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar = new ServicoDescricaoMaterialEscolarLocal(oowww.meDaUmBancoDeMaterial());
 
-      final ControllerBuscaSwing controller = new ControllerBuscaSwing(servicoEscola, servicoListaMaterial, material);
+      final ControllerBuscaSwing controller = new ControllerBuscaSwing(servicoEscola, servicoListaMaterial, servicoDescricaoMaterialEscolar);
       final ControllerAlteracaoSwing controllerCotacao = new ControllerAlteracaoSwing(servicoCotacao, servicoProduto, servicoEscola, servicoListaMaterial);
-      new Janela(controller, controllerCotacao);
+
+      final Escola escola = Escola.meDaUmaEscola(servicoEscola);
+
+      final ListaMaterial material = ListaMaterial.meDaUmMaterial(servicoListaMaterial);
+
+      new Janela(controller, controllerCotacao, material);
    }
 
 }

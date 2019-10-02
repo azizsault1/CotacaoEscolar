@@ -2,9 +2,9 @@ package cotacaoEscolar.service;
 
 import org.springframework.stereotype.Service;
 
-import cotacaoEscolar.model.ResultadoCotacao;
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.ListaEstabelecimento;
+import cotacaoEscolar.model.v1.ResultadoCotacao;
 
 @Service
 public interface ServicoCotacao {

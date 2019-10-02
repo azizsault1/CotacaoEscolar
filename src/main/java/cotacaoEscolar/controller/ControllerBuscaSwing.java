@@ -5,10 +5,12 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.EscolaReal;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoListaMaterial;
@@ -36,15 +38,15 @@ public class ControllerBuscaSwing {
       return this.servicoListaMaterial.selecionePor(escola);
    }
 
-   public ListaMaterial selecioneMaterialPor(final Escola escola, final String serie) {
+   public ListaMaterial selecioneMaterialPor(final EscolaReal escola, final Serie serie) {
       return this.servicoListaMaterial.selecionePor(escola, serie);
    }
 
-   public void remover(final Escola escola, final String serie, final Item item) {
+   public void remover(final EscolaReal escola, final Serie serie, final Item item) {
       this.servicoListaMaterial.remover(escola, serie, item);
    }
 
-   public void adicionar(final Escola escola, final String serie, final Item item) {
+   public void adicionar(final EscolaReal escola, final Serie serie, final Item item) {
       this.servicoListaMaterial.adicionar(escola, serie, item);
    }
 

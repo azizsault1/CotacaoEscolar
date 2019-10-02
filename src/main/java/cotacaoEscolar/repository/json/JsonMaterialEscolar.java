@@ -3,7 +3,7 @@ package cotacaoEscolar.repository.json;
 import java.util.ArrayList;
 import java.util.List;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 import cotacaoEscolar.repository.DescricaoMaterialEscolarRepository;
 import cotacaoEscolar.repository.pojos.DescricaoMaterialEscolarPojo;
 

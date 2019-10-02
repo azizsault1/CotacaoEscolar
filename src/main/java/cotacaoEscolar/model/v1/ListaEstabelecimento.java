@@ -1,12 +1,10 @@
-package cotacaoEscolar.model.listas;
+package cotacaoEscolar.model.v1;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import cotacaoEscolar.model.Estabelecimento;
-import cotacaoEscolar.model.ResultadoCotacao;
-import cotacaoEscolar.model.ResultadoCotacaoEstabelecimento;
+import cotacaoEscolar.model.ListaMaterial;
 
 public class ListaEstabelecimento {
 

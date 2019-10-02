@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cotacaoEscolar.app.IllegalError;
-import cotacaoEscolar.controller.dtos.Serie;
+import cotacaoEscolar.controller.dtos.SerieDto;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.ResultadoCotacao;
-import cotacaoEscolar.model.listas.ListaEstabelecimento;
-import cotacaoEscolar.model.listas.ListaMaterial;
+import cotacaoEscolar.model.v1.EscolaReal;
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ListaEstabelecimento;
+import cotacaoEscolar.model.v1.ListaMaterialReal;
+import cotacaoEscolar.model.v1.ResultadoCotacao;
+import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.service.ServicoCotacao;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoEstabelecimento;
@@ -43,7 +45,7 @@ public class ControllerAlteracaoRest {
 
    @CrossOrigin(origins = "*")
    @PostMapping(value = "cotar", produces = "application/json", consumes = "application/json")
-   public ResultadoCotacao cotar(@RequestBody final ListaMaterial lista) {
+   public ResultadoCotacao cotar(@RequestBody final ListaMaterialReal lista) {
       this.validate(lista);
       final ListaEstabelecimento estabelecimentos = this.servicoEstabelecimento.todos();
       return this.servicoCotacao.cotar(lista, estabelecimentos);
@@ -51,27 +53,27 @@ public class ControllerAlteracaoRest {
 
    @CrossOrigin(origins = "*")
    @PostMapping(value = "escola", produces = "application/json", consumes = "application/json")
-   public Escola salvar(@RequestBody final Escola escola) {
+   public Escola salvar(@RequestBody final EscolaReal escola) {
       this.servicoEscola.salvar(escola);
       return escola;
    }
 
    @CrossOrigin(origins = "*")
    @PostMapping(value = "serie", produces = "application/json", consumes = "application/json")
-   public Escola salvar(@RequestBody final Serie serie) {
-      if (serie == null) {
+   public Escola salvar(@RequestBody final SerieDto serieDto) {
+      if (serieDto == null) {
          throw new IllegalError("Opppss... dados inválidos.");
       }
-      final Escola escola = serie.getEscolaModel();
-      this.servicoListaMaterial.salvar(escola, serie.getSerie());
+      final Escola escola = serieDto.getEscolaModel();
+      final Serie serie = serieDto.getSerie();
+      this.servicoListaMaterial.salvar(escola, serie);
       return escola;
    }
 
-   private void validate(final ListaMaterial lista) {
+   private void validate(final ListaMaterialReal lista) {
       final Escola escola = lista.getEscola();
-      final String serie = lista.getSerie();
-      new Serie(escola.getNome(), serie).validate();
-      ;
+      final Serie serie = lista.getSerie();
+      new SerieDto(escola.getNome(), serie.getSerie()).validate();
 
       final List<Item> itens = lista.getItens();
       if ((itens == null) || itens.isEmpty()) {

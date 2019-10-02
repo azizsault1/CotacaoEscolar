@@ -6,6 +6,10 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.ResultadoCotacaoEstabelecimento;
+
 public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test

@@ -3,9 +3,9 @@ package cotacaoEscolar.repository.pojos;
 import java.util.ArrayList;
 import java.util.List;
 
-import cotacaoEscolar.model.Estabelecimento;
-import cotacaoEscolar.model.Produto;
-import cotacaoEscolar.model.listas.ListaProduto;
+import cotacaoEscolar.model.v1.Estabelecimento;
+import cotacaoEscolar.model.v1.ListaProduto;
+import cotacaoEscolar.model.v1.Produto;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 

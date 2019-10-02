@@ -10,7 +10,7 @@ import java.util.Optional;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.v1.Item;
 import swingView.CustomOptionalPalne.AcaoBotoes;
 
 public class TabelaMaterialEscolar {

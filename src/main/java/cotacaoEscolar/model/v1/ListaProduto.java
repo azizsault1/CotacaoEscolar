@@ -1,4 +1,4 @@
-package cotacaoEscolar.model.listas;
+package cotacaoEscolar.model.v1;
 
 import java.util.ArrayList;
 /**
@@ -9,9 +9,6 @@ import java.util.ArrayList;
  */
 import java.util.List;
 import java.util.Optional;
-
-import cotacaoEscolar.model.Item;
-import cotacaoEscolar.model.Produto;
 
 public class ListaProduto {
    private final List<Produto> produtos;

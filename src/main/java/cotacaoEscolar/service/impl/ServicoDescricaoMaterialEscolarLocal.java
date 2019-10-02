@@ -4,7 +4,7 @@ import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 import cotacaoEscolar.repository.DescricaoMaterialEscolarRepository;
 
 public class ServicoDescricaoMaterialEscolarLocal implements cotacaoEscolar.service.ServicoDescricaoMaterialEscolar {

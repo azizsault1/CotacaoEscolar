@@ -7,15 +7,17 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.v1.EscolaReal;
+import cotacaoEscolar.model.v1.Serie;
 
 @JsonRootName("serie")
-public class Serie {
+public class SerieDto {
 
    public String escola;
    public String serie;
 
    @JsonCreator
-   public Serie(@JsonProperty("escola") final String escola, @JsonProperty("serie") final String serie) {
+   public SerieDto(@JsonProperty("escola") final String escola, @JsonProperty("serie") final String serie) {
       this.escola = escola;
       this.serie = serie;
    }
@@ -26,11 +28,11 @@ public class Serie {
 
    @JsonIgnore
    public Escola getEscolaModel() {
-      return new Escola(this.escola);
+      return EscolaReal.create(this.escola);
    }
 
-   public String getSerie() {
-      return this.serie;
+   public Serie getSerie() {
+      return Serie.create(this.serie);
    }
 
    public void validate() {
@@ -38,7 +40,7 @@ public class Serie {
          throw new IllegalError("Escola invalida");
       }
 
-      final Escola model = new Escola(this.escola);
+      final Escola model = Escola.create(this.escola);
 
       if ((model == null) || !model.validate()) {
          throw new IllegalError("Escola invalida");

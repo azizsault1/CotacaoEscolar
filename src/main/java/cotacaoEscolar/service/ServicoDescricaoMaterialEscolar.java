@@ -2,7 +2,7 @@ package cotacaoEscolar.service;
 
 import java.util.Collection;
 
-import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 
 public interface ServicoDescricaoMaterialEscolar {
 

@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.v1.EscolaReal;
 
 public class JsonEscolaTest {
 
@@ -30,8 +31,8 @@ public class JsonEscolaTest {
 
    @Test
    public void testeSalvar() {
-      final Escola escola = new Escola("Escola1");
-      this.tamburete.salvaSaPorra(escola);
+      final Escola escola = EscolaReal.create(this.tamburete, "Escola1");
+      escola.save();
 
       final Collection<Escola> result = this.tamburete.escolas();
       assertEquals(1, result.size());

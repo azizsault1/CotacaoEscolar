@@ -14,7 +14,7 @@ import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoEscolaLocal;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 import cotacaoEscolar.service.ServicoListaMaterial;
-import cotacaoEscolar.service.impl.ServicoDescricaoMaterialEscolarLocal;
+import cotacaoEscolar.service.impl.ServicoDescricaoMaterialEscolarImpl;
 import cotacaoEscolar.service.impl.ServicoEstabelecimentoLocal;
 import cotacaoEscolar.service.impl.ServicoListaMaterialLocal;
 import io.swagger.annotations.Api;
@@ -43,7 +43,7 @@ public class Application {
 
    @Bean
    public ServicoDescricaoMaterialEscolar getDescricao() {
-      return new ServicoDescricaoMaterialEscolarLocal(tamburete.meDaUmBancoDeMaterial());
+      return new ServicoDescricaoMaterialEscolarImpl(tamburete.meDaUmBancoDeMaterial());
    }
 
    public static void main(final String[] args) throws IOException, GeneralSecurityException {

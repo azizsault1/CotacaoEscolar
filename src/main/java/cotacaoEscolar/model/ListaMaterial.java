@@ -5,11 +5,13 @@ import java.util.List;
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.ListaMaterialReal;
+import cotacaoEscolar.model.v1.Manjada;
 import cotacaoEscolar.model.v1.PrimeiraLista;
 import cotacaoEscolar.model.v1.Serie;
+import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
-public interface ListaMaterial {
+public interface ListaMaterial extends Manjada<ListaMaterial> {
 
    public Escola getEscola();
 
@@ -44,7 +46,15 @@ public interface ListaMaterial {
       return new ListaMaterialReal(escola, serie, itens);
    }
 
-   public static ListaMaterial meDaUmMaterial(final ServicoListaMaterial servicoListaMaterial) {
-      return servicoListaMaterial.meDaUmMaterial();
+   public static ListaMaterial meDaUmMaterial(final ServicoEscola servicoEscola, final ServicoListaMaterial servicoListaMaterial) {
+      final ListaMaterial material = servicoListaMaterial.meDaUmMaterial();
+
+      if (!material.souNova()) {
+
+         final ListaMaterialReal listaReal = (ListaMaterialReal) material;
+         listaReal.addService(servicoEscola, servicoListaMaterial);
+      }
+      return material;
    }
+
 }

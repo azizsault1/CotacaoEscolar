@@ -3,11 +3,10 @@ package cotacaoEscolar.repository.pojos;
 import java.util.ArrayList;
 import java.util.List;
 
+import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.EscolaReal;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.Serie;
-import cotacaoEscolar.repository.Repository;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 
@@ -54,8 +53,8 @@ public class ListaMaterialPojo implements ParserToModel<ListaMaterial> {
    }
 
    @Override
-   public ListaMaterial toModel(final Repository<ListaMaterial> repository) {
-      final EscolaReal escolaModel = this.escola.toModel();
+   public ListaMaterial toModel() {
+      final Escola escolaModel = this.escola.toModel();
 
       final Serie serieModel = this.serie.toModel();
 

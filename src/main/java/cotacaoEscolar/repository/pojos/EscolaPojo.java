@@ -2,7 +2,6 @@ package cotacaoEscolar.repository.pojos;
 
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.v1.EscolaReal;
-import cotacaoEscolar.repository.Repository;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 
@@ -28,8 +27,8 @@ public class EscolaPojo implements ParserToModel<Escola> {
    }
 
    @Override
-   public Escola toModel(final Repository<Escola> repository) {
-      return EscolaReal.create(repository, this.nome);
+   public Escola toModel() {
+      return EscolaReal.create(this.nome);
    }
 
 }

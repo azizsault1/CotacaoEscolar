@@ -40,7 +40,7 @@ public class SerieDto {
          throw new IllegalError("Escola invalida");
       }
 
-      final Escola model = Escola.create(this.escola);
+      final Escola model = EscolaReal.create(this.escola);
 
       if ((model == null) || !model.validate()) {
          throw new IllegalError("Escola invalida");

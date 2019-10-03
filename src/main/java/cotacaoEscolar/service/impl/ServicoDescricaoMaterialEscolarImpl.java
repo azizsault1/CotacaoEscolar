@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 import cotacaoEscolar.repository.DescricaoMaterialEscolarRepository;
 
-public class ServicoDescricaoMaterialEscolarLocal implements cotacaoEscolar.service.ServicoDescricaoMaterialEscolar {
+public class ServicoDescricaoMaterialEscolarImpl implements cotacaoEscolar.service.ServicoDescricaoMaterialEscolar {
 
    private final DescricaoMaterialEscolarRepository repository;
 
    @Autowired
-   public ServicoDescricaoMaterialEscolarLocal(final DescricaoMaterialEscolarRepository repository) {
+   public ServicoDescricaoMaterialEscolarImpl(final DescricaoMaterialEscolarRepository repository) {
       this.repository = repository;
    }
 

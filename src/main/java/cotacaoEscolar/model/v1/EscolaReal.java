@@ -6,18 +6,18 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import cotacaoEscolar.app.IllegalError;
 import cotacaoEscolar.model.Escola;
-import cotacaoEscolar.repository.Repository;
+import cotacaoEscolar.service.ServicoEscola;
 import io.jsondb.annotation.Id;
 import io.swagger.annotations.ApiModel;
 
 @JsonSerialize
 @ApiModel(description = "Instituição pública ou privada destinado ao ensino coletivo.")
 public class EscolaReal implements Comparable<Escola>, Escola {
-   private final String nome;
-   private final Repository<Escola> repository;
 
-   EscolaReal(final Repository<Escola> repository, final String nome) {
-      this.repository = repository;
+   private ServicoEscola servico;
+   private final String nome;
+
+   EscolaReal(final String nome) {
       this.nome = nome;
    }
 
@@ -30,6 +30,24 @@ public class EscolaReal implements Comparable<Escola>, Escola {
    @Override
    public String toString() {
       return this.nome;
+   }
+
+   public void addService(final ServicoEscola servico) {
+      this.servico = servico;
+   }
+
+   @Override
+   public void salvar(final Escola escola) {
+      if (this.servico == null) {
+         throw new IllegalArgumentException(
+               "Opa, alguém esqueceu de adicionar o serviço, faça isso nas entidades que usem escola quando ela vier do banco de dados");
+      }
+      this.servico.salvar(escola);
+   }
+
+   @Override
+   public boolean souNova() {
+      return false;
    }
 
    @Override
@@ -72,13 +90,8 @@ public class EscolaReal implements Comparable<Escola>, Escola {
       return this.nome.compareTo(o.getNome());
    }
 
-   @Override
-   public void save() {
-      this.repository.salvaSaPorra(this);
-   }
-
    @JsonCreator
-   public static Escola create(final Repository<Escola> repository, @JsonProperty("nome") final String nome) {
+   public static Escola create(@JsonProperty("nome") final String nome) {
       if ((nome == null) || nome.trim().isEmpty()) {
          throw new IllegalError("Uma escola não pode ser criada sem nome.");
       }
@@ -90,7 +103,7 @@ public class EscolaReal implements Comparable<Escola>, Escola {
       if (nome.length() > 100) {
          throw new IllegalError("Acho uma melhor ideia dar uma abreviada no nome dessa escola.");
       }
-      return new EscolaReal(repository, nome);
+      return new EscolaReal(nome);
    }
 
 }

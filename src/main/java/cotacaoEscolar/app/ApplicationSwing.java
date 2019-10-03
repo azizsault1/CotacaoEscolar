@@ -5,7 +5,6 @@ import java.security.GeneralSecurityException;
 
 import cotacaoEscolar.controller.ControllerAlteracaoSwing;
 import cotacaoEscolar.controller.ControllerBuscaSwing;
-import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.repository.LocalDb;
 import cotacaoEscolar.repository.json.JsonRepository;
@@ -16,7 +15,7 @@ import cotacaoEscolar.service.ServicoEscolaLocal;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 import cotacaoEscolar.service.ServicoListaMaterial;
 import cotacaoEscolar.service.impl.ServicoCotacaoLocal;
-import cotacaoEscolar.service.impl.ServicoDescricaoMaterialEscolarLocal;
+import cotacaoEscolar.service.impl.ServicoDescricaoMaterialEscolarImpl;
 import cotacaoEscolar.service.impl.ServicoEstabelecimentoLocal;
 import cotacaoEscolar.service.impl.ServicoListaMaterialLocal;
 import swingView.Janela;
@@ -43,14 +42,12 @@ public class ApplicationSwing {
       final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal(oowww.meDaUmBancoDeListaMaterial());
       final ServicoCotacao servicoCotacao = new ServicoCotacaoLocal();
       final ServicoEstabelecimento servicoProduto = new ServicoEstabelecimentoLocal(oowww.meDaUmBancoDeestabelecimentos());
-      final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar = new ServicoDescricaoMaterialEscolarLocal(oowww.meDaUmBancoDeMaterial());
+      final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar = new ServicoDescricaoMaterialEscolarImpl(oowww.meDaUmBancoDeMaterial());
 
       final ControllerBuscaSwing controller = new ControllerBuscaSwing(servicoEscola, servicoListaMaterial, servicoDescricaoMaterialEscolar);
       final ControllerAlteracaoSwing controllerCotacao = new ControllerAlteracaoSwing(servicoCotacao, servicoProduto, servicoEscola, servicoListaMaterial);
 
-      final Escola escola = Escola.meDaUmaEscola(servicoEscola);
-
-      final ListaMaterial material = ListaMaterial.meDaUmMaterial(servicoListaMaterial);
+      final ListaMaterial material = ListaMaterial.meDaUmMaterial(servicoEscola, servicoListaMaterial, servicoDescricaoMaterialEscolar);
 
       new Janela(controller, controllerCotacao, material);
    }

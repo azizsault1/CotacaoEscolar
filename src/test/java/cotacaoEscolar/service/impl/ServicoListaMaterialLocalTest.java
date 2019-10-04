@@ -16,7 +16,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.listas.ListaMaterial;
@@ -41,7 +42,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaInvalidaEOBancoRetornarNuloRetornaErroDeEscola() {
+   public void dadoUmaEscolaInvalidaEOBancoRetornarNuloRetornaErroDeEscola() throws FoiNao {
       this.expectedException.expect(IllegalError.class);
       this.expectedException.expectMessage("Opps... essa escola não existe.");
 
@@ -55,7 +56,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoEscolaEUmaSerieQueNaoExisteQuandoSelecionoMaterialRetornaErroDeSerie() {
+   public void dadoEscolaEUmaSerieQueNaoExisteQuandoSelecionoMaterialRetornaErroDeSerie() throws FoiNao {
       this.expectedException.expect(IllegalError.class);
       this.expectedException.expectMessage("Opps... essa serie não existe.");
 
@@ -70,7 +71,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaEUmaSerieSeNaoEncontrarAEscolaSignificaQueTemQueCriarUmaListaNova() {
+   public void dadoUmaEscolaEUmaSerieSeNaoEncontrarAEscolaSignificaQueTemQueCriarUmaListaNova() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final String serie = "1a serie";
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
@@ -87,7 +88,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaEUmaSerieSeEncontrarASerieSignificaQueTemQueCriarUmaListaNova() {
+   public void dadoUmaEscolaEUmaSerieSeEncontrarASerieSignificaQueTemQueCriarUmaListaNova() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final String serie = "1a serie";
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
@@ -105,7 +106,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaEUmaSerieSeEncontrarRetornaAListaEncontrada() {
+   public void dadoUmaEscolaEUmaSerieSeEncontrarRetornaAListaEncontrada() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final String serie = "1a serie";
       final Item item = Mockito.mock(Item.class);
@@ -167,7 +168,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaSerieEItemQuandoRemoverVaiRemoverOItemDoMaterial() {
+   public void dadoUmaEscolaSerieEItemQuandoRemoverVaiRemoverOItemDoMaterial() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final String serie = "Serie1";
       final Item itemARemover = Mockito.mock(Item.class);
@@ -186,7 +187,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaSerieEItemQuandoAdicionarVaiOItemNoMaterial() {
+   public void dadoUmaEscolaSerieEItemQuandoAdicionarVaiOItemNoMaterial() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final String serie = "Serie1";
       final Item itemAAdicionar = Mockito.mock(Item.class);

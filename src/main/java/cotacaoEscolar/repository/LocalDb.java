@@ -8,11 +8,12 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 import cotacaoEscolar.app.EscolhaUmBancoNessaPorra;
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Estabelecimento;
@@ -48,16 +49,16 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
    private void initItens() {
 
-      final DescricaoMaterialEscolar lapisDesc = new DescricaoMaterialEscolar("Lapis 123");
+      final DescricaoMaterialEscolar lapisDesc = DescricaoMaterialEscolar.create("Lapis 123");
       final Item lapis = new Item(lapisDesc, 5);
 
-      final DescricaoMaterialEscolar lapisDeCorDesc = new DescricaoMaterialEscolar("Lapis de cor");
+      final DescricaoMaterialEscolar lapisDeCorDesc = DescricaoMaterialEscolar.create("Lapis de cor");
       final Item lapisDeCor = new Item(lapisDeCorDesc, 30);
 
-      final DescricaoMaterialEscolar classificadorDesc = new DescricaoMaterialEscolar("Classificador");
+      final DescricaoMaterialEscolar classificadorDesc = DescricaoMaterialEscolar.create("Classificador");
       final Item classificador = new Item(classificadorDesc, 2);
 
-      final DescricaoMaterialEscolar cadernoDesc = new DescricaoMaterialEscolar("Caderno");
+      final DescricaoMaterialEscolar cadernoDesc = DescricaoMaterialEscolar.create("Caderno");
       final Item caderno = new Item(cadernoDesc, 1);
 
       final List<DescricaoMaterialEscolar> itensFabricados = DescricaoMaterialEscolar.create(20);
@@ -110,23 +111,23 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
       // Estabelecimento1
       final ListaProduto produtosEstabelecimento1 = new ListaProduto(todos.get(0), todos.get(1));
-      final Estabelecimento estabelecimento1 = new Estabelecimento("Estabelecimento1", produtosEstabelecimento1);
+      final Estabelecimento estabelecimento1 = Estabelecimento.create("Estabelecimento1", produtosEstabelecimento1);
 
       // Estabelecimento2
       final ListaProduto produtosEstabelecimento2 = new ListaProduto(todos);
-      final Estabelecimento estabelecimento2 = new Estabelecimento("Estabelecimento2", produtosEstabelecimento2);
+      final Estabelecimento estabelecimento2 = Estabelecimento.create("Estabelecimento2", produtosEstabelecimento2);
 
       // Estabelecimento3
       final ListaProduto produtosEstabelecimento3 = new ListaProduto(todos.get(9), todos.get(8), todos.get(7), todos.get(6), todos.get(5), todos.get(4));
-      final Estabelecimento estabelecimento3 = new Estabelecimento("Estabelecimento3", produtosEstabelecimento3);
+      final Estabelecimento estabelecimento3 = Estabelecimento.create("Estabelecimento3", produtosEstabelecimento3);
 
       // Estabelecimento4
       final ListaProduto produtosEstabelecimento4 = new ListaProduto(todos.get(0), todos.get(2), todos.get(4), todos.get(6), todos.get(8));
-      final Estabelecimento estabelecimento4 = new Estabelecimento("Estabelecimento4", produtosEstabelecimento4);
+      final Estabelecimento estabelecimento4 = Estabelecimento.create("Estabelecimento4", produtosEstabelecimento4);
 
       // Estabelecimento5
       final ListaProduto produtosEstabelecimento5 = new ListaProduto(todos.get(1), todos.get(3), todos.get(5), todos.get(7), todos.get(9));
-      final Estabelecimento estabelecimento5 = new Estabelecimento("Estabelecimento5", produtosEstabelecimento5);
+      final Estabelecimento estabelecimento5 = Estabelecimento.create("Estabelecimento5", produtosEstabelecimento5);
 
       this.estabelecimentos = new ListaEstabelecimento(Arrays.asList(estabelecimento1, estabelecimento2, estabelecimento3, estabelecimento4, estabelecimento5));
    }
@@ -214,6 +215,12 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
          @Override
          public ListaEstabelecimento estabelecimentos() {
             return LocalDb.this.estabelecimentos;
+         }
+
+         @Override
+         public Optional<Estabelecimento> selecionePor(final Estabelecimento estabelecimento) {
+            return LocalDb.this.estabelecimentos.meDaUm(estabelecimento);
+
          }
       };
    }

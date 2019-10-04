@@ -2,7 +2,8 @@ package cotacaoEscolar.service;
 
 import java.util.Collection;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.repository.EscolaRepository;
 
@@ -28,7 +29,7 @@ public class ServicoEscolaLocal implements ServicoEscola {
    }
 
    @Override
-   public void salvar(final Escola escola) {
+   public void salvar(final Escola escola) throws FoiNao {
       this.repository.salvaSaPorra(escola);
    }
 

@@ -12,7 +12,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.controller.ControllerAlteracaoSwing;
 import cotacaoEscolar.controller.ControllerBuscaSwing;
 import cotacaoEscolar.model.Escola;
@@ -126,7 +127,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
    }
 
    @Override
-   public void serieSelecionada(final String serie) {
+   public void serieSelecionada(final String serie) throws FoiNao {
       final Optional<Escola> escolaEscolhida = this.escolas.getEscolaEscolhida();
       final Optional<String> seriesEscolhida = Optional.of(serie);
       final ListaMaterial material = this.queroAListaDeMaterial(escolaEscolhida, seriesEscolhida);
@@ -153,7 +154,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       return series;
    }
 
-   private ListaMaterial queroAListaDeMaterial(final Optional<Escola> escola, final Optional<String> serie) {
+   private ListaMaterial queroAListaDeMaterial(final Optional<Escola> escola, final Optional<String> serie) throws FoiNao {
       if (!escola.isPresent() || !serie.isPresent()) {
          return ListaMaterial.Factory.criarListaVazia();
       }
@@ -162,7 +163,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
    }
 
    @Override
-   public void maisSeries(final String serie) {
+   public void maisSeries(final String serie) throws FoiNao {
       final Optional<Escola> escola = this.escolas.getEscolaEscolhida();
 
       if (escola.isPresent()) {
@@ -179,7 +180,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
    }
 
    @Override
-   public void maisEscolas(final Escola escola) {
+   public void maisEscolas(final Escola escola) throws FoiNao {
       this.controllerCotacao.salvarEscola(escola);
       this.escolas.atualizar(this.controller.todasEscolas());
       this.escolas.escolaSelecionada(escola);

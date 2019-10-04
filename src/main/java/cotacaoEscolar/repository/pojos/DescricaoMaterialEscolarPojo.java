@@ -27,7 +27,7 @@ public class DescricaoMaterialEscolarPojo implements ParserToModel<DescricaoMate
 
    @Override
    public DescricaoMaterialEscolar toModel() {
-      return new DescricaoMaterialEscolar(this.descricao);
+      return DescricaoMaterialEscolar.create(this.descricao);
    }
 
 }

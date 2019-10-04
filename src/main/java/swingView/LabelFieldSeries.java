@@ -7,7 +7,8 @@ import java.util.Optional;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import swingView.interfaces.Label;
 import swingView.interfaces.LabelFieldConfiguration;
 import swingView.interfaces.Posicao;
@@ -17,9 +18,9 @@ public class LabelFieldSeries extends LabelField<String> {
    private static final long serialVersionUID = 1L;
 
    public interface EventoSerieSelecionada {
-      public void serieSelecionada(String serie);
+      public void serieSelecionada(String serie) throws FoiNao;
 
-      public void maisSeries(String serie);
+      public void maisSeries(String serie) throws FoiNao;
    }
 
    public LabelFieldSeries(final Integer linha1, final EventoSerieSelecionada serieSelecionada) {
@@ -27,7 +28,14 @@ public class LabelFieldSeries extends LabelField<String> {
       super.addListeners(e -> {
          if (ItemEvent.SELECTED == e.getStateChange()) {
             final String serieEscolhida = (String) e.getItem();
-            serieSelecionada.serieSelecionada(serieEscolhida);
+            try {
+               serieSelecionada.serieSelecionada(serieEscolhida);
+            } catch (final FoiNao e1) {
+               final JOptionPane optionPane = new JOptionPane("Deu alguma coisa errada que eu não consigo identificar o que foi.", JOptionPane.ERROR_MESSAGE);
+               final JDialog dialog = optionPane.createDialog("Opppssss");
+               dialog.setAlwaysOnTop(true);
+               dialog.setVisible(true);
+            }
          }
       });
 
@@ -35,7 +43,7 @@ public class LabelFieldSeries extends LabelField<String> {
          final String digitado = JOptionPane.showInputDialog("Qual a Série?");
          try {
             serieSelecionada.maisSeries(digitado);
-         } catch (final IllegalError e) {
+         } catch (final IllegalError | FoiNao e) {
             final JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);
             final JDialog dialog = optionPane.createDialog("Opppssss");
             dialog.setAlwaysOnTop(true);

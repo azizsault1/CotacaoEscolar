@@ -3,6 +3,7 @@ package cotacaoEscolar.repository.json;
 import java.util.ArrayList;
 import java.util.List;
 
+import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.repository.DescricaoMaterialEscolarRepository;
 import cotacaoEscolar.repository.pojos.DescricaoMaterialEscolarPojo;
@@ -27,8 +28,13 @@ public class JsonMaterialEscolar implements DescricaoMaterialEscolarRepository {
    }
 
    @Override
-   public void salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) {
-      this.repository.salvar(new DescricaoMaterialEscolarPojo(descricaoMaterialEscolar.getDescricao()));
+   public void salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) throws FoiNao {
+      try {
+         this.repository.salvar(new DescricaoMaterialEscolarPojo(descricaoMaterialEscolar.getDescricao()));
+      } catch (final Exception e) {
+         throw new FoiNao("Porra vei, consegui salvar a descricao nao", e);
+      }
+
    }
 
 }

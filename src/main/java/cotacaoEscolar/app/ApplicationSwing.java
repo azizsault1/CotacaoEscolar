@@ -39,9 +39,9 @@ public class ApplicationSwing {
 
       final ServicoEscola servicoEscola = new ServicoEscolaLocal(oowww.meDaUmBancoDeEscola());
       final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal(oowww.meDaUmBancoDeListaMaterial());
-      final ServicoCotacao servicoCotacao = new ServicoCotacaoLocal();
       final ServicoEstabelecimento servicoProduto = new ServicoEstabelecimentoLocal(oowww.meDaUmBancoDeestabelecimentos());
       final ServicoDescricaoMaterialEscolar material = new ServicoDescricaoMaterialEscolarLocal(oowww.meDaUmBancoDeMaterial());
+      final ServicoCotacao servicoCotacao = new ServicoCotacaoLocal();
 
       final ControllerBuscaSwing controller = new ControllerBuscaSwing(servicoEscola, servicoListaMaterial, material);
       final ControllerAlteracaoSwing controllerCotacao = new ControllerAlteracaoSwing(servicoCotacao, servicoProduto, servicoEscola, servicoListaMaterial);

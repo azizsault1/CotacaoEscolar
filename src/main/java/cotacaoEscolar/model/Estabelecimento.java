@@ -3,27 +3,36 @@ package cotacaoEscolar.model;
 import java.util.List;
 import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
 import cotacaoEscolar.model.listas.ListaMaterial;
 import cotacaoEscolar.model.listas.ListaProduto;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Establecimento é uma entidade que comercializa materiais escolares como por exemplo uma papelaria.")
+@JsonSerialize
 public class Estabelecimento {
 
    private final String nome;
    private final ListaProduto produtos;
 
-   public Estabelecimento(final String nome) {
+   private Estabelecimento(final String nome) {
       this(nome, new ListaProduto());
    }
 
-   public Estabelecimento(final String nome, final ListaProduto produtos) {
+   private Estabelecimento(final String nome, final ListaProduto produtos) {
       this.produtos = produtos;
       this.nome = nome;
    }
 
    public String getNome() {
       return this.nome;
+   }
+
+   public List<Produto> getProdutos() {
+      return this.produtos.getProdutos();
    }
 
    public ResultadoCotacaoEstabelecimento cotar(final ListaMaterial lista) {
@@ -40,6 +49,10 @@ public class Estabelecimento {
 
       });
       return resultado;
+   }
+
+   public void adicioneMaisUmProdutoAe(final Produto produto) {
+      this.produtos.add(produto);
    }
 
    @Override
@@ -72,8 +85,26 @@ public class Estabelecimento {
       return true;
    }
 
-   public List<Produto> getProdutos() {
-      return this.produtos.getProdutos();
+   @JsonCreator
+   public static Estabelecimento create(@JsonProperty("nome") final String nome) {
+      validarNome(nome);
+      return new Estabelecimento(nome);
+   }
+
+   public static Estabelecimento create(final String nome, final ListaProduto listaProduto) {
+      validarNome(nome);
+
+      if (listaProduto == null) {
+         throw new IllegalArgumentException("Porra velho, se não quiser passar uma lista de produto, chame: Estabelecimento.create(String)");
+      }
+
+      return new Estabelecimento(nome, listaProduto);
+   }
+
+   private static void validarNome(final String nome) {
+      if ((nome == null) || nome.isEmpty()) {
+         throw new IllegalArgumentException("O nome do estabelecimento não pode ser nulo ou branco.");
+      }
    }
 
 }

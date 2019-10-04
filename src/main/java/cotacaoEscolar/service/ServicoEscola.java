@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.stereotype.Service;
 
+import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
 
 @Service
@@ -13,6 +14,6 @@ public interface ServicoEscola {
 
    public Escola buscar(String escola);
 
-   public void salvar(Escola escola);
+   public void salvar(Escola escola) throws FoiNao;
 
 }

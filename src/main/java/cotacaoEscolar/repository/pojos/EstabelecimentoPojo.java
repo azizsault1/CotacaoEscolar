@@ -48,7 +48,7 @@ public class EstabelecimentoPojo implements ParserToModel<Estabelecimento> {
       this.produtos.forEach(pojo -> models.add(pojo.toModel()));
 
       final ListaProduto listaProdutos = new ListaProduto(models);
-      return new Estabelecimento(this.nome, listaProdutos);
+      return Estabelecimento.create(this.nome, listaProdutos);
    }
 
 }

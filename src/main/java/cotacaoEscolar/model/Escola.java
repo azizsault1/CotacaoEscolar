@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import io.jsondb.annotation.Id;
 import io.swagger.annotations.ApiModel;
 

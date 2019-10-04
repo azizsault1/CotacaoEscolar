@@ -3,11 +3,15 @@ package cotacaoEscolar.model.listas;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
+
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import cotacaoEscolar.model.Estabelecimento;
 import cotacaoEscolar.model.ResultadoCotacao;
 import cotacaoEscolar.model.ResultadoCotacaoEstabelecimento;
 
+@JsonSerialize
 public class ListaEstabelecimento {
 
    private final List<Estabelecimento> estabelecimentos;
@@ -24,6 +28,10 @@ public class ListaEstabelecimento {
       this.estabelecimentos.addAll(estabelecimentos);
    }
 
+   public List<Estabelecimento> getEstabelecimentos() {
+      return this.estabelecimentos;
+   }
+
    public ResultadoCotacao cotar(final ListaMaterial lista) {
       final List<ResultadoCotacaoEstabelecimento> resultados = new ArrayList<>();
 
@@ -35,6 +43,15 @@ public class ListaEstabelecimento {
 
    public void add(final Estabelecimento estabelecimento) {
       this.estabelecimentos.add(estabelecimento);
+   }
+
+   public Optional<Estabelecimento> meDaUm(final Estabelecimento estabelecimento) {
+      //@formatter:off
+      return this.estabelecimentos.stream()
+         .filter(encontrado -> encontrado.equals(estabelecimento))
+         .findAny();
+
+      //@formatter:off
    }
 
 }

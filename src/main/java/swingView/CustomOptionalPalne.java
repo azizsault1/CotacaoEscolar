@@ -87,7 +87,7 @@ public class CustomOptionalPalne {
    }
 
    public static void main(final String[] args) {
-      final DescricaoMaterialEscolar descricao = new DescricaoMaterialEscolar("Lapis");
+      final DescricaoMaterialEscolar descricao = DescricaoMaterialEscolar.create("Lapis");
       final Item item = new Item(descricao, 10);
 
       final AcaoBotoes acao = new AcaoBotoes() {

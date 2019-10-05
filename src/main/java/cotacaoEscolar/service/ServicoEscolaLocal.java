@@ -22,7 +22,7 @@ public class ServicoEscolaLocal implements ServicoEscola {
 
    @Override
    public Escola buscar(final String escola) {
-      final Escola aProcurar = new Escola(escola);
+      final Escola aProcurar = Escola.create(escola);
       final Collection<Escola> escolas = this.todas();
       return escolas.stream().filter(encontrada -> encontrada.equals(aProcurar)).findFirst()
             .orElseThrow(() -> new IllegalError("Nao achei a escola: " + escola + "."));

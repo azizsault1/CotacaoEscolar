@@ -52,6 +52,6 @@ public class EscolaPojo implements ParserToModel<Escola> {
 
 	@Override
    public Escola toModel() {
-      return new Escola(this.getNome());
+      return Escola.create(this.getNome());
    }
 }

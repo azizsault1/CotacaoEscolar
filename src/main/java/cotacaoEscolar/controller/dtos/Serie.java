@@ -7,8 +7,10 @@ import com.fasterxml.jackson.annotation.JsonRootName;
 
 import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
+import io.swagger.annotations.ApiModel;
 
 @JsonRootName("serie")
+@ApiModel(description = "Classe ou ano curricular de uma escola.")
 public class Serie {
 
    public String escola;
@@ -26,7 +28,7 @@ public class Serie {
 
    @JsonIgnore
    public Escola getEscolaModel() {
-      return new Escola(this.escola);
+      return Escola.create(this.escola);
    }
 
    public String getSerie() {
@@ -38,7 +40,7 @@ public class Serie {
          throw new IllegalError("Escola invalida");
       }
 
-      final Escola model = new Escola(this.escola);
+      final Escola model = Escola.create(this.escola);
 
       if ((model == null) || !model.validate()) {
          throw new IllegalError("Escola invalida");

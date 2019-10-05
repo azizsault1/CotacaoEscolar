@@ -13,20 +13,7 @@ import io.swagger.annotations.ApiModel;
 public class Escola implements Comparable<Escola> {
    private final String nome;
 
-   @JsonCreator
-   public Escola(@JsonProperty("nome") final String nome) {
-      if ((nome == null) || nome.trim().isEmpty()) {
-         throw new IllegalError("Uma escola não pode ser criada sem nome.");
-      }
-
-      if (nome.trim().length() < 4) {
-         throw new IllegalError("Ahhh qual é uma escola tem mais de 4 letras.");
-      }
-
-      if (nome.length() > 100) {
-         throw new IllegalError("Acho uma melhor ideia dar uma abreviada no nome dessa escola.");
-      }
-
+   private Escola(final String nome) {
       this.nome = nome;
    }
 
@@ -79,4 +66,20 @@ public class Escola implements Comparable<Escola> {
       return this.nome.compareTo(o.getNome());
    }
 
+   @JsonCreator
+   public static Escola create(@JsonProperty("nome") String nome){
+      if ((nome == null) || nome.trim().isEmpty()) {
+          throw new IllegalError("Uma escola não pode ser criada sem nome.");
+       }
+
+       if (nome.trim().length() < 4) {
+          throw new IllegalError("Ahhh qual é uma escola tem mais de 4 letras.");
+       }
+
+       if (nome.length() > 100) {
+          throw new IllegalError("Acho uma melhor ideia dar uma abreviada no nome dessa escola.");
+       }
+
+       return new Escola(nome);
+   }
 }

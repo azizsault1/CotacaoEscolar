@@ -71,7 +71,7 @@ public class ListaMaterial implements Serializable {
       }
 
       public static ListaMaterial criarListaVazia() {
-         return new ListaMaterial(new Escola("EscolaInexistente"), "1", Collections.emptyList());
+         return new ListaMaterial(Escola.create("EscolaInexistente"), "1", Collections.emptyList());
       }
    }
 

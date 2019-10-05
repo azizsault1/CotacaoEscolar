@@ -60,7 +60,7 @@ public class ServicoListaMaterialLocalTest {
       this.expectedException.expect(IllegalError.class);
       this.expectedException.expectMessage("Opps... essa serie não existe.");
 
-      final Escola escola = new Escola("Escola");
+      final Escola escola = Escola.create("Escola");
       final String serie = null;
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);

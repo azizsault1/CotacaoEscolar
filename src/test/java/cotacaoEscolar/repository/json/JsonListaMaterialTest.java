@@ -32,7 +32,7 @@ public class JsonListaMaterialTest {
 
    @Test
    public void testSalvaSaPorra() {
-      final Escola escola = new Escola("Escola1");
+      final Escola escola = Escola.create("Escola1");
       final String serie = "1";
       final Item item1 = new Item("Item1", 10);
       final Item item2 = new Item("Item2", 20);

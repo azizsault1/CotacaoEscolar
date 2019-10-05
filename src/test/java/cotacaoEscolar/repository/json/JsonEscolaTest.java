@@ -30,7 +30,7 @@ public class JsonEscolaTest {
 
    @Test
    public void testeSalvar() {
-      final Escola escola = new Escola("Escola1");
+      final Escola escola = Escola.create("Escola1");
       this.tamburete.salvaSaPorra(escola);
 
       final Collection<Escola> result = this.tamburete.escolas();

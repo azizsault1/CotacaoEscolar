@@ -37,9 +37,9 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
    }
 
    private void initEscolas() {
-      final Escola escola1 = new Escola("Escola1");
-      final Escola escola2 = new Escola("Escola2");
-      final Escola escola3 = new Escola("Escola3");
+      final Escola escola1 = Escola.create("Escola1");
+      final Escola escola2 = Escola.create("Escola2");
+      final Escola escola3 = Escola.create("Escola3");
 
       this.escolas = new HashSet<>(Arrays.asList(escola1, escola2, escola3));
       this.initItens();

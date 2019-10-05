@@ -8,7 +8,7 @@ public class EscolaTest {
 
    @Test
    public void testEqualsEscolaComNulo() {
-      final Escola escola1 = new Escola("Escola1");
+      final Escola escola1 = Escola.create("Escola1");
       final Escola escola2 = null;
       assertFalse(escola1.equals(escola2));
    }

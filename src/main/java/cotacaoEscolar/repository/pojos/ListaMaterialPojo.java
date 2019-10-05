@@ -64,4 +64,42 @@ public class ListaMaterialPojo implements ParserToModel<ListaMaterial> {
       return ListaMaterial.create(escolaModel, serieModel, models);
    }
 
+   @Override
+   public int hashCode() {
+      final int prime = 31;
+      int result = 1;
+      result = (prime * result) + ((this.escola == null) ? 0 : this.escola.hashCode());
+      result = (prime * result) + ((this.serie == null) ? 0 : this.serie.hashCode());
+      return result;
+   }
+
+   @Override
+   public boolean equals(final Object obj) {
+      if (this == obj) {
+         return true;
+      }
+      if (obj == null) {
+         return false;
+      }
+      if (this.getClass() != obj.getClass()) {
+         return false;
+      }
+      final ListaMaterialPojo other = (ListaMaterialPojo) obj;
+      if (this.escola == null) {
+         if (other.escola != null) {
+            return false;
+         }
+      } else if (!this.escola.equals(other.escola)) {
+         return false;
+      }
+      if (this.serie == null) {
+         if (other.serie != null) {
+            return false;
+         }
+      } else if (!this.serie.equals(other.serie)) {
+         return false;
+      }
+      return true;
+   }
+
 }

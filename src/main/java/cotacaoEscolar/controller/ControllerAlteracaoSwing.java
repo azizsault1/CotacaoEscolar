@@ -1,5 +1,6 @@
 package cotacaoEscolar.controller;
 
+import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
@@ -30,11 +31,11 @@ public class ControllerAlteracaoSwing {
       return this.servicoCotacao.cotar(lista, estabelecimentos);
    }
 
-   public ListaMaterial salvarSerie(final Escola escola, final Serie serie) {
+   public ListaMaterial salvarSerie(final Escola escola, final Serie serie) throws FoiNao {
       return this.servicoListaMaterial.salvar(escola, serie);
    }
 
-   public void salvarEscola(final Escola escola) {
+   public void salvarEscola(final Escola escola) throws FoiNao {
       this.servicoEscola.salvar(escola);
    }
 

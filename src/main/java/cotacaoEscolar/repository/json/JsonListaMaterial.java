@@ -19,7 +19,6 @@ public class JsonListaMaterial implements ListaMaterialRepository {
    @Override
    public void salvaSaPorra(final ListaMaterial listaMaterial) {
       this.repository.salvar(new ListaMaterialPojo(listaMaterial));
-
    }
 
    @Override

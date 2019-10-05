@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Test;
 
@@ -15,6 +16,7 @@ import cotacaoEscolar.model.v1.EscolaReal;
 import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;
 import cotacaoEscolar.service.ServicoEscola;
+import cotacaoEscolar.service.ServicoEstabelecimento;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
 public class ControllerBuscaRestTest {
@@ -23,13 +25,16 @@ public class ControllerBuscaRestTest {
    private final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar;
    private final ServicoListaMaterial servicoListaMaterial;
    private final ControllerBuscaRest controllerBuscaRest;
+   private final ServicoEstabelecimento servicoEstabelecimento;
 
    public ControllerBuscaRestTest() {
       this.servicoEscola = mock(ServicoEscola.class);
       this.servicoDescricaoMaterialEscolar = mock(ServicoDescricaoMaterialEscolar.class);
       this.servicoListaMaterial = mock(ServicoListaMaterial.class);
+      this.servicoEstabelecimento = mock(ServicoEstabelecimento.class);
 
-      this.controllerBuscaRest = new ControllerBuscaRest(this.servicoEscola, this.servicoDescricaoMaterialEscolar, this.servicoListaMaterial);
+      this.controllerBuscaRest = new ControllerBuscaRest(this.servicoEscola, this.servicoDescricaoMaterialEscolar, this.servicoListaMaterial,
+            this.servicoEstabelecimento);
    }
 
    @Test
@@ -39,7 +44,7 @@ public class ControllerBuscaRestTest {
       final Serie serie = mock(Serie.class);
       final Collection<Serie> series = Arrays.asList(serie, serie, serie, serie);
 
-      when(this.servicoEscola.buscar(nomeEscola)).thenReturn(escola);
+      when(this.servicoEscola.buscar(nomeEscola)).thenReturn(Optional.of(escola));
       when(this.servicoListaMaterial.selecioneSeriesPor(escola)).thenReturn(series);
       //@formatter:off
       when(serie.getSerie())

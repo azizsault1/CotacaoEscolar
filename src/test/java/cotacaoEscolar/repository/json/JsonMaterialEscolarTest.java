@@ -11,6 +11,7 @@ import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.junit.Before;
 import org.junit.Test;
 
+import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 
 public class JsonMaterialEscolarTest {
@@ -29,8 +30,8 @@ public class JsonMaterialEscolarTest {
    }
 
    @Test
-   public void salvaUmAe() {
-      final DescricaoMaterialEscolar descricaoMaterialEscolar = new DescricaoMaterialEscolar("Descricao1");
+   public void salvaUmAe() throws FoiNao {
+      final DescricaoMaterialEscolar descricaoMaterialEscolar = DescricaoMaterialEscolar.create("Descricao1");
 
       this.tamburete.salvaSaPorra(descricaoMaterialEscolar);
       final List<DescricaoMaterialEscolar> veioIsso = this.tamburete.meDaTudo();
@@ -39,8 +40,8 @@ public class JsonMaterialEscolarTest {
    }
 
    @Test
-   public void agoraPegaUmAe() {
-      final DescricaoMaterialEscolar descricaoMaterialEscolar = new DescricaoMaterialEscolar("Descricao1");
+   public void agoraPegaUmAe() throws FoiNao {
+      final DescricaoMaterialEscolar descricaoMaterialEscolar = DescricaoMaterialEscolar.create("Descricao1");
 
       this.tamburete.salvaSaPorra(descricaoMaterialEscolar);
       final DescricaoMaterialEscolar veioIsso = this.tamburete.selecionarPor(descricaoMaterialEscolar);

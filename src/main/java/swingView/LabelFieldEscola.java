@@ -7,7 +7,8 @@ import java.util.Optional;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.v1.EscolaReal;
 import swingView.interfaces.Label;
@@ -19,9 +20,9 @@ public class LabelFieldEscola extends LabelField<Escola> {
    private static final long serialVersionUID = 1L;
 
    public interface EventoEscolaSelecionada {
-      public void escolaSelecionada(EscolaReal escola);
+      public void escolaSelecionada(Escola escola);
 
-      public void maisEscolas(EscolaReal escola);
+      public void maisEscolas(Escola escola) throws FoiNao;
    }
 
    public LabelFieldEscola(final int linha1, final EventoEscolaSelecionada escolaSelecionada) {
@@ -38,7 +39,7 @@ public class LabelFieldEscola extends LabelField<Escola> {
          try {
             final Escola escola = EscolaReal.create(escolaDigitada);
             escolaSelecionada.maisEscolas(escola);
-         } catch (final IllegalError e) {
+         } catch (final IllegalError | FoiNao e) {
             final JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);
             final JDialog dialog = optionPane.createDialog("Oooopsss...");
             dialog.setAlwaysOnTop(true);

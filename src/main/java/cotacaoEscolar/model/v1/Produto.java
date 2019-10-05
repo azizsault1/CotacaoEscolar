@@ -2,7 +2,10 @@ package cotacaoEscolar.model.v1;
 
 import java.math.BigDecimal;
 
-import cotacaoEscolar.app.IllegalError;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import cotacaoEscolar.app.exceptions.IllegalError;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Representa um produto que é disponibilizado em um estabelecimento.")
@@ -70,8 +73,22 @@ public class Produto {
    }
 
    public static Produto create(final DescricaoMaterialEscolar materialEscolar, final BigDecimal valor, final Integer quantidade) {
+      if (materialEscolar == null) {
+         throw new IllegalError("Descricao do material nao pode ser nulo.");
+      }
+
       validar(valor, quantidade);
       return new Produto(materialEscolar, valor, quantidade);
+   }
+
+   @JsonCreator
+   public static Produto create(@JsonProperty("descricao") final String descricao, @JsonProperty("valor") final BigDecimal valor,
+         @JsonProperty("quantidade") final Integer quantidade) {
+      if ((descricao == null) || descricao.trim().isEmpty()) {
+         throw new IllegalError("A descricao do material escolar nao pode ser branco ou nulo.");
+      }
+      validar(valor, quantidade);
+      return new Produto(DescricaoMaterialEscolar.create(descricao), valor, quantidade);
    }
 
    private static void validar(final BigDecimal valor, final Integer quantidade) {
@@ -81,11 +98,6 @@ public class Produto {
       if (valor.intValue() <= 0) {
          throw new IllegalError("O valor de um prduto não poder ser menor ou igual a zero.");
       }
-   }
-
-   public static Produto create(final String materialEscolar, final BigDecimal valor, final Integer quantidade) {
-      final DescricaoMaterialEscolar materialEscolarCriado = DescricaoMaterialEscolar.create(materialEscolar);
-      return create(materialEscolarCriado, valor, quantidade);
    }
 
 }

@@ -25,7 +25,7 @@ public class EstabelecimentoTest {
 
    public EstabelecimentoTest() {
       this.produtos = Mockito.mock(ListaProduto.class);
-      this.estabelecimento = new Estabelecimento("Estabelecimento1", this.produtos);
+      this.estabelecimento = Estabelecimento.create("Estabelecimento1", this.produtos);
    }
 
    @Test
@@ -54,7 +54,7 @@ public class EstabelecimentoTest {
 
       // Produto 1 encontrado
       final Cotacao encontrado1 = encontrados.get(0);
-      Assert.assertEquals(new DescricaoMaterialEscolar("Item1"), encontrado1.getMaterialEscolar());
+      Assert.assertEquals(DescricaoMaterialEscolar.create("Item1"), encontrado1.getMaterialEscolar());
       Assert.assertEquals(3, encontrado1.getQuantidade());
       Assert.assertEquals(BigDecimal.valueOf(6), encontrado1.getValorTotal());
       Assert.assertEquals(BigDecimal.valueOf(2), encontrado1.getValorUnitario());
@@ -62,11 +62,11 @@ public class EstabelecimentoTest {
       // Produto 2 Nao encontrado
       final List<Item> itemNaoEncontrado = resultado.getNaoEncontrados();
       Assert.assertEquals(1, itemNaoEncontrado.size());
-      Assert.assertEquals(new DescricaoMaterialEscolar("Item2"), itemNaoEncontrado.get(0).getMaterialEscolar());
+      Assert.assertEquals(DescricaoMaterialEscolar.create("Item2"), itemNaoEncontrado.get(0).getMaterialEscolar());
 
       // Produto3 encontrado
       final Cotacao encontrado3 = encontrados.get(1);
-      Assert.assertEquals(new DescricaoMaterialEscolar("Item3"), encontrado3.getMaterialEscolar());
+      Assert.assertEquals(DescricaoMaterialEscolar.create("Item3"), encontrado3.getMaterialEscolar());
       Assert.assertEquals(7, encontrado3.getQuantidade());
       Assert.assertEquals(BigDecimal.valueOf(210), encontrado3.getValorTotal());
       Assert.assertEquals(BigDecimal.valueOf(30), encontrado3.getValorUnitario());

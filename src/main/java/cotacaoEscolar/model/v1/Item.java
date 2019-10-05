@@ -20,7 +20,7 @@ public class Item implements Comparable<Item> {
    }
 
    public Item(final String descricao, final int quantidade) {
-      this(new DescricaoMaterialEscolar(descricao), quantidade);
+      this(DescricaoMaterialEscolar.create(descricao), quantidade);
    }
 
    public DescricaoMaterialEscolar getMaterialEscolar() {

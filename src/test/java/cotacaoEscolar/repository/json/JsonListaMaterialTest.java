@@ -1,7 +1,6 @@
 package cotacaoEscolar.repository.json;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.mock;
 
 import java.io.File;
 import java.io.IOException;
@@ -18,7 +17,6 @@ import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.EscolaReal;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.Serie;
-import cotacaoEscolar.repository.Repository;
 
 public class JsonListaMaterialTest {
    private final String dbTest = "src/test/resources/dbfiles/";
@@ -36,9 +34,7 @@ public class JsonListaMaterialTest {
 
    @Test
    public void testSalvaSaPorra() {
-      final Repository<Escola> repositoryEscola = mock(Repository.class);
-
-      final Escola escola = EscolaReal.create(repositoryEscola, "Escola1");
+      final Escola escola = EscolaReal.create("Escola1");
       final Serie serie = Serie.create("1");
       final Item item1 = new Item("Item1", 10);
       final Item item2 = new Item("Item2", 20);

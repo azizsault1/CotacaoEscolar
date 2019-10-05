@@ -4,7 +4,8 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.service.ServicoEscola;
 import io.jsondb.annotation.Id;
@@ -37,12 +38,12 @@ public class EscolaReal implements Comparable<Escola>, Escola {
    }
 
    @Override
-   public void salvar(final Escola escola) {
+   public void salvar() throws FoiNao {
       if (this.servico == null) {
          throw new IllegalArgumentException(
                "Opa, alguém esqueceu de adicionar o serviço, faça isso nas entidades que usem escola quando ela vier do banco de dados");
       }
-      this.servico.salvar(escola);
+      this.servico.salvar(this);
    }
 
    @Override

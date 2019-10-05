@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import io.swagger.annotations.ApiModel;
 
 @JsonSerialize
@@ -15,8 +15,7 @@ import io.swagger.annotations.ApiModel;
 public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEscolar> {
    private final String descricao;
 
-   @JsonCreator
-   public DescricaoMaterialEscolar(@JsonProperty("descricao") final String descricao) {
+   private DescricaoMaterialEscolar(final String descricao) {
       this.descricao = descricao;
    }
 
@@ -32,22 +31,6 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
    @Override
    public int compareTo(final DescricaoMaterialEscolar o) {
       return this.descricao.compareTo(o.descricao);
-   }
-
-   public static DescricaoMaterialEscolar create(final String descricao) {
-      if ((descricao == null) || descricao.trim().isEmpty()) {
-         throw new IllegalError("A descrição do material escolar não pode ser vazia.");
-      }
-
-      return new DescricaoMaterialEscolar(descricao);
-   }
-
-   public static List<DescricaoMaterialEscolar> create(final int quantidade) {
-      final List<DescricaoMaterialEscolar> result = new ArrayList<>();
-      for (int i = 0; i < quantidade; i++) {
-         result.add(create("Material" + i));
-      }
-      return result;
    }
 
    @Override
@@ -79,6 +62,22 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
          return false;
       }
       return true;
+   }
+
+   @JsonCreator
+   public static DescricaoMaterialEscolar create(@JsonProperty("descricao") final String descricao) {
+      if ((descricao == null) || descricao.isEmpty()) {
+         throw new IllegalError("A descrição do material escolar não pode ser em branco.");
+      }
+      return new DescricaoMaterialEscolar(descricao);
+   }
+
+   public static List<DescricaoMaterialEscolar> create(final int quantidade) {
+      final List<DescricaoMaterialEscolar> result = new ArrayList<>();
+      for (int i = 0; i < quantidade; i++) {
+         result.add(DescricaoMaterialEscolar.create("Material" + i));
+      }
+      return result;
    }
 
 }

@@ -31,8 +31,9 @@ public class JsonEscolaTest {
 
    @Test
    public void testeSalvar() {
-      final Escola escola = EscolaReal.create(this.tamburete, "Escola1");
-      escola.save();
+
+      final Escola escola = EscolaReal.create("Escola1");
+      this.tamburete.salvaSaPorra(escola);
 
       final Collection<Escola> result = this.tamburete.escolas();
       assertEquals(1, result.size());

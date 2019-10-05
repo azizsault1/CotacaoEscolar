@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.service.ServicoEscola;
@@ -61,12 +62,12 @@ public class ListaMaterialReal implements ListaMaterial, Serializable {
    }
 
    @Override
-   public void salvar() {
+   public void salvar() throws FoiNao {
       if (this.servico == null) {
          throw new IllegalArgumentException(
                "Opa, alguém esqueceu de adicionar o serviço, faça isso nas entidades que usem escola quando ela vier do banco de dados");
       }
-      this.servico.salvar(this);
+      this.servico.salvar(this.getEscola(), this.getSerie());
    }
 
    @Override
@@ -77,7 +78,7 @@ public class ListaMaterialReal implements ListaMaterial, Serializable {
    public void addService(final ServicoEscola servicoEscola, final ServicoListaMaterial servicoListaMaterial) {
       final EscolaReal escolaReal = (EscolaReal) this.escola;
       escolaReal.addService(servicoEscola);
-      this.servico = servicoMaterial;
+      this.servico = servicoListaMaterial;
    }
 
 }

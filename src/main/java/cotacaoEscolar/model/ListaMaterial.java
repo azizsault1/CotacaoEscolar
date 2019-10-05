@@ -2,7 +2,7 @@ package cotacaoEscolar.model;
 
 import java.util.List;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.ListaMaterialReal;
 import cotacaoEscolar.model.v1.Manjada;

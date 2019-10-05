@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.Item;
@@ -32,7 +33,7 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
    }
 
    @Override
-   public ListaMaterial selecionePor(final Escola escola, final Serie serie) {
+   public ListaMaterial selecionePor(final Escola escola, final Serie serie) throws FoiNao {
       final Collection<ListaMaterial> listaMaterialEscolar = this.protegerDoBanco(this.repository.materiais());
 
       //@formatter:off
@@ -51,20 +52,20 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
    }
 
    @Override
-   public ListaMaterial salvar(final Escola escola, final Serie serie) {
+   public ListaMaterial salvar(final Escola escola, final Serie serie) throws FoiNao {
       final ListaMaterial novaLista = ListaMaterial.create(escola, serie, new ArrayList<>());
       this.repository.salvaSaPorra(novaLista);
       return novaLista;
    }
 
    @Override
-   public void remover(final Escola escola, final Serie serie, final Item item) {
+   public void remover(final Escola escola, final Serie serie, final Item item) throws FoiNao {
       final List<Item> itens = this.selecionePor(escola, serie).getItens();
       itens.remove(item);
    }
 
    @Override
-   public void adicionar(final Escola escola, final Serie serie, final Item item) {
+   public void adicionar(final Escola escola, final Serie serie, final Item item) throws FoiNao {
       final List<Item> itens = this.selecionePor(escola, serie).getItens();
       itens.add(item);
    }

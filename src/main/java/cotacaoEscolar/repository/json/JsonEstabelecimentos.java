@@ -2,6 +2,7 @@ package cotacaoEscolar.repository.json;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import cotacaoEscolar.model.v1.Estabelecimento;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
@@ -26,6 +27,15 @@ public class JsonEstabelecimentos implements EstabelecimentoRepository {
    @Override
    public void salvaSaPorra(final Estabelecimento estabelecimento) {
       this.repository.salvar(new EstabelecimentoPojo(estabelecimento));
+   }
+
+   @Override
+   public Optional<Estabelecimento> selecionePor(final Estabelecimento estabelecimento) {
+      final EstabelecimentoPojo estabelecimentoEncontrado = this.repository.pegaEssaCaralha(estabelecimento.getNome(), EstabelecimentoPojo.class);
+      if (estabelecimentoEncontrado == null) {
+         return Optional.empty();
+      }
+      return Optional.of(estabelecimentoEncontrado.toModel());
    }
 
 }

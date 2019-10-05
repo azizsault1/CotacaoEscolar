@@ -1,6 +1,6 @@
 package cotacaoEscolar.model.v1;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.IllegalError;
 
 public class Serie implements Comparable<Serie> {
    private final String serie;

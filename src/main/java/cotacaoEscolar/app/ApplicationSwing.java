@@ -40,14 +40,14 @@ public class ApplicationSwing {
 
       final ServicoEscola servicoEscola = new ServicoEscolaLocal(oowww.meDaUmBancoDeEscola());
       final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal(oowww.meDaUmBancoDeListaMaterial());
-      final ServicoCotacao servicoCotacao = new ServicoCotacaoLocal();
       final ServicoEstabelecimento servicoProduto = new ServicoEstabelecimentoLocal(oowww.meDaUmBancoDeestabelecimentos());
       final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar = new ServicoDescricaoMaterialEscolarImpl(oowww.meDaUmBancoDeMaterial());
+      final ServicoCotacao servicoCotacao = new ServicoCotacaoLocal();
 
       final ControllerBuscaSwing controller = new ControllerBuscaSwing(servicoEscola, servicoListaMaterial, servicoDescricaoMaterialEscolar);
       final ControllerAlteracaoSwing controllerCotacao = new ControllerAlteracaoSwing(servicoCotacao, servicoProduto, servicoEscola, servicoListaMaterial);
 
-      final ListaMaterial material = ListaMaterial.meDaUmMaterial(servicoEscola, servicoListaMaterial, servicoDescricaoMaterialEscolar);
+      final ListaMaterial material = ListaMaterial.meDaUmMaterial(servicoEscola, servicoListaMaterial);
 
       new Janela(controller, controllerCotacao, material);
    }

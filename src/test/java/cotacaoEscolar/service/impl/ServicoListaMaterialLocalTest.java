@@ -16,7 +16,8 @@ import org.junit.Test;
 import org.junit.rules.ExpectedException;
 import org.mockito.Mockito;
 
-import cotacaoEscolar.app.IllegalError;
+import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.EscolaReal;
@@ -43,7 +44,7 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaInvalidaEOBancoRetornarNuloRetornaErroDeEscola() {
+   public void dadoUmaEscolaInvalidaEOBancoRetornarNuloRetornaErroDeEscola() throws FoiNao {
       this.expectedException.expect(IllegalError.class);
       this.expectedException.expectMessage("Opps... essa escola não existe.");
 
@@ -57,11 +58,11 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoEscolaEUmaSerieQueNaoExisteQuandoSelecionoMaterialRetornaErroDeSerie() {
+   public void dadoEscolaEUmaSerieQueNaoExisteQuandoSelecionoMaterialRetornaErroDeSerie() throws FoiNao {
       this.expectedException.expect(IllegalError.class);
       this.expectedException.expectMessage("Opps... essa serie não existe.");
 
-      final EscolaReal escola = EscolaReal.create("Escola");
+      final Escola escola = EscolaReal.create("Escola");
       final Serie serie = null;
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
@@ -72,8 +73,8 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaEUmaSerieSeNaoEncontrarAEscolaSignificaQueTemQueCriarUmaListaNova() {
-      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+   public void dadoUmaEscolaEUmaSerieSeNaoEncontrarAEscolaSignificaQueTemQueCriarUmaListaNova() throws FoiNao {
+      final Escola escola = Mockito.mock(Escola.class);
       final Serie serie = Serie.create("1a serie");
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
@@ -89,8 +90,8 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaEUmaSerieSeEncontrarASerieSignificaQueTemQueCriarUmaListaNova() {
-      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+   public void dadoUmaEscolaEUmaSerieSeEncontrarASerieSignificaQueTemQueCriarUmaListaNova() throws FoiNao {
+      final Escola escola = Mockito.mock(Escola.class);
       final Serie serie = Serie.create("1a serie");
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
@@ -107,8 +108,8 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaEUmaSerieSeEncontrarRetornaAListaEncontrada() {
-      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+   public void dadoUmaEscolaEUmaSerieSeEncontrarRetornaAListaEncontrada() throws FoiNao {
+      final Escola escola = Mockito.mock(Escola.class);
       final Serie serie = Serie.create("1a serie");
       final Item item = Mockito.mock(Item.class);
       final List<Item> itens = Arrays.asList(item);
@@ -169,9 +170,9 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaSerieEItemQuandoRemoverVaiRemoverOItemDoMaterial() {
-      final EscolaReal escola = Mockito.mock(EscolaReal.class);
-      final Serie serie = Serie.create("1a serie");
+   public void dadoUmaEscolaSerieEItemQuandoRemoverVaiRemoverOItemDoMaterial() throws FoiNao {
+      final Escola escola = Mockito.mock(Escola.class);
+      final Serie serie = Serie.create("Serie1");
       final Item itemARemover = Mockito.mock(Item.class);
       final List<Item> itens = new ArrayList<>(Arrays.asList(itemARemover));
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
@@ -188,8 +189,8 @@ public class ServicoListaMaterialLocalTest {
    }
 
    @Test
-   public void dadoUmaEscolaSerieEItemQuandoAdicionarVaiOItemNoMaterial() {
-      final EscolaReal escola = Mockito.mock(EscolaReal.class);
+   public void dadoUmaEscolaSerieEItemQuandoAdicionarVaiOItemNoMaterial() throws FoiNao {
+      final Escola escola = Mockito.mock(Escola.class);
       final Serie serie = Serie.create("1a serie");
       final Item itemAAdicionar = Mockito.mock(Item.class);
       final List<Item> itens = new ArrayList<>();

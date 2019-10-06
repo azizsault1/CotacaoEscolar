@@ -1,13 +1,11 @@
 package cotacaoEscolar.model;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.model.v1.Manjada;
+import cotacaoEscolar.model.v1.helpers.Manjada;
 
 public interface Escola extends Comparable<Escola>, Manjada<Escola> {
 
    String getNome();
-
-   boolean validate();
 
    static Escola PrimeiraEscola() {
       return new PrimeiraEscola();
@@ -27,11 +25,6 @@ public interface Escola extends Comparable<Escola>, Manjada<Escola> {
       }
 
       @Override
-      public boolean validate() {
-         return false;
-      }
-
-      @Override
       public int compareTo(final Escola o) {
          return -1;
       }
@@ -42,7 +35,7 @@ public interface Escola extends Comparable<Escola>, Manjada<Escola> {
       }
 
       @Override
-      public void salvar() throws FoiNao {
+      public Escola salvar() throws FoiNao {
          throw new UnsupportedOperationException("Opa, vc devereia ter chamado a Escola.create(String) pra poder salvar.");
       }
 

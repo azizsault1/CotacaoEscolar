@@ -1,10 +1,10 @@
-package cotacaoEscolar.model.v1;
+package cotacaoEscolar.model.v1.helpers;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
 
 public interface Manjada<Model> {
 
-   public void salvar() throws FoiNao;
+   public Model salvar() throws FoiNao;
 
    public boolean souNova();
 
@@ -17,11 +17,10 @@ public interface Manjada<Model> {
       }
 
       @Override
-      public void salvar() throws FoiNao {
+      public Model salvar() throws FoiNao {
          final String nomeModelo = this.getClass().getName();
          throw new UnsupportedOperationException(String.format(MENSAGEM, nomeModelo, nomeModelo));
       }
-
    }
 
 }

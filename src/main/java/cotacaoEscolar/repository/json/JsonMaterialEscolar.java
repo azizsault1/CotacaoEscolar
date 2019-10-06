@@ -28,9 +28,10 @@ public class JsonMaterialEscolar implements DescricaoMaterialEscolarRepository {
    }
 
    @Override
-   public void salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) throws FoiNao {
+   public DescricaoMaterialEscolar salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) throws FoiNao {
       try {
          this.repository.salvar(new DescricaoMaterialEscolarPojo(descricaoMaterialEscolar.getDescricao()));
+         return descricaoMaterialEscolar;
       } catch (final Exception e) {
          throw new FoiNao("Porra vei, consegui salvar a descricao nao", e);
       }

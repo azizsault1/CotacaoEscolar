@@ -2,7 +2,6 @@ package swingView;
 
 import java.awt.event.ItemEvent;
 import java.util.Collection;
-import java.util.Optional;
 
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
@@ -48,12 +47,12 @@ public class LabelFieldEscola extends LabelField<Escola> {
       });
    }
 
-   public Optional<Escola> getEscolaEscolhida() {
+   public Escola getEscolaEscolhida() {
       if (super.combo.getSelectedItem() != null) {
-         return Optional.of((Escola) super.combo.getSelectedItem());
+         return (Escola) super.combo.getSelectedItem();
       }
 
-      return Optional.empty();
+      throw new IllegalError("Escola inválida. Tente salvar primeiro a escola.");
 
    }
 

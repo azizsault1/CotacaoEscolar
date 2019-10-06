@@ -80,7 +80,7 @@ public class JsonRepository implements EscolhaUmBancoNessaPorra {
    }
 
    @Override
-   public EstabelecimentoRepository meDaUmBancoDeestabelecimentos() {
+   public EstabelecimentoRepository meDaUmBancoDeEstabelecimentos() {
       return new JsonEstabelecimentos(this);
    }
 

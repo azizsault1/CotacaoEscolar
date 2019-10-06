@@ -23,8 +23,9 @@ public class JsonEscola implements EscolaRepository {
    }
 
    @Override
-   public void salvaSaPorra(final Escola escola) {
+   public Escola salvaSaPorra(final Escola escola) {
       this.jsonDBTemplate.salvar(new EscolaPojo(escola));
+      return escola;
    }
 
 }

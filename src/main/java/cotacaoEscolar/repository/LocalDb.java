@@ -13,6 +13,7 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import cotacaoEscolar.app.EscolhaUmBancoNessaPorra;
+import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
@@ -151,8 +152,9 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
       return new DescricaoMaterialEscolarRepository() {
 
          @Override
-         public void salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) {
+         public DescricaoMaterialEscolar salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) {
             LocalDb.this.itens.add(descricaoMaterialEscolar);
+            return descricaoMaterialEscolar;
          }
 
          @Override
@@ -177,9 +179,9 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
       return new EscolaRepository() {
 
          @Override
-         public void salvaSaPorra(final Escola escola) {
+         public Escola salvaSaPorra(final Escola escola) {
             LocalDb.this.escolas.add(escola);
-
+            return escola;
          }
 
          @Override
@@ -199,20 +201,22 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
          }
 
          @Override
-         public void salvaSaPorra(final ListaMaterial listaMaterial) {
+         public ListaMaterial salvaSaPorra(final ListaMaterial listaMaterial) {
             LocalDb.this.listaMaterialEscolar.add(listaMaterial);
+            return listaMaterial;
          }
 
       };
    }
 
    @Override
-   public EstabelecimentoRepository meDaUmBancoDeestabelecimentos() {
+   public EstabelecimentoRepository meDaUmBancoDeEstabelecimentos() {
       return new EstabelecimentoRepository() {
 
          @Override
-         public void salvaSaPorra(final Estabelecimento estabelecimento) {
+         public Estabelecimento salvaSaPorra(final Estabelecimento estabelecimento) {
             LocalDb.this.estabelecimentos.add(estabelecimento);
+            return estabelecimento;
          }
 
          @Override
@@ -226,6 +230,33 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
          }
       };
+   }
+
+   class EscolaImpl implements Escola {
+
+      @Override
+      public int compareTo(final Escola o) {
+         return 1;
+      }
+
+      @Override
+      public Escola salvar() throws FoiNao {
+         // TODO Auto-generated method stub
+         return null;
+      }
+
+      @Override
+      public boolean souNova() {
+         // TODO Auto-generated method stub
+         return false;
+      }
+
+      @Override
+      public String getNome() {
+         // TODO Auto-generated method stub
+         return null;
+      }
+
    }
 
 }

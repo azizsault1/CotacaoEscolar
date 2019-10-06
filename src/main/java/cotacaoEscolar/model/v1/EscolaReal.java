@@ -1,29 +1,23 @@
 package cotacaoEscolar.model.v1;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.v1.helpers.EscolaValidator;
 import cotacaoEscolar.service.ServicoEscola;
-import io.jsondb.annotation.Id;
 import io.swagger.annotations.ApiModel;
 
-@JsonSerialize
 @ApiModel(description = "Instituição pública ou privada destinado ao ensino coletivo.")
 public class EscolaReal implements Comparable<Escola>, Escola {
 
-   private ServicoEscola servico;
+   private final transient ServicoEscola servico;
    private final String nome;
 
-   EscolaReal(final String nome) {
+   EscolaReal(final ServicoEscola servico, final String nome) {
       this.nome = nome;
+      this.servico = servico;
    }
 
    @Override
-   @Id
    public String getNome() {
       return this.nome;
    }
@@ -33,17 +27,9 @@ public class EscolaReal implements Comparable<Escola>, Escola {
       return this.nome;
    }
 
-   public void addService(final ServicoEscola servico) {
-      this.servico = servico;
-   }
-
    @Override
-   public void salvar() throws FoiNao {
-      if (this.servico == null) {
-         throw new IllegalArgumentException(
-               "Opa, alguém esqueceu de adicionar o serviço, faça isso nas entidades que usem escola quando ela vier do banco de dados");
-      }
-      this.servico.salvar(this);
+   public Escola salvar() throws FoiNao {
+      return this.servico.salvar(this);
    }
 
    @Override
@@ -82,29 +68,17 @@ public class EscolaReal implements Comparable<Escola>, Escola {
    }
 
    @Override
-   public boolean validate() {
-      return !this.getNome().isEmpty();
-   }
-
-   @Override
    public int compareTo(final Escola o) {
       return this.nome.compareTo(o.getNome());
    }
 
-   @JsonCreator
-   public static Escola create(@JsonProperty("nome") final String nome) {
-      if ((nome == null) || nome.trim().isEmpty()) {
-         throw new IllegalError("Uma escola não pode ser criada sem nome.");
-      }
+   public static Escola create(final ServicoEscola servico, final Escola escola) {
+      validar(escola.getNome());
+      return new EscolaReal(servico, escola.getNome());
+   }
 
-      if (nome.trim().length() < 4) {
-         throw new IllegalError("Ahhh qual é uma escola tem mais de 4 letras.");
-      }
-
-      if (nome.length() > 100) {
-         throw new IllegalError("Acho uma melhor ideia dar uma abreviada no nome dessa escola.");
-      }
-      return new EscolaReal(nome);
+   private static void validar(final String nome) {
+      EscolaValidator.create(nome).validate();
    }
 
 }

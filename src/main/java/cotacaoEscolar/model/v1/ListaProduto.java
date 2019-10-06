@@ -13,9 +13,6 @@ import java.util.Optional;
 public class ListaProduto {
    private final List<Produto> produtos;
 
-   /**
-    * COnstrutor para objetos da classe ListaProdutos
-    */
    public ListaProduto() {
       this.produtos = new ArrayList<>();
    }

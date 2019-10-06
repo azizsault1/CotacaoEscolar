@@ -13,7 +13,7 @@ public interface ServicoEscola {
 
    public Optional<Escola> buscar(String escola);
 
-   public void salvar(Escola escola) throws FoiNao;
+   public Escola salvar(Escola escola) throws FoiNao;
 
    public Collection<Escola> todas();
 

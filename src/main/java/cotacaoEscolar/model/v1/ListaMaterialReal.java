@@ -1,27 +1,30 @@
 package cotacaoEscolar.model.v1;
 
 import java.io.Serializable;
+import java.util.Collections;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
+import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.service.ServicoEscola;
-import cotacaoEscolar.service.ServicoListaMaterial;
+import cotacaoEscolar.repository.ListaMaterialRepository;
 
 public class ListaMaterialReal implements ListaMaterial, Serializable {
    private static final long serialVersionUID = 1L;
    private final Escola escola;
    private final Serie serie;
    private final List<Item> itens;
-   private ServicoListaMaterial servico;
 
-   public ListaMaterialReal(final Escola escola, final Serie serie, final List<Item> itens) {
+   private final transient ListaMaterialRepository repository;
+
+   private ListaMaterialReal(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<Item> itens) {
       this.escola = escola;
       this.serie = serie;
       this.itens = itens;
+      this.repository = repository;
    }
 
    @Override
@@ -62,12 +65,9 @@ public class ListaMaterialReal implements ListaMaterial, Serializable {
    }
 
    @Override
-   public void salvar() throws FoiNao {
-      if (this.servico == null) {
-         throw new IllegalArgumentException(
-               "Opa, alguém esqueceu de adicionar o serviço, faça isso nas entidades que usem escola quando ela vier do banco de dados");
-      }
-      this.servico.salvar(this.getEscola(), this.getSerie());
+   public ListaMaterial salvar() throws FoiNao {
+      this.repository.salvaSaPorra(this);
+      return this;
    }
 
    @Override
@@ -75,10 +75,32 @@ public class ListaMaterialReal implements ListaMaterial, Serializable {
       return false;
    }
 
-   public void addService(final ServicoEscola servicoEscola, final ServicoListaMaterial servicoListaMaterial) {
-      final EscolaReal escolaReal = (EscolaReal) this.escola;
-      escolaReal.addService(servicoEscola);
-      this.servico = servicoListaMaterial;
+   public static ListaMaterial create(final ListaMaterialRepository repository, final Escola escola, final Serie serie) {
+      validate(repository, escola, serie);
+      return new ListaMaterialReal(repository, escola, serie, Collections.emptyList());
+   }
+
+   public static ListaMaterial create(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<Item> itens) {
+      validate(repository, escola, serie);
+      if (itens == null) {
+         throw new IllegalError("Chame o método create(repository, escola, serie)");
+      }
+      return new ListaMaterialReal(repository, escola, serie, Collections.emptyList());
+   }
+
+   private static void validate(final ListaMaterialRepository repository, final Escola escola, final Serie serie) {
+      if (repository == null) {
+         throw new IllegalError(
+               "Opps... se você está chamando esse método é porque mais na frente você quer salvar esse objeto, então eu preciso do banco, se não use a Implementação PrimeiraLista.");
+      }
+
+      if (escola == null) {
+         throw new IllegalError("Opps... essa escola não existe.");
+      }
+
+      if ((serie == null)) {
+         throw new IllegalError("Opps... essa serie não existe.");
+      }
    }
 
 }

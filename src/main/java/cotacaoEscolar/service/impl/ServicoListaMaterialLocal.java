@@ -1,6 +1,5 @@
 package cotacaoEscolar.service.impl;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -13,6 +12,7 @@ import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ListaMaterialReal;
 import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.repository.ListaMaterialRepository;
 import cotacaoEscolar.service.ServicoListaMaterial;
@@ -44,18 +44,12 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
       //@formatter:on
 
       if (!materialOpt.isPresent()) {
-         materialOpt = Optional.of(this.salvar(escola, serie));
+         final ListaMaterial materialNovo = ListaMaterialReal.create(this.repository, escola, serie);
+         materialOpt = Optional.of(materialNovo.salvar());
       }
 
       return materialOpt.get();
 
-   }
-
-   @Override
-   public ListaMaterial salvar(final Escola escola, final Serie serie) throws FoiNao {
-      final ListaMaterial novaLista = ListaMaterial.create(escola, serie, new ArrayList<>());
-      this.repository.salvaSaPorra(novaLista);
-      return novaLista;
    }
 
    @Override

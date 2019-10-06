@@ -25,8 +25,9 @@ public class JsonEstabelecimentos implements EstabelecimentoRepository {
    }
 
    @Override
-   public void salvaSaPorra(final Estabelecimento estabelecimento) {
+   public Estabelecimento salvaSaPorra(final Estabelecimento estabelecimento) {
       this.repository.salvar(new EstabelecimentoPojo(estabelecimento));
+      return estabelecimento;
    }
 
    @Override

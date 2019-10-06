@@ -38,7 +38,7 @@ public class Application {
 
    @Bean
    public ServicoEstabelecimento getEstabelecimento() {
-      return new ServicoEstabelecimentoLocal(tamburete.meDaUmBancoDeestabelecimentos());
+      return new ServicoEstabelecimentoLocal(tamburete.meDaUmBancoDeEstabelecimentos());
    }
 
    @Bean

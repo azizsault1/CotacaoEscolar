@@ -3,21 +3,14 @@ package cotacaoEscolar.app;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
-import cotacaoEscolar.controller.ControllerAlteracaoSwing;
-import cotacaoEscolar.controller.ControllerBuscaSwing;
-import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.DescricoesMaterialEscolar;
+import cotacaoEscolar.model.Escolas;
+import cotacaoEscolar.model.Estabelecimentos;
+import cotacaoEscolar.model.ListaMateriaisEscolares;
 import cotacaoEscolar.repository.LocalDb;
 import cotacaoEscolar.repository.json.JsonRepository;
-import cotacaoEscolar.service.ServicoCotacao;
-import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;
 import cotacaoEscolar.service.ServicoEscola;
 import cotacaoEscolar.service.ServicoEscolaLocal;
-import cotacaoEscolar.service.ServicoEstabelecimento;
-import cotacaoEscolar.service.ServicoListaMaterial;
-import cotacaoEscolar.service.impl.ServicoCotacaoLocal;
-import cotacaoEscolar.service.impl.ServicoDescricaoMaterialEscolarImpl;
-import cotacaoEscolar.service.impl.ServicoEstabelecimentoLocal;
-import cotacaoEscolar.service.impl.ServicoListaMaterialLocal;
 import swingView.Janela;
 
 public class ApplicationSwing {
@@ -39,17 +32,13 @@ public class ApplicationSwing {
       }
 
       final ServicoEscola servicoEscola = new ServicoEscolaLocal(oowww.meDaUmBancoDeEscola());
-      final ServicoListaMaterial servicoListaMaterial = new ServicoListaMaterialLocal(oowww.meDaUmBancoDeListaMaterial());
-      final ServicoEstabelecimento servicoProduto = new ServicoEstabelecimentoLocal(oowww.meDaUmBancoDeestabelecimentos());
-      final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar = new ServicoDescricaoMaterialEscolarImpl(oowww.meDaUmBancoDeMaterial());
-      final ServicoCotacao servicoCotacao = new ServicoCotacaoLocal();
 
-      final ControllerBuscaSwing controller = new ControllerBuscaSwing(servicoEscola, servicoListaMaterial, servicoDescricaoMaterialEscolar);
-      final ControllerAlteracaoSwing controllerCotacao = new ControllerAlteracaoSwing(servicoCotacao, servicoProduto, servicoEscola, servicoListaMaterial);
+      final DescricoesMaterialEscolar descricoes = DescricoesMaterialEscolar.create(oowww.meDaUmBancoDeMaterial());
+      final ListaMateriaisEscolares materiais = ListaMateriaisEscolares.create(oowww.meDaUmBancoDeListaMaterial());
+      final Estabelecimentos estabelecimentos = Estabelecimentos.create(oowww.meDaUmBancoDeEstabelecimentos());
+      final Escolas escolas = Escolas.create(servicoEscola);
 
-      final ListaMaterial material = ListaMaterial.meDaUmMaterial(servicoEscola, servicoListaMaterial);
-
-      new Janela(controller, controllerCotacao, material);
+      new Janela(escolas, materiais, descricoes, estabelecimentos);
    }
 
 }

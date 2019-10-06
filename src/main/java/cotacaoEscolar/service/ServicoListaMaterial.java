@@ -13,8 +13,6 @@ import cotacaoEscolar.model.v1.Serie;
 @Service
 public interface ServicoListaMaterial {
 
-   ListaMaterial salvar(Escola escola, Serie serie) throws FoiNao;
-
    Collection<ListaMaterial> selecionePor(Escola escola);
 
    ListaMaterial selecionePor(Escola escolaEscolhida, Serie serieEscolhida) throws FoiNao;

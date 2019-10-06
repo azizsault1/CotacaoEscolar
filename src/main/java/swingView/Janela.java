@@ -4,7 +4,6 @@ import java.awt.Container;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.swing.JButton;
@@ -13,10 +12,11 @@ import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.app.exceptions.IllegalError;
-import cotacaoEscolar.controller.ControllerAlteracaoSwing;
-import cotacaoEscolar.controller.ControllerBuscaSwing;
+import cotacaoEscolar.model.DescricoesMaterialEscolar;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Escolas;
+import cotacaoEscolar.model.Estabelecimentos;
+import cotacaoEscolar.model.ListaMateriaisEscolares;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.ResultadoCotacao;
@@ -37,20 +37,23 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
 
    private static final int Y_INICIAL = 20;
 
-   private final ControllerBuscaSwing controller;
-   private final ControllerAlteracaoSwing controllerCotacao;
-
    private LabelFieldEscola escolas;
    private LabelFieldSeries series;
    private LinhaItens itens;
    private TabelaMaterialEscolar tabelaMaterial;
-   private final ListaMaterial materialEscolar;
 
-   public Janela(final ControllerBuscaSwing controllerMateriais, final ControllerAlteracaoSwing controllerCotacao, final ListaMaterial materialEscolar) {
-      this.controller = controllerMateriais;
-      this.controllerCotacao = controllerCotacao;
-      this.materialEscolar = materialEscolar;
+   private final DescricoesMaterialEscolar descricoes;
+   private final Estabelecimentos estabelecimentos;
+   private final ListaMateriaisEscolares materiais;
+   private final Escolas listaEscolas;
+   private ListaMaterial listaSelecionada;
 
+   public Janela(final Escolas escolas, final ListaMateriaisEscolares materiais, final DescricoesMaterialEscolar descricoes,
+         final Estabelecimentos estabelecimentos) {
+      this.descricoes = descricoes;
+      this.estabelecimentos = estabelecimentos;
+      this.materiais = materiais;
+      this.listaEscolas = escolas;
       this.addComponents();
       this.configureWindow();
    }
@@ -78,9 +81,8 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       final int linha2 = this.calculaProximaLinha(linha1);
       final int linha3 = this.calculaProximaLinha(linha2);
 
-      this.itens = new LinhaItens(linha2, this.controller.todasDescricoes(), this);
-
-      final Collection<Escola> escolas = this.controller.todasEscolas();
+      this.itens = new LinhaItens(linha2, this.descricoes.todasDescricoes(), this);
+      final Collection<Escola> escolas = this.listaEscolas.todas();
 
       this.escolas = new LabelFieldEscola(linha1, this);
       this.series = new LabelFieldSeries(linha1, this);
@@ -90,17 +92,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       final JButton cotar = new JButton("Cotar");
       cotar.setBounds(Dimensoes.MarginColuna1.getValor(), 520, 575, 40);
       cotar.addActionListener(listener -> {
-         final Optional<Escola> escola = this.escolas.getEscolaEscolhida();
-         final Optional<Serie> serie = this.series.getSerieEscolhida();
-         final List<Item> itensEscohidos = this.tabelaMaterial.getItens();
-
-         final ListaMaterial material;
-         if ((!escola.isPresent()) || !serie.isPresent()) {
-            material = ListaMaterial.criarListaVazia();
-         } else {
-            material = ListaMaterial.create(escola.get(), serie.get(), itensEscohidos);
-         }
-         final ResultadoCotacao resultado = this.controllerCotacao.cotar(material);
+         final ResultadoCotacao resultado = this.estabelecimentos.cotar(this.listaSelecionada);
          Relatorio.displayGUI(resultado);
       });
 
@@ -123,7 +115,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
 
    @Override
    public void escolaSelecionada(final Escola escola) {
-      final Collection<ListaMaterial> listaMateriais = this.queroAListaDeMateriaisDaEscola(Optional.of(escola));
+      final Collection<ListaMaterial> listaMateriais = this.queroAListaDeMateriaisDaEscola(escola);
       final List<Serie> listaSeries = this.queroAsSeriesDaListaDeMateriais(listaMateriais);
       this.series.atualizarLista(listaSeries);
 
@@ -131,9 +123,8 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
 
    @Override
    public void serieSelecionada(final Serie serie) throws FoiNao {
-      final Optional<Escola> escolaEscolhida = this.escolas.getEscolaEscolhida();
-      final Optional<Serie> seriesEscolhida = Optional.of(serie);
-      final ListaMaterial material = this.queroAListaDeMaterial(escolaEscolhida, seriesEscolhida);
+      final Escola escolaEscolhida = this.escolas.getEscolaEscolhida();
+      final ListaMaterial material = this.queroAListaDeMaterial(escolaEscolhida, serie);
       this.tabelaMaterial.atualizar(material.getItens());
 
    }
@@ -143,12 +134,8 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       this.tabelaMaterial.adicioneMaisUmItem(item);
    }
 
-   private Collection<ListaMaterial> queroAListaDeMateriaisDaEscola(final Optional<Escola> escola) {
-      if (escola.isPresent()) {
-         return this.controller.selecioneMaterialPor(escola.get());
-      } else {
-         return Collections.emptyList();
-      }
+   private Collection<ListaMaterial> queroAListaDeMateriaisDaEscola(final Escola escola) {
+      return this.materiais.selecionePor(escola);
    }
 
    private List<Serie> queroAsSeriesDaListaDeMateriais(final Collection<ListaMaterial> listaMateriais) {
@@ -163,35 +150,24 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
       return series;
    }
 
-   private ListaMaterial queroAListaDeMaterial(final Optional<Escola> escola, final Optional<Serie> serie) throws FoiNao {
-      if (!escola.isPresent() || !serie.isPresent()) {
-         return ListaMaterial.criarListaVazia();
-      }
-
-      return this.controller.selecioneMaterialPor(escola.get(), serie.get());
+   private ListaMaterial queroAListaDeMaterial(final Escola escola, final Serie serie) throws FoiNao {
+      return this.materiais.selecionePor(escola, serie);
    }
 
    @Override
    public void maisSeries(final Serie serie) throws FoiNao {
-      final Optional<Escola> escola = this.escolas.getEscolaEscolhida();
-
-      if (escola.isPresent()) {
-         final Escola e = escola.get();
-         this.controllerCotacao.salvarSerie(e, serie);
-         this.escolas.atualizar(this.controller.todasEscolas());
-         this.escolas.escolaSelecionada(e);
-         this.series.selecionaSerie(serie);
-
-      } else {
-         throw new IllegalError("Escola inválida. Tente salvar primeiro a escola.");
-      }
+      final Escola escola = this.escolas.getEscolaEscolhida();
+      this.listaSelecionada = this.materiais.selecionePor(escola, serie);
+      this.escolas.atualizar(this.listaEscolas.todas());
+      this.escolas.escolaSelecionada(this.listaSelecionada.getEscola());
+      this.series.selecionaSerie(this.listaSelecionada.getSerie());
 
    }
 
    @Override
    public void maisEscolas(final Escola escola) throws FoiNao {
-      this.controllerCotacao.salvarEscola(escola);
-      this.escolas.atualizar(this.controller.todasEscolas());
+      this.listaEscolas.inserir(escola);
+      this.escolas.atualizar(this.listaEscolas.todas());
       this.escolas.escolaSelecionada(escola);
    }
 

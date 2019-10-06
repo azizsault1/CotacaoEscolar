@@ -34,8 +34,8 @@ public class ServicoEscolaLocal implements ServicoEscola {
    }
 
    @Override
-   public void salvar(final Escola escola) throws FoiNao {
-      this.repository.salvaSaPorra(escola);
+   public Escola salvar(final Escola escola) throws FoiNao {
+      return this.repository.salvaSaPorra(escola);
    }
 
 }

@@ -29,7 +29,7 @@ public class JsonRepositoryTest {
 
    @Test
    public void testandoCriarRepEstabelecimento() {
-      final EstabelecimentoRepository resultado = this.tamburete.meDaUmBancoDeestabelecimentos();
+      final EstabelecimentoRepository resultado = this.tamburete.meDaUmBancoDeEstabelecimentos();
       assertNotNull(resultado);
    }
 

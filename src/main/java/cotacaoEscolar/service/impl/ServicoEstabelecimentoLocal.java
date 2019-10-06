@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.v1.Estabelecimento;
-import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.repository.EstabelecimentoRepository;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 
@@ -17,11 +16,6 @@ public class ServicoEstabelecimentoLocal implements ServicoEstabelecimento {
    @Autowired
    public ServicoEstabelecimentoLocal(final EstabelecimentoRepository repository) {
       this.repository = repository;
-   }
-
-   @Override
-   public ListaEstabelecimento todos() {
-      return this.repository.estabelecimentos();
    }
 
    @Override

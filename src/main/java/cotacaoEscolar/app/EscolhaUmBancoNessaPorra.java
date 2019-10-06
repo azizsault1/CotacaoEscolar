@@ -12,5 +12,5 @@ public interface EscolhaUmBancoNessaPorra {
 
    ListaMaterialRepository meDaUmBancoDeListaMaterial();
 
-   EstabelecimentoRepository meDaUmBancoDeestabelecimentos();
+   EstabelecimentoRepository meDaUmBancoDeEstabelecimentos();
 }

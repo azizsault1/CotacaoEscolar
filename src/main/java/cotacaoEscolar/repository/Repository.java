@@ -8,7 +8,7 @@ import cotacaoEscolar.repository.pojos.ParserToModel;
 
 public interface Repository<Model> {
 
-   public void salvaSaPorra(Model model) throws FoiNao;
+   public Model salvaSaPorra(Model model) throws FoiNao;
 
    default List<Model> toModels(final List<ParserToModel<Model>> pojos) {
       final List<Model> models = new ArrayList<>();

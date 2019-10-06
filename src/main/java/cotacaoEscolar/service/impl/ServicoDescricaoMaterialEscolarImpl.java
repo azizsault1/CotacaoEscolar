@@ -1,7 +1,5 @@
 package cotacaoEscolar.service.impl;
 
-import java.util.Collection;
-
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
@@ -15,11 +13,6 @@ public class ServicoDescricaoMaterialEscolarImpl implements cotacaoEscolar.servi
    @Autowired
    public ServicoDescricaoMaterialEscolarImpl(final DescricaoMaterialEscolarRepository repository) {
       this.repository = repository;
-   }
-
-   @Override
-   public Collection<DescricaoMaterialEscolar> todasDescricoes() {
-      return this.repository.meDaTudo();
    }
 
    @Override

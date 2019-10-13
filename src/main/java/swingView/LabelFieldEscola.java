@@ -36,7 +36,7 @@ public class LabelFieldEscola extends LabelField<Escola> {
       this.botaUmAe.addActionListener(ActionListener -> {
          final String escolaDigitada = JOptionPane.showInputDialog("Qual o nome de escola?");
          try {
-            final Escola escola = EscolaReal.create(escolaDigitada);
+            final Escola escola = Escola.create(escolaDigitada);
             escolaSelecionada.maisEscolas(escola);
          } catch (final IllegalError | FoiNao e) {
             final JOptionPane optionPane = new JOptionPane(e.getMessage(), JOptionPane.ERROR_MESSAGE);

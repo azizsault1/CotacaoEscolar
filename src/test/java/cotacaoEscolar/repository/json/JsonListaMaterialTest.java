@@ -14,7 +14,6 @@ import org.junit.Test;
 
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.EscolaReal;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.Serie;
 
@@ -34,7 +33,7 @@ public class JsonListaMaterialTest {
 
    @Test
    public void testSalvaSaPorra() {
-      final Escola escola = EscolaReal.create("Escola1");
+      final Escola escola = Escola.create("Escola1");
       final Serie serie = Serie.create("1");
       final Item item1 = new Item("Item1", 10);
       final Item item2 = new Item("Item2", 20);

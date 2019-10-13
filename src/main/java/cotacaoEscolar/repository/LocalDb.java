@@ -13,12 +13,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 import cotacaoEscolar.app.EscolhaUmBancoNessaPorra;
-import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.v1.EscolaReal;
 import cotacaoEscolar.model.v1.Estabelecimento;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
@@ -41,9 +39,9 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
    private void initEscolas() {
       this.escolas = new HashSet<>();
-      final Escola escola1 = EscolaReal.create("Escola1");
-      final Escola escola2 = EscolaReal.create("Escola2");
-      final Escola escola3 = EscolaReal.create("Escola3");
+      final Escola escola1 = Escola.create("Escola1");
+      final Escola escola2 = Escola.create("Escola2");
+      final Escola escola3 = Escola.create("Escola3");
       this.escolas.addAll(Arrays.asList(escola1, escola2, escola3));
 
       this.initItens();
@@ -230,33 +228,6 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
          }
       };
-   }
-
-   class EscolaImpl implements Escola {
-
-      @Override
-      public int compareTo(final Escola o) {
-         return 1;
-      }
-
-      @Override
-      public Escola salvar() throws FoiNao {
-         // TODO Auto-generated method stub
-         return null;
-      }
-
-      @Override
-      public boolean souNova() {
-         // TODO Auto-generated method stub
-         return false;
-      }
-
-      @Override
-      public String getNome() {
-         // TODO Auto-generated method stub
-         return null;
-      }
-
    }
 
 }

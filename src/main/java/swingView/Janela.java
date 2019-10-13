@@ -166,7 +166,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
 
    @Override
    public void maisEscolas(final Escola escola) throws FoiNao {
-      this.listaEscolas.inserir(escola);
+      this.listaEscolas.salvar(escola);
       this.escolas.atualizar(this.listaEscolas.todas());
       this.escolas.escolaSelecionada(escola);
    }

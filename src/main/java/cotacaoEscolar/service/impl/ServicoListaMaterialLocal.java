@@ -14,6 +14,7 @@ import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.ListaMaterialReal;
 import cotacaoEscolar.model.v1.Serie;
+import cotacaoEscolar.model.v1.helpers.ListaMaterialAutoSave;
 import cotacaoEscolar.repository.ListaMaterialRepository;
 import cotacaoEscolar.service.ServicoListaMaterial;
 
@@ -33,22 +34,21 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
    }
 
    @Override
-   public ListaMaterial selecionePor(final Escola escola, final Serie serie) throws FoiNao {
+   public ListaMaterialAutoSave selecionePor(final Escola escola, final Serie serie) throws FoiNao {
       final Collection<ListaMaterial> listaMaterialEscolar = this.protegerDoBanco(this.repository.materiais());
 
       //@formatter:off
-      Optional<ListaMaterial> materialOpt = listaMaterialEscolar
+      final Optional<ListaMaterial> materialOpt = listaMaterialEscolar
             .stream()
             .filter(material -> material.pertenceA(escola) && material.pertenceASerie(serie))
             .findFirst();
       //@formatter:on
 
+      final ListaMaterialAutoSave materialNovo = ListaMaterialReal.create(this.repository, escola, serie);
       if (!materialOpt.isPresent()) {
-         final ListaMaterial materialNovo = ListaMaterialReal.create(this.repository, escola, serie);
-         materialOpt = Optional.of(materialNovo.salvar());
+         materialNovo.save();
       }
-
-      return materialOpt.get();
+      return materialNovo;
 
    }
 
@@ -77,14 +77,6 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 
    private Collection<ListaMaterial> protegerDoBanco(final Collection<ListaMaterial> materiais) {
       return materiais == null ? Collections.emptyList() : materiais;
-   }
-
-   @Override
-   public ListaMaterial meDaUmMaterial() {
-      final Collection<ListaMaterial> materiais = this.repository.materiais();
-
-      final ListaMaterial listaMaterial = materiais.stream().findFirst().orElse(ListaMaterial.criarListaVazia());
-      return listaMaterial;
    }
 
 }

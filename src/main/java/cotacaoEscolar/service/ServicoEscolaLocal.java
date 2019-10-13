@@ -23,7 +23,7 @@ public class ServicoEscolaLocal implements ServicoEscola {
 
    @Override
    public Optional<Escola> buscar(final String escola) {
-      final Escola aProcurar = EscolaReal.create(escola);
+      final Escola aProcurar = EscolaReal.create(this, escola);
       final Collection<Escola> escolas = this.todas();
       //@formatter:off
       return escolas.stream()

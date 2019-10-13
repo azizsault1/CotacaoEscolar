@@ -3,6 +3,8 @@ package cotacaoEscolar.app;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import cotacaoEscolar.controller.EscolasController;
+import cotacaoEscolar.controller.EstabelecimentosController;
 import cotacaoEscolar.model.DescricoesMaterialEscolar;
 import cotacaoEscolar.model.Escolas;
 import cotacaoEscolar.model.Estabelecimentos;
@@ -35,8 +37,8 @@ public class ApplicationSwing {
 
       final DescricoesMaterialEscolar descricoes = DescricoesMaterialEscolar.create(oowww.meDaUmBancoDeMaterial());
       final ListaMateriaisEscolares materiais = ListaMateriaisEscolares.create(oowww.meDaUmBancoDeListaMaterial());
-      final Estabelecimentos estabelecimentos = Estabelecimentos.create(oowww.meDaUmBancoDeEstabelecimentos());
-      final Escolas escolas = Escolas.create(servicoEscola);
+      final Estabelecimentos estabelecimentos = new EstabelecimentosController(oowww.meDaUmBancoDeEstabelecimentos());
+      final Escolas escolas = new EscolasController(servicoEscola);
 
       new Janela(escolas, materiais, descricoes, estabelecimentos);
    }

@@ -10,9 +10,10 @@ import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.v1.helpers.ListaMaterialAutoSave;
 import cotacaoEscolar.repository.ListaMaterialRepository;
 
-public class ListaMaterialReal implements ListaMaterial, Serializable {
+public class ListaMaterialReal implements ListaMaterialAutoSave, Serializable {
    private static final long serialVersionUID = 1L;
    private final Escola escola;
    private final Serie serie;
@@ -60,22 +61,17 @@ public class ListaMaterialReal implements ListaMaterial, Serializable {
    }
 
    @Override
-   public boolean primeiraLista() {
-      return false;
-   }
-
-   @Override
-   public ListaMaterial salvar() throws FoiNao {
+   public ListaMaterial save() throws FoiNao {
       this.repository.salvaSaPorra(this);
       return this;
    }
 
    @Override
-   public boolean souNova() {
+   public boolean canIPersist() {
       return false;
    }
 
-   public static ListaMaterial create(final ListaMaterialRepository repository, final Escola escola, final Serie serie) {
+   public static ListaMaterialAutoSave create(final ListaMaterialRepository repository, final Escola escola, final Serie serie) {
       validate(repository, escola, serie);
       return new ListaMaterialReal(repository, escola, serie, Collections.emptyList());
    }
@@ -102,5 +98,4 @@ public class ListaMaterialReal implements ListaMaterial, Serializable {
          throw new IllegalError("Opps... essa serie não existe.");
       }
    }
-
 }

@@ -1,42 +1,44 @@
 package cotacaoEscolar.model;
 
-import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.model.v1.helpers.Manjada;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-public interface Escola extends Comparable<Escola>, Manjada<Escola> {
+import io.swagger.annotations.ApiModel;
+
+@ApiModel(description = "Instituição pública ou privada destinado ao ensino coletivo.")
+public interface Escola extends Comparable<Escola> {
 
    String getNome();
 
-   static Escola PrimeiraEscola() {
+   @JsonCreator
+   public static Escola create(@JsonProperty("nome") final String nome) {
+      return new PrimeiraEscola(nome);
+   }
+
+   public static Escola create() {
       return new PrimeiraEscola();
    }
 
-   class PrimeiraEscola implements Escola {
+   final class PrimeiraEscola implements Escola {
 
-      private final Manjada<Escola> naoSouManjada;
+      private final String nome;
+
+      public PrimeiraEscola(final String nome) {
+         this.nome = nome;
+      }
 
       public PrimeiraEscola() {
-         this.naoSouManjada = new Manjada.ModelNovo<>();
+         this.nome = "";
       }
 
       @Override
       public String getNome() {
-         return "";
+         return this.nome;
       }
 
       @Override
       public int compareTo(final Escola o) {
-         return -1;
-      }
-
-      @Override
-      public boolean souNova() {
-         return this.naoSouManjada.souNova();
-      }
-
-      @Override
-      public Escola salvar() throws FoiNao {
-         throw new UnsupportedOperationException("Opa, vc devereia ter chamado a Escola.create(String) pra poder salvar.");
+         return this.nome.compareTo(this.nome);
       }
 
    }

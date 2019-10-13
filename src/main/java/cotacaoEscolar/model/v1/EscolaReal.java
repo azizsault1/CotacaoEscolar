@@ -2,12 +2,11 @@ package cotacaoEscolar.model.v1;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.v1.helpers.EscolaAutoSave;
 import cotacaoEscolar.model.v1.helpers.EscolaValidator;
 import cotacaoEscolar.service.ServicoEscola;
-import io.swagger.annotations.ApiModel;
 
-@ApiModel(description = "Instituição pública ou privada destinado ao ensino coletivo.")
-public class EscolaReal implements Comparable<Escola>, Escola {
+public class EscolaReal implements Comparable<Escola>, EscolaAutoSave {
 
    private final transient ServicoEscola servico;
    private final String nome;
@@ -28,12 +27,12 @@ public class EscolaReal implements Comparable<Escola>, Escola {
    }
 
    @Override
-   public Escola salvar() throws FoiNao {
+   public Escola save() throws FoiNao {
       return this.servico.salvar(this);
    }
 
    @Override
-   public boolean souNova() {
+   public boolean canIPersist() {
       return false;
    }
 
@@ -72,9 +71,9 @@ public class EscolaReal implements Comparable<Escola>, Escola {
       return this.nome.compareTo(o.getNome());
    }
 
-   public static Escola create(final ServicoEscola servico, final Escola escola) {
-      validar(escola.getNome());
-      return new EscolaReal(servico, escola.getNome());
+   public static EscolaAutoSave create(final ServicoEscola servico, final String escola) {
+      validar(escola);
+      return new EscolaReal(servico, escola);
    }
 
    private static void validar(final String nome) {

@@ -40,34 +40,11 @@ public class ControllerBuscaRest {
 
    @Autowired
    public ControllerBuscaRest(final ServicoEscola servicoEscola, final ServicoDescricaoMaterialEscolar servicoDescricaoMaterialEscolar,
-         final ServicoListaMaterial servicoListaMaterial, final ServicoEstabelecimento servicoEstabelecimentos) {
+         , final ServicoEstabelecimento servicoEstabelecimentos) {
       this.servicoEscola = servicoEscola;
       this.servicoItem = servicoDescricaoMaterialEscolar;
-      this.servicoListaMaterial = servicoListaMaterial;
+      this.servicoListaMaterial = this.servicoListaMaterial;
       this.servicoEstabelecimentos = servicoEstabelecimentos;
-   }
-
-   private Escola getEscola(final String nomeEscola) {
-      final Optional<Escola> escolaProcurada = this.servicoEscola.buscar(nomeEscola);
-      if (escolaProcurada.isPresent()) {
-         throw new IllegalError("Não encontrei a escola: " + nomeEscola);
-      }
-      return escolaProcurada.get();
-
-   }
-
-   @CrossOrigin(origins = "*")
-   @ApiOperation(value = "Busca as escolas cadastradas")
-   @GetMapping(value = "escolas", produces = "application/json")
-   public Collection<Escola> todasEscolas() {
-      return this.servicoEscola.todas();
-   }
-
-   @CrossOrigin(origins = "*")
-   @ApiOperation(value = "Busca a lista de materiais de uma escola.")
-   @GetMapping(value = "escola/{nomeEscola}", produces = MediaType.APPLICATION_JSON_VALUE)
-   public Collection<ListaMaterial> ListaDeMateriaisEscolaresDa(@PathVariable("nomeEscola") final String nomeEscola) throws IllegalError {
-      return this.servicoListaMaterial.selecionePor(this.getEscola(nomeEscola));
    }
 
    @CrossOrigin(origins = "*")

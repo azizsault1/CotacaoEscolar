@@ -57,7 +57,7 @@ public class ControllerAlteracaoRest {
    public ResultadoCotacao cotar(@RequestBody final ListaMaterial lista) {
       this.validate(lista);
       final ListaEstabelecimento estabelecimentos = this.servicoEstabelecimento.todos();
-      return this.servicoCotacao.cotar(lista, estabelecimentos);
+      return estabelecimentos.cotar(lista);
    }
 
    @CrossOrigin(origins = "*")

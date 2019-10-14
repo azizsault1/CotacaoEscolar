@@ -23,14 +23,15 @@ public class ResultadoCotacaoEstabelecimentoTest {
    public void dado200e0QuandoComparados200TemQueSerMenorQue0() {
       final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final Item item = Mockito.mock(Item.class);
-      final Produto produto = Mockito.mock(Produto.class);
 
-      Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
-      Mockito.when(item.getQuantidade()).thenReturn(2);
+      final int quantidadeProcurada = 2;
+      final int quantidadeEncontrada = 2;
+      final BigDecimal valorUnitario = BigDecimal.valueOf(100);
+
       Mockito.when(resultadoCotacao2.getTotal()).thenReturn(BigDecimal.valueOf(0));
 
-      resultadoCotacao.encontrei(item, produto);
+      final Cotacao cotacao = new Cotacao("Desc1", quantidadeProcurada, quantidadeEncontrada, valorUnitario);
+      resultadoCotacao.encontrei(cotacao);
 
       final int resultado = resultadoCotacao.compareTo(resultadoCotacao2);
       Assert.assertEquals(-1, resultado);
@@ -51,14 +52,14 @@ public class ResultadoCotacaoEstabelecimentoTest {
    public void dado200e300QuandoComparadosTemQueRetornar200MenorQue300() {
       final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final Item item = Mockito.mock(Item.class);
-      final Produto produto = Mockito.mock(Produto.class);
+      final int quantidadeProcurada = 2;
+      final int quantidadeEncontrada = 2;
+      final BigDecimal valorUnitario = BigDecimal.valueOf(100);
 
-      Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
-      Mockito.when(item.getQuantidade()).thenReturn(2);
       Mockito.when(resultadoCotacao2.getTotal()).thenReturn(BigDecimal.valueOf(300));
 
-      resultadoCotacao.encontrei(item, produto);
+      final Cotacao cotacao = new Cotacao("Desc1", quantidadeProcurada, quantidadeEncontrada, valorUnitario);
+      resultadoCotacao.encontrei(cotacao);
 
       final int resultado = resultadoCotacao.compareTo(resultadoCotacao2);
       Assert.assertEquals(-1, resultado);
@@ -68,14 +69,14 @@ public class ResultadoCotacaoEstabelecimentoTest {
    public void dado200e100QuandoComparadosTemQueRetornar200MenorQue300() {
       final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final Item item = Mockito.mock(Item.class);
-      final Produto produto = Mockito.mock(Produto.class);
+      final int quantidadeProcurada = 2;
+      final int quantidadeEncontrada = 2;
+      final BigDecimal valorUnitario = BigDecimal.valueOf(100);
 
-      Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
-      Mockito.when(item.getQuantidade()).thenReturn(2);
       Mockito.when(resultadoCotacao2.getTotal()).thenReturn(BigDecimal.valueOf(100));
 
-      resultadoCotacao.encontrei(item, produto);
+      final Cotacao cotacao = new Cotacao("Desc1", quantidadeProcurada, quantidadeEncontrada, valorUnitario);
+      resultadoCotacao.encontrei(cotacao);
 
       final int resultado = resultadoCotacao.compareTo(resultadoCotacao2);
       Assert.assertEquals(1, resultado);

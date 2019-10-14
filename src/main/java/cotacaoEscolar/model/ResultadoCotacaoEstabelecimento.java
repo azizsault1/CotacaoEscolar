@@ -22,10 +22,9 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
       this.total = BigDecimal.ZERO;
    }
 
-   public void encontrei(final Item item, final Produto produto) {
-      final Cotacao cotacao = new Cotacao(item, produto);
+   public void encontrei(final Cotacao cotacao) {
       this.produtosEncontrados.add(cotacao);
-      this.total = this.total.add(cotacao.getValorTotal());
+      this.total = this.total.add(cotacao.getTotal());
    }
 
    public void naoEncontrei(final Item item) {

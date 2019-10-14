@@ -11,53 +11,42 @@ import io.swagger.annotations.ApiModel;
 @JsonSerialize
 public class Cotacao {
 
-   private final Item item;
-   private final Produto produto;
+   private final String descricao;
+   private final int quantidade;
+   private final BigDecimal valorUnitario;
    private final String observacao;
+   private final BigDecimal total;
 
-   public Cotacao(final Item item, final Produto produto) {
-      this.item = item;
-      this.produto = produto;
-      this.observacao = item.getQuantidade() > produto.getQuantidade() ? this.criarObservacao() : "";
+   public Cotacao(final String descricao, final int quantidadeProcurada, final int quantidadeEncontrada, final BigDecimal valorUnitario) {
+      this.descricao = descricao;
+      this.quantidade = quantidadeProcurada;
+      this.valorUnitario = valorUnitario;
+      this.total = this.valorUnitario.multiply(BigDecimal.valueOf(this.quantidade));
+      this.observacao = quantidadeProcurada > quantidadeEncontrada ? this.criarObservacao(quantidadeEncontrada) : "";
    }
 
-   public DescricaoMaterialEscolar getMaterialEscolar() {
-      return this.item.getMaterialEscolar();
-   }
-
-   public int getQuantidade() {
-      return this.item.getQuantidade();
-   }
-
-   public BigDecimal getValorUnitario() {
-      return this.produto.getValor();
-   }
-
-   public BigDecimal getValorTotal() {
-      return this.produto.getValor().multiply(BigDecimal.valueOf(this.item.getQuantidade()));
-   }
-
-   public String criarObservacao() {
-      return "Infelizmente não possuímos a quantidade desejada:" + this.item.getQuantidade() + ", apenas possuímos:" + this.produto.getQuantidade()
+   private String criarObservacao(final int quantidadeEncontrada) {
+      return "Infelizmente não possuímos a quantidade desejada:" + this.quantidade + ", apenas possuímos:" + quantidadeEncontrada
             + " para critério de cotação, o valor total considera como se tivéssmos todos os produtos.";
    }
 
-   public String getObservacao() {
-      return this.observacao;
+   public BigDecimal getTotal() {
+      return this.total;
    }
 
    @Override
    public String toString() {
-      return "Cotacao [item=" + this.item + ", produto=" + this.produto + "]";
+      return "Cotacao [descricao=" + this.descricao + ", quantidade=" + this.quantidade + ", valorUnitario=" + this.valorUnitario + ", observacao="
+            + this.observacao + "]";
    }
 
    //@formatter:off
    public String toReport() {
-      final StringBuffer report = new StringBuffer("Item: " + this.item.getMaterialEscolar())
+      final StringBuffer report = new StringBuffer("Item: " + this.descricao)
       .append(System.getProperty("line.separator"))
-      .append("Quantidade: ").append(this.getQuantidade()).append("    ").append("Total unitário: "+ NumberFormat.getCurrencyInstance().format(this.getValorUnitario()))
+      .append("Quantidade: ").append(this.quantidade).append("    ").append("Total unitário: "+ NumberFormat.getCurrencyInstance().format(this.valorUnitario))
       .append(System.getProperty("line.separator"))
-      .append("Valor da cotação: " + NumberFormat.getCurrencyInstance().format(this.getValorTotal()))
+      .append("Valor da cotação: " + NumberFormat.getCurrencyInstance().format(this.total))
       .append(System.getProperty("line.separator"));
       if(!this.observacao.isEmpty()) {
          report.append("Observação:")

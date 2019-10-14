@@ -1,5 +1,7 @@
 package cotacaoEscolar.model;
 
+import static org.junit.Assert.assertEquals;
+
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
@@ -48,23 +50,33 @@ public class EstabelecimentoTest {
 
       // Produto 1 encontrado
       final Cotacao encontrado1 = encontrados.get(0);
-      Assert.assertEquals(DescricaoMaterialEscolar.create("Item1"), encontrado1.getMaterialEscolar());
-      Assert.assertEquals(3, encontrado1.getQuantidade());
-      Assert.assertEquals(BigDecimal.valueOf(6), encontrado1.getValorTotal());
-      Assert.assertEquals(BigDecimal.valueOf(2), encontrado1.getValorUnitario());
+      final String encontrado1Report = encontrado1.toReport();
+      //@formatter:off
+      final String esperado1Report = "Item: Item1\n" +
+            "Quantidade: 3    Total unitário: R$ 2,00\n" +
+            "Valor da cotação: R$ 6,00\n" +
+            "---\n";
+      assertEquals(esperado1Report, encontrado1Report);
 
       // Produto 2 Nao encontrado
-      final List<Item> itemNaoEncontrado = resultado.getNaoEncontrados();
-      Assert.assertEquals(1, itemNaoEncontrado.size());
-      Assert.assertEquals(DescricaoMaterialEscolar.create("Item2"), itemNaoEncontrado.get(0).getMaterialEscolar());
+       final List<Item> itemNaoEncontrado = resultado.getNaoEncontrados();
+       Assert.assertEquals(1, itemNaoEncontrado.size());
+       final String itemNaoEncontradoReport = itemNaoEncontrado.get(0).toReport();
+       final String esperadoReportItemNaoEncontrado = "Item: Item2\n" +
+             "Quantidade procurada: 5\n" +
+             "---\n";
+       assertEquals(esperadoReportItemNaoEncontrado, itemNaoEncontradoReport);
 
       // Produto3 encontrado
       final Cotacao encontrado3 = encontrados.get(1);
-      Assert.assertEquals(DescricaoMaterialEscolar.create("Item3"), encontrado3.getMaterialEscolar());
-      Assert.assertEquals(7, encontrado3.getQuantidade());
-      Assert.assertEquals(BigDecimal.valueOf(210), encontrado3.getValorTotal());
-      Assert.assertEquals(BigDecimal.valueOf(30), encontrado3.getValorUnitario());
-
+      final String reportEncontrado3 = encontrado3.toReport();
+      final String reportEsperado3 = "Item: Item3\n" +
+            "Quantidade: 7    Total unitário: R$ 30,00\n" +
+            "Valor da cotação: R$ 210,00\n" +
+            "Observação:\n" +
+            "  Infelizmente não possuímos a quantidade desejada:7, apenas possuímos:5 para critério de cotação, o valor total considera como se tivéssmos todos os produtos.\n" +
+            "---\n";
+      assertEquals(reportEsperado3, reportEncontrado3);
    }
 
 }

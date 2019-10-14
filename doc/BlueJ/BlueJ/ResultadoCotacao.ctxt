@@ -1,7 +1,0 @@
-#BlueJ class context
-comment0.target=ResultadoCotacao
-comment0.text=\n\ Escreva\ a\ descri\u00E7\u00E3o\ da\ classe\ ResultadoCotacao\ aqui.\n\n\ @author\ (seu\ nome)\n\ @version\ (n\u00FAmero\ de\ vers\u00E3o\ ou\ data)\n
-comment1.params=material
-comment1.target=ResultadoCotacao(ListaMaterial)
-comment1.text=\n\ COnstrutor\ para\ objetos\ da\ classe\ ResultadoCotacao\n
-numComments=2

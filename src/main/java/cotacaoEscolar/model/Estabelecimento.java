@@ -44,7 +44,9 @@ public class Estabelecimento {
          if (!produtoOpt.isPresent()) {
             resultado.naoEncontrei(item);
          } else {
-            resultado.encontrei(item, produtoOpt.get());
+            final Produto produto = produtoOpt.get();
+            final Cotacao cotacao = new Cotacao(item.getMaterialEscolar().getDescricao(), item.getQuantidade(), produto.getQuantidade(), produto.getValor());
+            resultado.encontrei(cotacao);
          }
 
       });

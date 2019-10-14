@@ -13,12 +13,12 @@ As escolas poderão adicionar a suas listas de materiais escolares disponibiliza
 **AUTORES: Aziz Sault, Alexandre da Hora**
 
 
-## PRINCIPAIS PONTOS CRITICOS:
-> * PC1. Coloboração dos usuários para manter os preços de cada produto atualizados;
+**PRINCIPAIS PONTOS CRITICOS:**
+>* PC1. Coloboração dos usuários para manter os preços de cada produto atualizados;
 
 **POSSIVEIS MELHORIAS:**
-> * Ref.:  PC1. Layout mais agradável e fácil para estimular o usuário a atualizar os preços;
-*  Ref.: PC1. Gameficação da atualização de preços, dando pontos para o usuário que atualiza;
+>* Ref.:  PC1. Layout mais agradável e fácil para estimular o usuário a atualizar os preços;
+>*  Ref.: PC1. Gameficação da atualização de preços, dando pontos para o usuário que atualiza;
 
 **DESCRIÇÃO DO PROCESSO DE NEGÓCIO:**
 
@@ -45,14 +45,14 @@ E para o FrontEnd:
 
 ### Diagramas:
 
-####Diagrama de Classes do FrontEnd:
+#### Diagrama de Classes do FrontEnd:
 ![Diagrama de Classe do FrontEnd](https://github.com/azizsault1/CotacaoEscolar/blob/master/doc/diagramas/diagrama_classe_cotacao_frontend.png)
  
-####Diagrama de Classes do BackEnd:
+#### Diagrama de Classes do BackEnd:
 ![Diagrama de Classe do BackEnd](https://github.com/azizsault1/CotacaoEscolar/blob/master/doc/diagramas/DiagramaClasse.png)
 
-####Diagrama de Sequencia do FrontEnd:
+#### Diagrama de Sequencia do FrontEnd:
 ![Diagrama de Sequencia do FrontEnd](https://github.com/azizsault1/CotacaoEscolar/blob/master/doc/diagramas/diagrama_sequencia_frontend_cotacao.png)
 
-####Diagrama de Sequencia do BackEnd:
+#### Diagrama de Sequencia do BackEnd:
 ![Diagrama de Sequencia do Backend](https://github.com/azizsault1/CotacaoEscolar/blob/master/doc/diagramas/cotacao.png)

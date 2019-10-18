@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import swingView.Dimensoes;
 
 public class LinhaItens extends JPanel {
@@ -18,7 +18,7 @@ public class LinhaItens extends JPanel {
    private static final int LARGURA_DO_COMBO = 300;
 
    public interface EventoItemSelecionado {
-      public void adicioneMaisUmItem(Item de);
+      public void adicioneMaisUmItem(ItemImpl de);
 
    }
 
@@ -50,7 +50,7 @@ public class LinhaItens extends JPanel {
       adicionarItem.addActionListener(evento -> {
          final DescricaoMaterialEscolar material = (DescricaoMaterialEscolar) this.combo.getSelectedItem();
          if (material != null) {
-            final Item de = new Item(material, 1);
+            final ItemImpl de = new ItemImpl(material, 1);
             itemSelecionado.adicioneMaisUmItem(de);
          }
       });

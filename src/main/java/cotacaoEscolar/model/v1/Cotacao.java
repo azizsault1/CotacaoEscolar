@@ -11,11 +11,11 @@ import io.swagger.annotations.ApiModel;
 @JsonSerialize
 public class Cotacao {
 
-   private final Item item;
+   private final ItemImpl item;
    private final Produto produto;
    private final String observacao;
 
-   public Cotacao(final Item item, final Produto produto) {
+   public Cotacao(final ItemImpl item, final Produto produto) {
       this.item = item;
       this.produto = produto;
       this.observacao = item.getQuantidade() > produto.getQuantidade() ? this.criarObservacao() : "";

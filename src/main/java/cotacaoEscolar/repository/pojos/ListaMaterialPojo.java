@@ -5,7 +5,7 @@ import java.util.List;
 
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.Serie;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
@@ -58,7 +58,7 @@ public class ListaMaterialPojo implements ParserToModel<ListaMaterial> {
 
       final Serie serieModel = this.serie.toModel();
 
-      final List<Item> models = new ArrayList<>();
+      final List<ItemImpl> models = new ArrayList<>();
       this.itens.forEach(pojo -> models.add(pojo.toModel()));
 
       return ListaMaterial.create(escolaModel, serieModel, models);

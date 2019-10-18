@@ -21,7 +21,7 @@ import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.EscolaReal;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.repository.ListaMaterialRepository;
 
@@ -111,8 +111,8 @@ public class ServicoListaMaterialLocalTest {
    public void dadoUmaEscolaEUmaSerieSeEncontrarRetornaAListaEncontrada() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final Serie serie = Serie.create("1a serie");
-      final Item item = Mockito.mock(Item.class);
-      final List<Item> itens = Arrays.asList(item);
+      final ItemImpl item = Mockito.mock(ItemImpl.class);
+      final List<ItemImpl> itens = Arrays.asList(item);
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 
@@ -173,8 +173,8 @@ public class ServicoListaMaterialLocalTest {
    public void dadoUmaEscolaSerieEItemQuandoRemoverVaiRemoverOItemDoMaterial() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final Serie serie = Serie.create("Serie1");
-      final Item itemARemover = Mockito.mock(Item.class);
-      final List<Item> itens = new ArrayList<>(Arrays.asList(itemARemover));
+      final ItemImpl itemARemover = Mockito.mock(ItemImpl.class);
+      final List<ItemImpl> itens = new ArrayList<>(Arrays.asList(itemARemover));
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 
@@ -192,8 +192,8 @@ public class ServicoListaMaterialLocalTest {
    public void dadoUmaEscolaSerieEItemQuandoAdicionarVaiOItemNoMaterial() throws FoiNao {
       final Escola escola = Mockito.mock(Escola.class);
       final Serie serie = Serie.create("1a serie");
-      final Item itemAAdicionar = Mockito.mock(Item.class);
-      final List<Item> itens = new ArrayList<>();
+      final ItemImpl itemAAdicionar = Mockito.mock(ItemImpl.class);
+      final List<ItemImpl> itens = new ArrayList<>();
       final ListaMaterial listaMaterial = Mockito.mock(ListaMaterial.class);
       final Collection<ListaMaterial> lista = Arrays.asList(listaMaterial);
 

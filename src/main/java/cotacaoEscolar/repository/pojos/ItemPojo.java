@@ -1,12 +1,12 @@
 package cotacaoEscolar.repository.pojos;
 
 import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 
 @Document(collection = "itens", schemaVersion = "1.0")
-public class ItemPojo implements ParserToModel<Item> {
+public class ItemPojo implements ParserToModel<ItemImpl> {
 
 	@Id
 	private DescricaoMaterialEscolarPojo materialEscolar;
@@ -15,7 +15,7 @@ public class ItemPojo implements ParserToModel<Item> {
 	public ItemPojo() {
 	}
 
-	public ItemPojo(final Item item) {
+	public ItemPojo(final ItemImpl item) {
 		this.materialEscolar = new DescricaoMaterialEscolarPojo(item.getMaterialEscolar().getDescricao());
 		this.quantidade = item.getQuantidade();
 	}
@@ -62,10 +62,10 @@ public class ItemPojo implements ParserToModel<Item> {
 	}
 
 	@Override
-	public Item toModel() {
+	public ItemImpl toModel() {
 		final DescricaoMaterialEscolar descricaoModel = this.materialEscolar.toModel();
 
-		return Item.create(descricaoModel.getDescricao(), this.quantidade);
+		return ItemImpl.create(descricaoModel.getDescricao(), this.quantidade);
 	}
 
 }

@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.Serie;
 
 public class JsonListaMaterialTest {
@@ -35,10 +35,10 @@ public class JsonListaMaterialTest {
    public void testSalvaSaPorra() {
       final Escola escola = Escola.create("Escola1");
       final Serie serie = Serie.create("1");
-      final Item item1 = new Item("Item1", 10);
-      final Item item2 = new Item("Item2", 20);
+      final ItemImpl item1 = new ItemImpl("Item1", 10);
+      final ItemImpl item2 = new ItemImpl("Item2", 20);
 
-      final List<Item> itens = java.util.Arrays.asList(item1, item2);
+      final List<ItemImpl> itens = java.util.Arrays.asList(item1, item2);
 
       final ListaMaterial listaMaterial = ListaMaterial.create(escola, serie, itens);
 

@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import org.mockito.Mockito;
 
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.Produto;
 import cotacaoEscolar.model.v1.ResultadoCotacaoEstabelecimento;
 
@@ -27,7 +27,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
    public void dado200e0QuandoComparados200TemQueSerMenorQue0() {
       final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final Item item = Mockito.mock(Item.class);
+      final ItemImpl item = Mockito.mock(ItemImpl.class);
       final Produto produto = Mockito.mock(Produto.class);
 
       Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
@@ -55,7 +55,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
    public void dado200e300QuandoComparadosTemQueRetornar200MenorQue300() {
       final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final Item item = Mockito.mock(Item.class);
+      final ItemImpl item = Mockito.mock(ItemImpl.class);
       final Produto produto = Mockito.mock(Produto.class);
 
       Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
@@ -72,7 +72,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
    public void dado200e100QuandoComparadosTemQueRetornar200MenorQue300() {
       final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final Item item = Mockito.mock(Item.class);
+      final ItemImpl item = Mockito.mock(ItemImpl.class);
       final Produto produto = Mockito.mock(Produto.class);
 
       Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));

@@ -12,7 +12,7 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
 
    private final String nome;
    private final List<Cotacao> produtosEncontrados;
-   private final List<Item> itensNaoEncontrados;
+   private final List<ItemImpl> itensNaoEncontrados;
    private BigDecimal total;
 
    public ResultadoCotacaoEstabelecimento(final String nome) {
@@ -22,13 +22,13 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
       this.total = BigDecimal.ZERO;
    }
 
-   public void encontrei(final Item item, final Produto produto) {
+   public void encontrei(final ItemImpl item, final Produto produto) {
       final Cotacao cotacao = new Cotacao(item, produto);
       this.produtosEncontrados.add(cotacao);
       this.total = this.total.add(cotacao.getValorTotal());
    }
 
-   public void naoEncontrei(final Item item) {
+   public void naoEncontrei(final ItemImpl item) {
       this.itensNaoEncontrados.add(item);
    }
 
@@ -57,7 +57,7 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
       return this.produtosEncontrados;
    }
 
-   public List<Item> getNaoEncontrados() {
+   public List<ItemImpl> getNaoEncontrados() {
       return this.itensNaoEncontrados;
    }
 

@@ -17,11 +17,11 @@ public class ListaMaterialReal implements ListaMaterialAutoSave, Serializable {
    private static final long serialVersionUID = 1L;
    private final Escola escola;
    private final Serie serie;
-   private final List<Item> itens;
+   private final List<ItemImpl> itens;
 
    private final transient ListaMaterialRepository repository;
 
-   private ListaMaterialReal(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<Item> itens) {
+   private ListaMaterialReal(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<ItemImpl> itens) {
       this.escola = escola;
       this.serie = serie;
       this.itens = itens;
@@ -45,7 +45,7 @@ public class ListaMaterialReal implements ListaMaterialAutoSave, Serializable {
    }
 
    @Override
-   public List<Item> getItens() {
+   public List<ItemImpl> getItens() {
       return this.itens;
    }
 
@@ -56,7 +56,7 @@ public class ListaMaterialReal implements ListaMaterialAutoSave, Serializable {
    }
 
    @Override
-   public void addItem(final Item item) {
+   public void addItem(final ItemImpl item) {
       this.itens.add(item);
    }
 
@@ -76,7 +76,7 @@ public class ListaMaterialReal implements ListaMaterialAutoSave, Serializable {
       return new ListaMaterialReal(repository, escola, serie, Collections.emptyList());
    }
 
-   public static ListaMaterial create(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<Item> itens) {
+   public static ListaMaterial create(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<ItemImpl> itens) {
       validate(repository, escola, serie);
       if (itens == null) {
          throw new IllegalError("Chame o método create(repository, escola, serie)");

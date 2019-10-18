@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.ListaMaterialReal;
 import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.model.v1.helpers.ListaMaterialAutoSave;
@@ -53,14 +53,14 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
    }
 
    @Override
-   public void remover(final Escola escola, final Serie serie, final Item item) throws FoiNao {
-      final List<Item> itens = this.selecionePor(escola, serie).getItens();
+   public void remover(final Escola escola, final Serie serie, final ItemImpl item) throws FoiNao {
+      final List<ItemImpl> itens = this.selecionePor(escola, serie).getItens();
       itens.remove(item);
    }
 
    @Override
-   public void adicionar(final Escola escola, final Serie serie, final Item item) throws FoiNao {
-      final List<Item> itens = this.selecionePor(escola, serie).getItens();
+   public void adicionar(final Escola escola, final Serie serie, final ItemImpl item) throws FoiNao {
+      final List<ItemImpl> itens = this.selecionePor(escola, serie).getItens();
       itens.add(item);
    }
 

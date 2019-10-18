@@ -12,7 +12,7 @@ import org.mockito.Mockito;
 import cotacaoEscolar.model.v1.Cotacao;
 import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.v1.Estabelecimento;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.ListaMaterialReal;
 import cotacaoEscolar.model.v1.ListaProduto;
 import cotacaoEscolar.model.v1.Produto;
@@ -31,10 +31,10 @@ public class EstabelecimentoTest {
    @Test
    public void testCotar() {
       final ListaMaterialReal lista = Mockito.mock(ListaMaterialReal.class);
-      final Item item1 = new Item("Item1", 3);
-      final Item item2 = new Item("Item2", 5);
-      final Item item3 = new Item("Item3", 7);
-      final List<Item> itens = Arrays.asList(item1, item2, item3);
+      final ItemImpl item1 = new ItemImpl("Item1", 3);
+      final ItemImpl item2 = new ItemImpl("Item2", 5);
+      final ItemImpl item3 = new ItemImpl("Item3", 7);
+      final List<ItemImpl> itens = Arrays.asList(item1, item2, item3);
       final Produto produto1 = Produto.create("Produto1", BigDecimal.valueOf(2), Integer.valueOf(5));
       final Produto produto3 = Produto.create("Produto3", BigDecimal.valueOf(30), Integer.valueOf(5));
       final Optional<Produto> optionalTem1 = Optional.of(produto1);
@@ -60,7 +60,7 @@ public class EstabelecimentoTest {
       Assert.assertEquals(BigDecimal.valueOf(2), encontrado1.getValorUnitario());
 
       // Produto 2 Nao encontrado
-      final List<Item> itemNaoEncontrado = resultado.getNaoEncontrados();
+      final List<ItemImpl> itemNaoEncontrado = resultado.getNaoEncontrados();
       Assert.assertEquals(1, itemNaoEncontrado.size());
       Assert.assertEquals(DescricaoMaterialEscolar.create("Item2"), itemNaoEncontrado.get(0).getMaterialEscolar());
 

@@ -32,7 +32,7 @@ public class ListaProduto {
       this.produtos.add(produto);
    }
 
-   public Optional<Produto> quero(final Item item) {
+   public Optional<Produto> quero(final ItemImpl item) {
       return this.produtos.stream().filter(produto -> produto.equivale(item)).findAny();
    }
 

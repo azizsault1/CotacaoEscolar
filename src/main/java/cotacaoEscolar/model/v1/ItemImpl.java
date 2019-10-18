@@ -9,17 +9,17 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Representa um Item na lista de material escolar, que contém uma Descrição e uma quantidade.")
-public class Item implements Comparable<Item> {
+public class ItemImpl implements Comparable<ItemImpl> {
    private final DescricaoMaterialEscolar materialEscolar;
    private final int quantidade;
 
    @JsonCreator
-   public Item(@JsonProperty("materialEscolar") final DescricaoMaterialEscolar descricaoMaterialEscolar, @JsonProperty("quantidade") final int quantidade) {
+   public ItemImpl(@JsonProperty("materialEscolar") final DescricaoMaterialEscolar descricaoMaterialEscolar, @JsonProperty("quantidade") final int quantidade) {
       this.materialEscolar = descricaoMaterialEscolar;
       this.quantidade = quantidade;
    }
 
-   public Item(final String descricao, final int quantidade) {
+   public ItemImpl(final String descricao, final int quantidade) {
       this(DescricaoMaterialEscolar.create(descricao), quantidade);
    }
 
@@ -50,7 +50,7 @@ public class Item implements Comparable<Item> {
       if (this.getClass() != obj.getClass()) {
          return false;
       }
-      final Item other = (Item) obj;
+      final ItemImpl other = (ItemImpl) obj;
       if (this.materialEscolar == null) {
          if (other.materialEscolar != null) {
             return false;
@@ -67,16 +67,16 @@ public class Item implements Comparable<Item> {
    }
 
    @Override
-   public int compareTo(final Item o) {
+   public int compareTo(final ItemImpl o) {
       return this.materialEscolar.compareTo(o.materialEscolar);
    }
 
-   public static Item create(final String descricao, final int quantidade) {
-      return new Item(descricao, quantidade);
+   public static ItemImpl create(final String descricao, final int quantidade) {
+      return new ItemImpl(descricao, quantidade);
    }
 
-   public static List<Item> create(final int quantidade) {
-      final List<Item> result = new ArrayList<>();
+   public static List<ItemImpl> create(final int quantidade) {
+      final List<ItemImpl> result = new ArrayList<>();
       for (int i = 0; i < quantidade; i++) {
          result.add(create("Item" + i, i));
       }

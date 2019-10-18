@@ -24,7 +24,7 @@ public class Produto {
       return this.materialEscolar.getDescricao();
    }
 
-   public boolean equivale(final Item item) {
+   public boolean equivale(final ItemImpl item) {
       final boolean result = this.materialEscolar.equals(item.getMaterialEscolar());
       return result;
    }

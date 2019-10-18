@@ -11,7 +11,7 @@ import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Estabelecimentos;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.model.v1.ResultadoCotacao;
 import cotacaoEscolar.model.v1.Serie;
@@ -45,7 +45,7 @@ public class EstabelecimentosController implements Estabelecimentos {
       final Serie serie = lista.getSerie();
       new cotacaoEscolar.controller.dtos.Serie(escola.getNome(), serie.getSerie()).validate();
 
-      final List<Item> itens = lista.getItens();
+      final List<ItemImpl> itens = lista.getItens();
       if ((itens == null) || itens.isEmpty()) {
          throw new IllegalError("A lista de itens procurados nao pode ser vazia.");
       }

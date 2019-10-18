@@ -18,7 +18,7 @@ import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.v1.Estabelecimento;
-import cotacaoEscolar.model.v1.Item;
+import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.model.v1.ListaProduto;
 import cotacaoEscolar.model.v1.Produto;
@@ -27,7 +27,7 @@ import cotacaoEscolar.model.v1.Serie;
 public class LocalDb implements EscolhaUmBancoNessaPorra {
    private Set<Escola> escolas;
    private Set<DescricaoMaterialEscolar> itens;
-   private Map<String, List<Item>> listasEstaticas;
+   private Map<String, List<ItemImpl>> listasEstaticas;
    private final List<ListaMaterial> listaMaterialEscolar = new ArrayList<>();
    private ListaEstabelecimento estabelecimentos;
 
@@ -52,25 +52,25 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
    private void initItens() {
 
       final DescricaoMaterialEscolar lapisDesc = DescricaoMaterialEscolar.create("Lapis 123");
-      final Item lapis = new Item(lapisDesc, 5);
+      final ItemImpl lapis = new ItemImpl(lapisDesc, 5);
 
       final DescricaoMaterialEscolar lapisDeCorDesc = DescricaoMaterialEscolar.create("Lapis de cor");
-      final Item lapisDeCor = new Item(lapisDeCorDesc, 30);
+      final ItemImpl lapisDeCor = new ItemImpl(lapisDeCorDesc, 30);
 
       final DescricaoMaterialEscolar classificadorDesc = DescricaoMaterialEscolar.create("Classificador");
-      final Item classificador = new Item(classificadorDesc, 2);
+      final ItemImpl classificador = new ItemImpl(classificadorDesc, 2);
 
       final DescricaoMaterialEscolar cadernoDesc = DescricaoMaterialEscolar.create("Caderno");
-      final Item caderno = new Item(cadernoDesc, 1);
+      final ItemImpl caderno = new ItemImpl(cadernoDesc, 1);
 
       final List<DescricaoMaterialEscolar> itensFabricados = DescricaoMaterialEscolar.create(20);
 
       this.itens = new HashSet<>(Arrays.asList(lapisDesc, lapisDeCorDesc, classificadorDesc, cadernoDesc));
       itensFabricados.forEach(itemEntrontrado -> this.itens.add(itemEntrontrado));
 
-      final List<Item> lista1 = Arrays.asList(lapis, lapisDeCor);
-      final List<Item> lista2 = Arrays.asList(lapis, classificador);
-      final List<Item> lista3 = Arrays.asList(caderno, classificador);
+      final List<ItemImpl> lista1 = Arrays.asList(lapis, lapisDeCor);
+      final List<ItemImpl> lista2 = Arrays.asList(lapis, classificador);
+      final List<ItemImpl> lista3 = Arrays.asList(caderno, classificador);
 
       this.listasEstaticas = new HashMap<>();
       this.listasEstaticas.put("Lista1", lista1);
@@ -134,7 +134,7 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
       this.estabelecimentos = new ListaEstabelecimento(Arrays.asList(estabelecimento1, estabelecimento2, estabelecimento3, estabelecimento4, estabelecimento5));
    }
 
-   private List<Item> selecionePor(final int serie) {
+   private List<ItemImpl> selecionePor(final int serie) {
       switch (serie) {
       case 1:
          return this.listasEstaticas.get("Lista1");

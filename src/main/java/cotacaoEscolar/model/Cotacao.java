@@ -25,6 +25,22 @@ public class Cotacao {
       this.observacao = quantidadeProcurada > quantidadeEncontrada ? this.criarObservacao(quantidadeEncontrada) : "";
    }
 
+   public String getObservacao() {
+      return this.observacao;
+   }
+
+   public BigDecimal getValorUnitario() {
+      return this.valorUnitario;
+   }
+
+   public String getDescricao() {
+      return this.descricao;
+   }
+
+   public int getQuantidade() {
+      return this.quantidade;
+   }
+
    private String criarObservacao(final int quantidadeEncontrada) {
       return "Infelizmente não possuímos a quantidade desejada:" + this.quantidade + ", apenas possuímos:" + quantidadeEncontrada
             + " para critério de cotação, o valor total considera como se tivéssmos todos os produtos.";

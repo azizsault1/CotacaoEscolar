@@ -4,7 +4,7 @@
   <interface id="1" language="java" name="cotacaoEscolar.model.DescricoesMaterialEscolar" project="CotacaoEscolar" 
     file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/DescricoesMaterialEscolar.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1480" y="560"/>    
+    <position height="-1" width="-1" x="772" y="348"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -14,7 +14,7 @@
   <interface id="2" language="java" name="cotacaoEscolar.model.ListaMateriaisEscolares" project="CotacaoEscolar" 
     file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/ListaMateriaisEscolares.java" binary="false" 
     corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="543" y="621"/>    
+    <position height="-1" width="-1" x="1191" y="355"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -23,7 +23,7 @@
   </interface>  
   <interface id="3" language="java" name="cotacaoEscolar.model.Estabelecimentos" project="CotacaoEscolar" 
     file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/Estabelecimentos.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="484" y="171"/>    
+    <position height="-1" width="-1" x="922" y="141"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -32,7 +32,7 @@
   </interface>  
   <interface id="4" language="java" name="cotacaoEscolar.model.Escola" project="CotacaoEscolar" 
     file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/Escola.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="960" y="327"/>    
+    <position height="-1" width="-1" x="374" y="135"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -41,7 +41,7 @@
   </interface>  
   <interface id="5" language="java" name="cotacaoEscolar.model.Escolas" project="CotacaoEscolar" 
     file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/Escolas.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="953" y="182"/>    
+    <position height="-1" width="-1" x="597" y="140"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -50,7 +50,26 @@
   </interface>  
   <interface id="6" language="java" name="cotacaoEscolar.model.ListaMaterial" project="CotacaoEscolar" 
     file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/ListaMaterial.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1008" y="602"/>    
+    <position height="-1" width="-1" x="748" y="590"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="7" language="java" name="cotacaoEscolar.model.Item" project="CotacaoEscolar" 
+    file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="402" y="369"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="8" language="java" name="cotacaoEscolar.model.DescricaoMaterialEscolar" project="CotacaoEscolar" 
+    file="/CotacaoEscolar/src/main/java/cotacaoEscolar/model/DescricaoMaterialEscolar.java" binary="false" 
+    corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="358" y="564"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      

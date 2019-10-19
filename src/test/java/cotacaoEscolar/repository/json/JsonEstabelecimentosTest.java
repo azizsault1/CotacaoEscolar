@@ -17,7 +17,7 @@ import org.junit.Test;
 import cotacaoEscolar.model.v1.Estabelecimento;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.model.v1.ListaProduto;
-import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.ProdutoImpl;
 
 public class JsonEstabelecimentosTest {
 
@@ -43,9 +43,9 @@ public class JsonEstabelecimentosTest {
       final BigDecimal valor2 = BigDecimal.valueOf(20, 00);
       final Integer quantidade2 = 2;
 
-      final Produto produto1 = Produto.create(materialEscolar1, valor1, quantidade1);
-      final Produto produto2 = Produto.create(materialEscolar2, valor2, quantidade2);
-      final List<Produto> produtos = Arrays.asList(produto1, produto2);
+      final ProdutoImpl produto1 = ProdutoImpl.create(materialEscolar1, valor1, quantidade1);
+      final ProdutoImpl produto2 = ProdutoImpl.create(materialEscolar2, valor2, quantidade2);
+      final List<ProdutoImpl> produtos = Arrays.asList(produto1, produto2);
       final ListaProduto listaProduto = new ListaProduto(produtos);
       final Estabelecimento estabelecimento = Estabelecimento.create("Estabelecimento1", listaProduto);
       this.tamburete.salvaSaPorra(estabelecimento);
@@ -63,9 +63,9 @@ public class JsonEstabelecimentosTest {
       final BigDecimal valor2 = BigDecimal.valueOf(20, 00);
       final Integer quantidade2 = 2;
 
-      final Produto produto1 = Produto.create(materialEscolar1, valor1, quantidade1);
-      final Produto produto2 = Produto.create(materialEscolar2, valor2, quantidade2);
-      final List<Produto> produtos = Arrays.asList(produto1, produto2);
+      final ProdutoImpl produto1 = ProdutoImpl.create(materialEscolar1, valor1, quantidade1);
+      final ProdutoImpl produto2 = ProdutoImpl.create(materialEscolar2, valor2, quantidade2);
+      final List<ProdutoImpl> produtos = Arrays.asList(produto1, produto2);
       final ListaProduto listaProduto = new ListaProduto(produtos);
       final Estabelecimento estabelecimento = Estabelecimento.create("Estabelecimento1", listaProduto);
       this.tamburete.salvaSaPorra(estabelecimento);

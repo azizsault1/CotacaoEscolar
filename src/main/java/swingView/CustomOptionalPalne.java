@@ -10,18 +10,19 @@ import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.SwingUtilities;
 
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 import cotacaoEscolar.model.v1.ItemImpl;
 
 public class CustomOptionalPalne {
 
    public interface AcaoBotoes {
-      public void salvar(ItemImpl de, ItemImpl para);
+      public void salvar(Item de, ItemImpl para);
 
-      public void remover(ItemImpl item);
+      public void remover(Item item);
    }
 
-   public static void displayGUI(final ItemImpl item, final AcaoBotoes acao) {
+   public static void displayGUI(final Item item, final AcaoBotoes acao) {
       final JOptionPane optionPane = new JOptionPane(null);
       optionPane.setLayout(null);
       final JDialog dialog = optionPane.createDialog(null, "Item");
@@ -31,7 +32,7 @@ public class CustomOptionalPalne {
       dialog.setVisible(true);
    }
 
-   private static JPanel getPanel(final ItemImpl item, final JDialog dialog, final AcaoBotoes acao) {
+   private static JPanel getPanel(final Item item, final JDialog dialog, final AcaoBotoes acao) {
       final JLabel label = new JLabel("Descricao:");
       label.setBounds(5, 5, 90, 20);
 
@@ -87,19 +88,19 @@ public class CustomOptionalPalne {
    }
 
    public static void main(final String[] args) {
-      final DescricaoMaterialEscolar descricao = DescricaoMaterialEscolar.create("Lapis");
-      final ItemImpl item = new ItemImpl(descricao, 10);
+      final DescricaoMaterialEscolarImpl descricao = DescricaoMaterialEscolarImpl.create("Lapis");
+      final Item item = new ItemImpl(descricao, 10);
 
       final AcaoBotoes acao = new AcaoBotoes() {
 
          @Override
-         public void salvar(final ItemImpl de, final ItemImpl para) {
+         public void salvar(final Item de, final ItemImpl para) {
             System.out.println("CustomOptionalPalne.main(...).new AcaoBotoes() {...}.salvar() trocando de:" + de + " para: " + para);
 
          }
 
          @Override
-         public void remover(final ItemImpl item) {
+         public void remover(final Item item) {
             System.out.println("CustomOptionalPalne.main(...).new AcaoBotoes() {...}.main()" + item);
          }
       };

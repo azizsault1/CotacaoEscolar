@@ -8,7 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,7 +30,7 @@ public class DescricaoMaterialEscolarController {
    @ApiOperation(value = "Salva uma lista de material escolar.")
    @PostMapping(value = "descricaoMaterial", produces = "application/json", consumes = "application/json")
    public DescricaoMaterialEscolar descricao(@RequestBody final String descricao) throws FoiNao {
-      final DescricaoMaterialEscolar descricaoMaterial = DescricaoMaterialEscolar.create(descricao);
+      final DescricaoMaterialEscolarImpl descricaoMaterial = DescricaoMaterialEscolarImpl.create(descricao);
       this.servico.salvar(descricaoMaterial);
       return descricaoMaterial;
    }

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import cotacaoEscolar.model.ListaMaterial;
+import cotacaoEscolar.model.Produto;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Establecimento é uma entidade que comercializa materiais escolares como por exemplo uma papelaria.")
@@ -35,7 +36,7 @@ public class Estabelecimento {
    }
 
    public ResultadoCotacaoEstabelecimento cotar(final ListaMaterial lista) {
-      final ResultadoCotacaoEstabelecimento resultado = new ResultadoCotacaoEstabelecimento(this.nome);
+      final ResultadoCotacaoEstabelecimentoImpl resultado = new ResultadoCotacaoEstabelecimentoImpl(this.nome);
 
       lista.getItens().forEach(item -> {
          final Optional<Produto> produtoOpt = this.produtos.quero(item);
@@ -50,7 +51,7 @@ public class Estabelecimento {
       return resultado;
    }
 
-   public void adicioneMaisUmProdutoAe(final Produto produto) {
+   public void adicioneMaisUmProdutoAe(final ProdutoImpl produto) {
       this.produtos.add(produto);
    }
 

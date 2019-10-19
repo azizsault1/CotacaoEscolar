@@ -3,7 +3,8 @@ package cotacaoEscolar.service.impl;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 import cotacaoEscolar.repository.DescricaoMaterialEscolarRepository;
 
 public class ServicoDescricaoMaterialEscolarImpl implements cotacaoEscolar.service.ServicoDescricaoMaterialEscolar {
@@ -17,11 +18,11 @@ public class ServicoDescricaoMaterialEscolarImpl implements cotacaoEscolar.servi
 
    @Override
    public DescricaoMaterialEscolar selecionarPor(final String materialEscolar) {
-      return this.repository.selecionarPor(DescricaoMaterialEscolar.create(materialEscolar));
+      return this.repository.selecionarPor(DescricaoMaterialEscolarImpl.create(materialEscolar));
    }
 
    @Override
-   public void salvar(final DescricaoMaterialEscolar descricaoMaterial) throws FoiNao {
+   public void salvar(final DescricaoMaterialEscolarImpl descricaoMaterial) throws FoiNao {
       this.repository.salvaSaPorra(descricaoMaterial);
    }
 

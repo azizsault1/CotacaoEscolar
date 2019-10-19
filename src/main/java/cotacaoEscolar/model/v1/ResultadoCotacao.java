@@ -7,13 +7,13 @@ import io.swagger.annotations.ApiModel;
 @ApiModel(description = "Representa o resultado de várias cotações em diversos estabelecimentos diferentes.")
 public class ResultadoCotacao {
 
-   private final List<ResultadoCotacaoEstabelecimento> resultado;
+   private final List<ResultadoCotacaoEstabelecimentoImpl> resultado;
 
-   public ResultadoCotacao(final List<ResultadoCotacaoEstabelecimento> resultado) {
+   public ResultadoCotacao(final List<ResultadoCotacaoEstabelecimentoImpl> resultado) {
       this.resultado = resultado;
    }
 
-   public List<ResultadoCotacaoEstabelecimento> getResultado() {
+   public List<ResultadoCotacaoEstabelecimentoImpl> getResultado() {
       return this.resultado;
    }
 

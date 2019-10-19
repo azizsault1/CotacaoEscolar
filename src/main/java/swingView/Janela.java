@@ -16,9 +16,9 @@ import cotacaoEscolar.model.DescricoesMaterialEscolar;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.Escolas;
 import cotacaoEscolar.model.Estabelecimentos;
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ListaMateriaisEscolares;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.ResultadoCotacao;
 import cotacaoEscolar.model.v1.Serie;
 import swingView.LabelFieldEscola.EventoEscolaSelecionada;
@@ -130,7 +130,7 @@ public class Janela extends JFrame implements EventoItemSelecionado, EventoEscol
    }
 
    @Override
-   public void adicioneMaisUmItem(final ItemImpl item) {
+   public void adicioneMaisUmItem(final Item item) {
       this.tabelaMaterial.adicioneMaisUmItem(item);
    }
 

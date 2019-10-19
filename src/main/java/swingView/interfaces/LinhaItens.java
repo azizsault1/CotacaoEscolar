@@ -7,7 +7,8 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 import cotacaoEscolar.model.v1.ItemImpl;
 import swingView.Dimensoes;
 
@@ -18,14 +19,14 @@ public class LinhaItens extends JPanel {
    private static final int LARGURA_DO_COMBO = 300;
 
    public interface EventoItemSelecionado {
-      public void adicioneMaisUmItem(ItemImpl de);
+      public void adicioneMaisUmItem(Item de);
 
    }
 
-   private final JComboBox<DescricaoMaterialEscolar> combo;
-   private final Collection<DescricaoMaterialEscolar> descricoes;
+   private final JComboBox<DescricaoMaterialEscolarImpl> combo;
+   private final Collection<DescricaoMaterialEscolarImpl> descricoes;
 
-   public LinhaItens(final int linha, final Collection<DescricaoMaterialEscolar> descricoes, final EventoItemSelecionado itemSelecionado) {
+   public LinhaItens(final int linha, final Collection<DescricaoMaterialEscolarImpl> descricoes, final EventoItemSelecionado itemSelecionado) {
       this.descricoes = descricoes;
       this.combo = new JComboBox<>();
       this.setLayout(null);
@@ -48,7 +49,7 @@ public class LinhaItens extends JPanel {
       final int larguraAdicionar = (Dimensoes.LarguraLinha.getValor() - marginMaisLabelMaisEspacoMaisComboMaisEspaco);
       adicionarItem.setBounds(marginMaisLabelMaisEspacoMaisComboMaisEspaco, 0, larguraAdicionar, Dimensoes.AlturaComponentPadrao.getValor());
       adicionarItem.addActionListener(evento -> {
-         final DescricaoMaterialEscolar material = (DescricaoMaterialEscolar) this.combo.getSelectedItem();
+         final DescricaoMaterialEscolarImpl material = (DescricaoMaterialEscolarImpl) this.combo.getSelectedItem();
          if (material != null) {
             final ItemImpl de = new ItemImpl(material, 1);
             itemSelecionado.adicioneMaisUmItem(de);
@@ -61,7 +62,7 @@ public class LinhaItens extends JPanel {
 
    }
 
-   private void atualizarDescricoes(final Collection<DescricaoMaterialEscolar> novasDescricoes) {
+   private void atualizarDescricoes(final Collection<DescricaoMaterialEscolarImpl> novasDescricoes) {
       this.combo.removeAllItems();
       novasDescricoes.forEach(this.combo::addItem);
       if (!novasDescricoes.isEmpty()) {

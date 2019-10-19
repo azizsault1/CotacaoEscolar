@@ -6,27 +6,32 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.Item;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Representa um Item na lista de material escolar, que contém uma Descrição e uma quantidade.")
-public class ItemImpl implements Comparable<ItemImpl> {
+public class ItemImpl implements Comparable<Item>, Item {
    private final DescricaoMaterialEscolar materialEscolar;
    private final int quantidade;
 
    @JsonCreator
-   public ItemImpl(@JsonProperty("materialEscolar") final DescricaoMaterialEscolar descricaoMaterialEscolar, @JsonProperty("quantidade") final int quantidade) {
+   public ItemImpl(@JsonProperty("materialEscolar") final DescricaoMaterialEscolarImpl descricaoMaterialEscolar,
+         @JsonProperty("quantidade") final int quantidade) {
       this.materialEscolar = descricaoMaterialEscolar;
       this.quantidade = quantidade;
    }
 
    public ItemImpl(final String descricao, final int quantidade) {
-      this(DescricaoMaterialEscolar.create(descricao), quantidade);
+      this(DescricaoMaterialEscolarImpl.create(descricao), quantidade);
    }
 
+   @Override
    public DescricaoMaterialEscolar getMaterialEscolar() {
       return this.materialEscolar;
    }
 
+   @Override
    public int getQuantidade() {
       return this.quantidade;
    }
@@ -67,8 +72,8 @@ public class ItemImpl implements Comparable<ItemImpl> {
    }
 
    @Override
-   public int compareTo(final ItemImpl o) {
-      return this.materialEscolar.compareTo(o.materialEscolar);
+   public int compareTo(final Item o) {
+      return this.materialEscolar.compareTo(o.getMaterialEscolar());
    }
 
    public static ItemImpl create(final String descricao, final int quantidade) {
@@ -84,6 +89,7 @@ public class ItemImpl implements Comparable<ItemImpl> {
    }
 
    //@formatter:off
+   @Override
    public String toReport() {
       final StringBuffer report = new StringBuffer("Item: " + this.getMaterialEscolar())
       .append(System.getProperty("line.separator"))

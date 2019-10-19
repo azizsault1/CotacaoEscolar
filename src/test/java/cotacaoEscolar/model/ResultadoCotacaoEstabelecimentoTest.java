@@ -7,15 +7,15 @@ import org.junit.Test;
 import org.mockito.Mockito;
 
 import cotacaoEscolar.model.v1.ItemImpl;
-import cotacaoEscolar.model.v1.Produto;
-import cotacaoEscolar.model.v1.ResultadoCotacaoEstabelecimento;
+import cotacaoEscolar.model.v1.ProdutoImpl;
+import cotacaoEscolar.model.v1.ResultadoCotacaoEstabelecimentoImpl;
 
 public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado0e200QuandoComparados200TemQueSerMenorQue0() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
-      final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao = new ResultadoCotacaoEstabelecimentoImpl("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimentoImpl.class);
 
       Mockito.when(resultadoCotacao2.getTotal()).thenReturn(BigDecimal.valueOf(200));
 
@@ -25,10 +25,10 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado200e0QuandoComparados200TemQueSerMenorQue0() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
-      final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final ItemImpl item = Mockito.mock(ItemImpl.class);
-      final Produto produto = Mockito.mock(Produto.class);
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao = new ResultadoCotacaoEstabelecimentoImpl("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimentoImpl.class);
+      final Item item = Mockito.mock(ItemImpl.class);
+      final Produto produto = Mockito.mock(ProdutoImpl.class);
 
       Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
       Mockito.when(item.getQuantidade()).thenReturn(2);
@@ -42,8 +42,8 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado0e0QuandoComparadosTemQueRetornarIguais() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
-      final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao = new ResultadoCotacaoEstabelecimentoImpl("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimentoImpl.class);
 
       Mockito.when(resultadoCotacao2.getTotal()).thenReturn(BigDecimal.valueOf(0));
 
@@ -53,10 +53,10 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado200e300QuandoComparadosTemQueRetornar200MenorQue300() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
-      final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final ItemImpl item = Mockito.mock(ItemImpl.class);
-      final Produto produto = Mockito.mock(Produto.class);
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao = new ResultadoCotacaoEstabelecimentoImpl("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimentoImpl.class);
+      final Item item = Mockito.mock(ItemImpl.class);
+      final Produto produto = Mockito.mock(ProdutoImpl.class);
 
       Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
       Mockito.when(item.getQuantidade()).thenReturn(2);
@@ -70,10 +70,10 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado200e100QuandoComparadosTemQueRetornar200MenorQue300() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
-      final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
-      final ItemImpl item = Mockito.mock(ItemImpl.class);
-      final Produto produto = Mockito.mock(Produto.class);
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao = new ResultadoCotacaoEstabelecimentoImpl("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimentoImpl resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimentoImpl.class);
+      final Item item = Mockito.mock(ItemImpl.class);
+      final Produto produto = Mockito.mock(ProdutoImpl.class);
 
       Mockito.when(produto.getValor()).thenReturn(BigDecimal.valueOf(100));
       Mockito.when(item.getQuantidade()).thenReturn(2);

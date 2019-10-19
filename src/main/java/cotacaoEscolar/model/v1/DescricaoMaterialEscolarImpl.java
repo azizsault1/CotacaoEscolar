@@ -8,17 +8,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import cotacaoEscolar.app.exceptions.IllegalError;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import io.swagger.annotations.ApiModel;
 
 @JsonSerialize
 @ApiModel(description = "A descrição de um material escolar é a descrição ou de um um Produto ou de um Item. Exemplo: \"Lapis de cor.\"")
-public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEscolar> {
+public class DescricaoMaterialEscolarImpl implements Comparable<DescricaoMaterialEscolar>, DescricaoMaterialEscolar {
    private final String descricao;
 
-   private DescricaoMaterialEscolar(final String descricao) {
+   private DescricaoMaterialEscolarImpl(final String descricao) {
       this.descricao = descricao;
    }
 
+   @Override
    public String getDescricao() {
       return this.descricao;
    }
@@ -30,7 +32,7 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
 
    @Override
    public int compareTo(final DescricaoMaterialEscolar o) {
-      return this.descricao.compareTo(o.descricao);
+      return this.descricao.compareTo(o.getDescricao());
    }
 
    @Override
@@ -53,7 +55,7 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
       if (this.getClass() != obj.getClass()) {
          return false;
       }
-      final DescricaoMaterialEscolar other = (DescricaoMaterialEscolar) obj;
+      final DescricaoMaterialEscolarImpl other = (DescricaoMaterialEscolarImpl) obj;
       if (this.descricao == null) {
          if (other.descricao != null) {
             return false;
@@ -65,17 +67,17 @@ public class DescricaoMaterialEscolar implements Comparable<DescricaoMaterialEsc
    }
 
    @JsonCreator
-   public static DescricaoMaterialEscolar create(@JsonProperty("descricao") final String descricao) {
+   public static DescricaoMaterialEscolarImpl create(@JsonProperty("descricao") final String descricao) {
       if ((descricao == null) || descricao.isEmpty()) {
          throw new IllegalError("A descrição do material escolar não pode ser em branco.");
       }
-      return new DescricaoMaterialEscolar(descricao);
+      return new DescricaoMaterialEscolarImpl(descricao);
    }
 
-   public static List<DescricaoMaterialEscolar> create(final int quantidade) {
-      final List<DescricaoMaterialEscolar> result = new ArrayList<>();
+   public static List<DescricaoMaterialEscolarImpl> create(final int quantidade) {
+      final List<DescricaoMaterialEscolarImpl> result = new ArrayList<>();
       for (int i = 0; i < quantidade; i++) {
-         result.add(DescricaoMaterialEscolar.create("Material" + i));
+         result.add(DescricaoMaterialEscolarImpl.create("Material" + i));
       }
       return result;
    }

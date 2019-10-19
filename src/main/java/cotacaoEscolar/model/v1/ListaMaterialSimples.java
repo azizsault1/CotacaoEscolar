@@ -4,15 +4,16 @@ import java.util.Collections;
 import java.util.List;
 
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ListaMaterial;
 
 public class ListaMaterialSimples implements ListaMaterial {
 
    private final Escola escola;
    private final Serie serie;
-   private final List<ItemImpl> itens;
+   private final List<Item> itens;
 
-   private ListaMaterialSimples(final Escola escola, final Serie serie, final List<ItemImpl> itens) {
+   private ListaMaterialSimples(final Escola escola, final Serie serie, final List<Item> itens) {
       this.escola = escola;
       this.serie = serie;
       this.itens = itens;
@@ -34,7 +35,7 @@ public class ListaMaterialSimples implements ListaMaterial {
    }
 
    @Override
-   public List<ItemImpl> getItens() {
+   public List<Item> getItens() {
       return this.itens;
    }
 
@@ -48,7 +49,7 @@ public class ListaMaterialSimples implements ListaMaterial {
       this.itens.add(item);
    }
 
-   public static ListaMaterial create(final Escola escola, final Serie serie, final List<ItemImpl> itens) {
+   public static ListaMaterial create(final Escola escola, final Serie serie, final List<Item> itens) {
       return new ListaMaterialSimples(escola, serie, itens);
    }
 

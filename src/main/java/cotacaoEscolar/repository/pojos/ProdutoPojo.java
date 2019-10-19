@@ -2,12 +2,13 @@ package cotacaoEscolar.repository.pojos;
 
 import java.math.BigDecimal;
 
-import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.Produto;
+import cotacaoEscolar.model.v1.ProdutoImpl;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 
 @Document(collection = "produtos", schemaVersion = "1.0")
-public class ProdutoPojo implements ParserToModel<Produto> {
+public class ProdutoPojo implements ParserToModel<ProdutoImpl> {
 
 	@Id
 	private DescricaoMaterialEscolarPojo materialEscolar;
@@ -73,8 +74,8 @@ public class ProdutoPojo implements ParserToModel<Produto> {
 	}
 
 	@Override
-	public Produto toModel() {
-		return Produto.create(this.materialEscolar.getDescricao(), BigDecimal.valueOf(this.valor),
+	public ProdutoImpl toModel() {
+		return ProdutoImpl.create(this.materialEscolar.getDescricao(), BigDecimal.valueOf(this.valor),
 				this.quantidadeEstoque);
 	}
 

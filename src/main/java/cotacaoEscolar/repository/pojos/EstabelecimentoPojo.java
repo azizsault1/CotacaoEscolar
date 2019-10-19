@@ -5,7 +5,7 @@ import java.util.List;
 
 import cotacaoEscolar.model.v1.Estabelecimento;
 import cotacaoEscolar.model.v1.ListaProduto;
-import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.ProdutoImpl;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 
@@ -69,7 +69,7 @@ public class EstabelecimentoPojo implements ParserToModel<Estabelecimento> {
 	@Override
 	public Estabelecimento toModel() {
 
-		final List<Produto> models = new ArrayList<>();
+		final List<ProdutoImpl> models = new ArrayList<>();
 		this.produtos.forEach(pojo -> models.add(pojo.toModel()));
 
 		final ListaProduto listaProdutos = new ListaProduto(models);

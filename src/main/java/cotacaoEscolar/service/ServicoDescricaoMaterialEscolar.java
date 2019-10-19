@@ -1,12 +1,13 @@
 package cotacaoEscolar.service;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 
 public interface ServicoDescricaoMaterialEscolar {
 
    DescricaoMaterialEscolar selecionarPor(String materialEscolar);
 
-   void salvar(DescricaoMaterialEscolar descricaoMaterial) throws FoiNao;
+   void salvar(DescricaoMaterialEscolarImpl descricaoMaterial) throws FoiNao;
 
 }

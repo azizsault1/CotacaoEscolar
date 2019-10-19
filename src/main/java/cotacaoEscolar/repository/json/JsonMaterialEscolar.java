@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 import cotacaoEscolar.repository.DescricaoMaterialEscolarRepository;
 import cotacaoEscolar.repository.pojos.DescricaoMaterialEscolarPojo;
 
@@ -17,18 +18,18 @@ public class JsonMaterialEscolar implements DescricaoMaterialEscolarRepository {
    }
 
    @Override
-   public List<DescricaoMaterialEscolar> meDaTudo() {
+   public List<DescricaoMaterialEscolarImpl> meDaTudo() {
       final List<DescricaoMaterialEscolarPojo> pojos = this.repository.pegaAPorraToda(DescricaoMaterialEscolarPojo.class);
       return this.toModels(new ArrayList<>(pojos));
    }
 
    @Override
-   public DescricaoMaterialEscolar selecionarPor(final DescricaoMaterialEscolar descricao) {
+   public DescricaoMaterialEscolar selecionarPor(final DescricaoMaterialEscolarImpl descricao) {
       return this.toModel(this.repository.pegaEssaCaralha(descricao.getDescricao(), DescricaoMaterialEscolarPojo.class));
    }
 
    @Override
-   public DescricaoMaterialEscolar salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) throws FoiNao {
+   public DescricaoMaterialEscolar salvaSaPorra(final DescricaoMaterialEscolarImpl descricaoMaterialEscolar) throws FoiNao {
       try {
          this.repository.salvar(new DescricaoMaterialEscolarPojo(descricaoMaterialEscolar.getDescricao()));
          return descricaoMaterialEscolar;

@@ -5,17 +5,20 @@ import java.text.NumberFormat;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.Produto;
 import io.swagger.annotations.ApiModel;
 
 @ApiModel(description = "Uma cotação sigifica uma cotação de um item em um estabelecimento.")
 @JsonSerialize
 public class Cotacao {
 
-   private final ItemImpl item;
+   private final Item item;
    private final Produto produto;
    private final String observacao;
 
-   public Cotacao(final ItemImpl item, final Produto produto) {
+   public Cotacao(final Item item, final Produto produto) {
       this.item = item;
       this.produto = produto;
       this.observacao = item.getQuantidade() > produto.getQuantidade() ? this.criarObservacao() : "";

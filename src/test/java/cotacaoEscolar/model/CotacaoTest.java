@@ -6,14 +6,14 @@ import org.mockito.Mockito;
 
 import cotacaoEscolar.model.v1.Cotacao;
 import cotacaoEscolar.model.v1.ItemImpl;
-import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.ProdutoImpl;
 
 public class CotacaoTest {
 
    @Test
    public void DadoMaisItensDoQueAQuantidadeEmEstoqueDeveAdicionarObservacao() {
-      final ItemImpl item = Mockito.mock(ItemImpl.class);
-      final Produto produto = Mockito.mock(Produto.class);
+      final Item item = Mockito.mock(ItemImpl.class);
+      final Produto produto = Mockito.mock(ProdutoImpl.class);
 
       Mockito.when(item.getQuantidade()).thenReturn(15);
       Mockito.when(produto.getQuantidade()).thenReturn(10);
@@ -26,8 +26,8 @@ public class CotacaoTest {
 
    @Test
    public void DadoMenosItensDoQueAQuantidadeEmEstoqueNaoSeDeveAdicionarObservacao() {
-      final ItemImpl item = Mockito.mock(ItemImpl.class);
-      final Produto produto = Mockito.mock(Produto.class);
+      final Item item = Mockito.mock(ItemImpl.class);
+      final Produto produto = Mockito.mock(ProdutoImpl.class);
 
       Mockito.when(item.getQuantidade()).thenReturn(5);
       Mockito.when(produto.getQuantidade()).thenReturn(10);

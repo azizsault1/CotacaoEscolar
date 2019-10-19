@@ -10,6 +10,7 @@ import java.util.Optional;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.v1.ItemImpl;
 import swingView.CustomOptionalPalne.AcaoBotoes;
 
@@ -37,14 +38,14 @@ public class TabelaMaterialEscolar {
       final AcaoBotoes acao = new AcaoBotoes() {
 
          @Override
-         public void salvar(final ItemImpl de, final ItemImpl para) {
+         public void salvar(final Item de, final ItemImpl para) {
             TabelaMaterialEscolar.this.queroItem(de).ifPresent(itemARemover -> TabelaMaterialEscolar.this.removeItem(itemARemover));
             TabelaMaterialEscolar.this.itens.add(para);
             TabelaMaterialEscolar.this.atualizar();
          }
 
          @Override
-         public void remover(final ItemImpl item) {
+         public void remover(final Item item) {
             TabelaMaterialEscolar.this.queroItem(item).ifPresent(itemARemover -> TabelaMaterialEscolar.this.removeItem(itemARemover));
             TabelaMaterialEscolar.this.atualizar();
          }
@@ -55,7 +56,7 @@ public class TabelaMaterialEscolar {
          public void mouseClicked(final MouseEvent e) {
             final int row = TabelaMaterialEscolar.this.tabela.rowAtPoint(e.getPoint());
             final int col = 0;
-            final ItemImpl item = (ItemImpl) TabelaMaterialEscolar.this.tabela.getValueAt(row, col);
+            final Item item = (Item) TabelaMaterialEscolar.this.tabela.getValueAt(row, col);
             CustomOptionalPalne.displayGUI(item, acao);
          }
       });
@@ -63,7 +64,7 @@ public class TabelaMaterialEscolar {
 
    private void atualizar() {
       this.modelo.setNumRows(0);
-      for (final ItemImpl item : this.itens) {
+      for (final Item item : this.itens) {
          this.modelo.addRow(new Object[] { item, item.getQuantidade() });
       }
    }
@@ -76,11 +77,11 @@ public class TabelaMaterialEscolar {
       return this.itens;
    }
 
-   public Optional<ItemImpl> queroItem(final ItemImpl item) {
+   public Optional<ItemImpl> queroItem(final Item item) {
       return this.itens.stream().filter(itemDaLista -> itemDaLista.equals(item)).findAny();
    }
 
-   private void removeItem(final ItemImpl item) {
+   private void removeItem(final Item item) {
       this.itens.remove(item);
       this.atualizar();
    }
@@ -90,12 +91,12 @@ public class TabelaMaterialEscolar {
       this.atualizar();
    }
 
-   public void adicioneMaisUmItem(final ItemImpl item) {
+   public void adicioneMaisUmItem(final Item item) {
       final Optional<ItemImpl> opt = this.queroItem(item);
 
       final ItemImpl para;
       if (opt.isPresent()) {
-         final ItemImpl itemEncontrado = opt.get();
+         final Item itemEncontrado = opt.get();
          Integer novaQuantidade = itemEncontrado.getQuantidade() + 1;
          if (novaQuantidade > 100) {
             novaQuantidade = 100;

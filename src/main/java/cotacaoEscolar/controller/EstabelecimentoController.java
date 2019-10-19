@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.v1.Estabelecimento;
-import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.ProdutoImpl;
 import cotacaoEscolar.service.ServicoEstabelecimento;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -43,7 +43,7 @@ public class EstabelecimentoController {
    @CrossOrigin(origins = "*")
    @ApiOperation(value = "Adiciona uma lista de produtos em um estabelecimento.")
    @PostMapping(value = "estabelcimento/{nome}/produtos", produces = "application/json", consumes = "application/json")
-   public Estabelecimento adicionarProduto(@PathVariable final String nome, @RequestBody final List<Produto> produtos) throws FoiNao {
+   public Estabelecimento adicionarProduto(@PathVariable final String nome, @RequestBody final List<ProdutoImpl> produtos) throws FoiNao {
       final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.create(nome);
       final Optional<Estabelecimento> estabelecimentoEncontradoOpt = this.servico.selecionePor(vouProcurarEstabelecimento);
 
@@ -61,7 +61,7 @@ public class EstabelecimentoController {
    @CrossOrigin(origins = "*")
    @ApiOperation(value = "Adiciona um produto no estabelecimento.")
    @PostMapping(value = "estabelcimento/{nome}/produto", produces = "application/json", consumes = "application/json")
-   public Estabelecimento adicionarProduto(@PathVariable final String nome, @RequestBody final Produto produto) throws FoiNao {
+   public Estabelecimento adicionarProduto(@PathVariable final String nome, @RequestBody final ProdutoImpl produto) throws FoiNao {
       final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.create(nome);
       final Optional<Estabelecimento> estabelecimentoEncontradoOpt = this.servico.selecionePor(vouProcurarEstabelecimento);
 

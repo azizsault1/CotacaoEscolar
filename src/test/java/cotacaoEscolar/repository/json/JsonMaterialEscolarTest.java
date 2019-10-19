@@ -12,7 +12,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 
 public class JsonMaterialEscolarTest {
 
@@ -31,17 +32,17 @@ public class JsonMaterialEscolarTest {
 
    @Test
    public void salvaUmAe() throws FoiNao {
-      final DescricaoMaterialEscolar descricaoMaterialEscolar = DescricaoMaterialEscolar.create("Descricao1");
+      final DescricaoMaterialEscolarImpl descricaoMaterialEscolar = DescricaoMaterialEscolarImpl.create("Descricao1");
 
       this.tamburete.salvaSaPorra(descricaoMaterialEscolar);
-      final List<DescricaoMaterialEscolar> veioIsso = this.tamburete.meDaTudo();
+      final List<DescricaoMaterialEscolarImpl> veioIsso = this.tamburete.meDaTudo();
 
       assertEquals(1, veioIsso.size());
    }
 
    @Test
    public void agoraPegaUmAe() throws FoiNao {
-      final DescricaoMaterialEscolar descricaoMaterialEscolar = DescricaoMaterialEscolar.create("Descricao1");
+      final DescricaoMaterialEscolarImpl descricaoMaterialEscolar = DescricaoMaterialEscolarImpl.create("Descricao1");
 
       this.tamburete.salvaSaPorra(descricaoMaterialEscolar);
       final DescricaoMaterialEscolar veioIsso = this.tamburete.selecionarPor(descricaoMaterialEscolar);

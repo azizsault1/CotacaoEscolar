@@ -2,12 +2,13 @@ package cotacaoEscolar.repository;
 
 import java.util.Collection;
 
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 
-public interface DescricaoMaterialEscolarRepository extends Repository<DescricaoMaterialEscolar> {
+public interface DescricaoMaterialEscolarRepository extends Repository<DescricaoMaterialEscolarImpl> {
 
-   Collection<DescricaoMaterialEscolar> meDaTudo();
+   Collection<DescricaoMaterialEscolarImpl> meDaTudo();
 
-   DescricaoMaterialEscolar selecionarPor(DescricaoMaterialEscolar create);
+   DescricaoMaterialEscolar selecionarPor(DescricaoMaterialEscolarImpl create);
 
 }

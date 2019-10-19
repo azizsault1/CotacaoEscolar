@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.Serie;
@@ -18,7 +19,7 @@ public interface ServicoListaMaterial {
 
    ListaMaterialAutoSave selecionePor(Escola escolaEscolhida, Serie serieEscolhida) throws FoiNao;
 
-   void remover(Escola escola, Serie serie, ItemImpl de) throws FoiNao;
+   void remover(Escola escola, Serie serie, Item de) throws FoiNao;
 
    void adicionar(Escola escola, Serie serie, ItemImpl para) throws FoiNao;
 

@@ -1,11 +1,12 @@
 package cotacaoEscolar.repository.pojos;
 
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 import io.jsondb.annotation.Document;
 import io.jsondb.annotation.Id;
 
 @Document(collection = "descricoes", schemaVersion = "1.0")
-public class DescricaoMaterialEscolarPojo implements ParserToModel<DescricaoMaterialEscolar> {
+public class DescricaoMaterialEscolarPojo implements ParserToModel<DescricaoMaterialEscolarImpl> {
 
 	@Id
 	private String descricao;
@@ -52,7 +53,7 @@ public class DescricaoMaterialEscolarPojo implements ParserToModel<DescricaoMate
 
 	@Override
 	public DescricaoMaterialEscolar toModel() {
-		return DescricaoMaterialEscolar.create(this.descricao);
+		return DescricaoMaterialEscolarImpl.create(this.descricao);
 	}
 
 }

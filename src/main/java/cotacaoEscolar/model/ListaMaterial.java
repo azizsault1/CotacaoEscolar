@@ -13,7 +13,7 @@ public interface ListaMaterial {
 
    public boolean pertenceA(final Escola escola);
 
-   public List<ItemImpl> getItens();
+   public List<Item> getItens();
 
    public boolean pertenceASerie(final Serie serie);
 

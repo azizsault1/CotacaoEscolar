@@ -31,7 +31,7 @@ public class ListaEstabelecimento {
    }
 
    public ResultadoCotacao cotar(final ListaMaterial lista) {
-      final List<ResultadoCotacaoEstabelecimento> resultados = new ArrayList<>();
+      final List<ResultadoCotacaoEstabelecimentoImpl> resultados = new ArrayList<>();
 
       this.estabelecimentos.forEach(estabelecimento -> resultados.add(estabelecimento.cotar(lista)));
 

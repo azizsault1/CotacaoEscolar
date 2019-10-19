@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import cotacaoEscolar.model.Item;
+import cotacaoEscolar.model.Produto;
+
 public class ListaProduto {
    private final List<Produto> produtos;
 
@@ -17,9 +20,9 @@ public class ListaProduto {
       this.produtos = new ArrayList<>();
    }
 
-   public ListaProduto(final Produto... produtos) {
+   public ListaProduto(final ProdutoImpl... produtos) {
       this.produtos = new ArrayList<>();
-      for (final Produto produto : produtos) {
+      for (final ProdutoImpl produto : produtos) {
          this.produtos.add(produto);
       }
    }
@@ -28,11 +31,11 @@ public class ListaProduto {
       this.produtos = produtos;
    }
 
-   public void add(final Produto produto) {
+   public void add(final ProdutoImpl produto) {
       this.produtos.add(produto);
    }
 
-   public Optional<Produto> quero(final ItemImpl item) {
+   public Optional<Produto> quero(final Item item) {
       return this.produtos.stream().filter(produto -> produto.equivale(item)).findAny();
    }
 

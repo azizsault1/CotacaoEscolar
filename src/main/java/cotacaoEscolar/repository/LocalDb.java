@@ -14,24 +14,25 @@ import java.util.stream.Collectors;
 
 import cotacaoEscolar.app.EscolhaUmBancoNessaPorra;
 import cotacaoEscolar.app.exceptions.IllegalError;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
+import cotacaoEscolar.model.v1.DescricaoMaterialEscolarImpl;
 import cotacaoEscolar.model.v1.Estabelecimento;
 import cotacaoEscolar.model.v1.ItemImpl;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.model.v1.ListaProduto;
-import cotacaoEscolar.model.v1.Produto;
+import cotacaoEscolar.model.v1.ProdutoImpl;
 import cotacaoEscolar.model.v1.Serie;
 
 public class LocalDb implements EscolhaUmBancoNessaPorra {
    private Set<Escola> escolas;
-   private Set<DescricaoMaterialEscolar> itens;
+   private Set<DescricaoMaterialEscolarImpl> itens;
    private Map<String, List<ItemImpl>> listasEstaticas;
    private final List<ListaMaterial> listaMaterialEscolar = new ArrayList<>();
    private ListaEstabelecimento estabelecimentos;
 
-   private Set<Produto> produtos;
+   private Set<ProdutoImpl> produtos;
 
    public LocalDb() {
       this.initEscolas();
@@ -51,19 +52,19 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
    private void initItens() {
 
-      final DescricaoMaterialEscolar lapisDesc = DescricaoMaterialEscolar.create("Lapis 123");
+      final DescricaoMaterialEscolarImpl lapisDesc = DescricaoMaterialEscolarImpl.create("Lapis 123");
       final ItemImpl lapis = new ItemImpl(lapisDesc, 5);
 
-      final DescricaoMaterialEscolar lapisDeCorDesc = DescricaoMaterialEscolar.create("Lapis de cor");
+      final DescricaoMaterialEscolarImpl lapisDeCorDesc = DescricaoMaterialEscolarImpl.create("Lapis de cor");
       final ItemImpl lapisDeCor = new ItemImpl(lapisDeCorDesc, 30);
 
-      final DescricaoMaterialEscolar classificadorDesc = DescricaoMaterialEscolar.create("Classificador");
+      final DescricaoMaterialEscolarImpl classificadorDesc = DescricaoMaterialEscolarImpl.create("Classificador");
       final ItemImpl classificador = new ItemImpl(classificadorDesc, 2);
 
-      final DescricaoMaterialEscolar cadernoDesc = DescricaoMaterialEscolar.create("Caderno");
+      final DescricaoMaterialEscolarImpl cadernoDesc = DescricaoMaterialEscolarImpl.create("Caderno");
       final ItemImpl caderno = new ItemImpl(cadernoDesc, 1);
 
-      final List<DescricaoMaterialEscolar> itensFabricados = DescricaoMaterialEscolar.create(20);
+      final List<DescricaoMaterialEscolarImpl> itensFabricados = DescricaoMaterialEscolarImpl.create(20);
 
       this.itens = new HashSet<>(Arrays.asList(lapisDesc, lapisDeCorDesc, classificadorDesc, cadernoDesc));
       itensFabricados.forEach(itemEntrontrado -> this.itens.add(itemEntrontrado));
@@ -96,11 +97,11 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
    }
 
    private void initProdutos() {
-      final List<DescricaoMaterialEscolar> listaItens = this.itens.stream().collect(Collectors.toList());
+      final List<DescricaoMaterialEscolarImpl> listaItens = this.itens.stream().collect(Collectors.toList());
       this.produtos = new HashSet<>();
 
       for (int i = 0; i < listaItens.size(); i++) {
-         final Produto produto = Produto.create(listaItens.get(i), BigDecimal.valueOf(i + 1), Integer.valueOf(i + 1));
+         final ProdutoImpl produto = ProdutoImpl.create(listaItens.get(i), BigDecimal.valueOf(i + 1), Integer.valueOf(i + 1));
          this.produtos.add(produto);
       }
 
@@ -109,7 +110,7 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
    private void initEstabelecimentos() {
 
-      final List<Produto> todos = this.produtos.stream().collect(Collectors.toList());
+      final List<ProdutoImpl> todos = this.produtos.stream().collect(Collectors.toList());
 
       // Estabelecimento1
       final ListaProduto produtosEstabelecimento1 = new ListaProduto(todos.get(0), todos.get(1));
@@ -150,18 +151,18 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
       return new DescricaoMaterialEscolarRepository() {
 
          @Override
-         public DescricaoMaterialEscolar salvaSaPorra(final DescricaoMaterialEscolar descricaoMaterialEscolar) {
+         public DescricaoMaterialEscolar salvaSaPorra(final DescricaoMaterialEscolarImpl descricaoMaterialEscolar) {
             LocalDb.this.itens.add(descricaoMaterialEscolar);
             return descricaoMaterialEscolar;
          }
 
          @Override
-         public Collection<DescricaoMaterialEscolar> meDaTudo() {
+         public Collection<DescricaoMaterialEscolarImpl> meDaTudo() {
             return LocalDb.this.itens;
          }
 
          @Override
-         public DescricaoMaterialEscolar selecionarPor(final DescricaoMaterialEscolar materialEscolar) {
+         public DescricaoMaterialEscolar selecionarPor(final DescricaoMaterialEscolarImpl materialEscolar) {
             if (!LocalDb.this.itens.contains(materialEscolar)) {
                LocalDb.this.itens.add(materialEscolar);
             }

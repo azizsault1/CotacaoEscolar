@@ -9,6 +9,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.app.exceptions.IllegalError;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ListaMaterial;
 import cotacaoEscolar.model.v1.helpers.ListaMaterialAutoSave;
 import cotacaoEscolar.repository.ListaMaterialRepository;
@@ -17,11 +18,11 @@ public class ListaMaterialReal implements ListaMaterialAutoSave, Serializable {
    private static final long serialVersionUID = 1L;
    private final Escola escola;
    private final Serie serie;
-   private final List<ItemImpl> itens;
+   private final List<Item> itens;
 
    private final transient ListaMaterialRepository repository;
 
-   private ListaMaterialReal(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<ItemImpl> itens) {
+   private ListaMaterialReal(final ListaMaterialRepository repository, final Escola escola, final Serie serie, final List<Item> itens) {
       this.escola = escola;
       this.serie = serie;
       this.itens = itens;
@@ -45,7 +46,7 @@ public class ListaMaterialReal implements ListaMaterialAutoSave, Serializable {
    }
 
    @Override
-   public List<ItemImpl> getItens() {
+   public List<Item> getItens() {
       return this.itens;
    }
 

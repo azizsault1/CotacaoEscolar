@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.app.exceptions.IllegalError;
+import cotacaoEscolar.model.DescricaoMaterialEscolar;
 import cotacaoEscolar.model.Escola;
+import cotacaoEscolar.model.Item;
 import cotacaoEscolar.model.ListaMaterial;
-import cotacaoEscolar.model.v1.DescricaoMaterialEscolar;
-import cotacaoEscolar.model.v1.Item;
 import cotacaoEscolar.model.v1.ListaEstabelecimento;
 import cotacaoEscolar.model.v1.Serie;
 import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;

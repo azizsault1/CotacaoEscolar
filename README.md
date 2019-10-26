@@ -45,6 +45,9 @@ E para o FrontEnd:
 
 ### Diagramas:
 
+#### Diagrama de Arquitetura:
+![Diagrama de Arquitetura](https://github.com/azizsault1/CotacaoEscolar/blob/master/doc/diagramas/Arquitetura.png)
+
 #### Diagrama de Classes do FrontEnd:
 ![Diagrama de Classe do FrontEnd](https://github.com/azizsault1/CotacaoEscolar/blob/master/doc/diagramas/diagrama_classe_cotacao_frontend.png)
  
@@ -56,3 +59,6 @@ E para o FrontEnd:
 
 #### Diagrama de Sequencia do BackEnd:
 ![Diagrama de Sequencia do Backend](https://github.com/azizsault1/CotacaoEscolar/blob/master/doc/diagramas/cotacao.png)
+
+
+

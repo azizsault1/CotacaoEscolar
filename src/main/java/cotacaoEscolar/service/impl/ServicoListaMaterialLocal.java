@@ -59,8 +59,9 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 
    @Override
    public void remover(final Escola escola, final String serie, final Item item) throws FoiNao {
-      final List<Item> itens = this.selecionePor(escola, serie).getItens();
-      itens.remove(item);
+      final ListaMaterial lista = this.selecionePor(escola, serie);
+      lista.removerItem(item);
+      this.repository.salvaSaPorra(lista);
    }
 
    @Override

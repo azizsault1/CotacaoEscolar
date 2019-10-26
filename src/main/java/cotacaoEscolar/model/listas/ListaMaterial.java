@@ -77,4 +77,8 @@ public class ListaMaterial implements Serializable {
       }
    }
 
+   public void removerItem(final Item item) {
+      this.itens.remove(item);
+   }
+
 }

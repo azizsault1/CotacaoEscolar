@@ -11,6 +11,7 @@ import io.swagger.annotations.ApiModel;
 public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCotacaoEstabelecimento> {
 
    private final String nome;
+   private final String logo;
    private final List<Cotacao> produtosEncontrados;
    private final List<Item> itensNaoEncontrados;
    private BigDecimal total;
@@ -19,6 +20,7 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
       this.produtosEncontrados = new ArrayList<>();
       this.itensNaoEncontrados = new ArrayList<>();
       this.nome = nome;
+      this.logo = nome + "_logo.png";
       this.total = BigDecimal.ZERO;
    }
 

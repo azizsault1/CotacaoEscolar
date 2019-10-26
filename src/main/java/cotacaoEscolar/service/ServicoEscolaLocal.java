@@ -1,6 +1,8 @@
 package cotacaoEscolar.service;
 
 import java.util.Collection;
+import java.util.Set;
+import java.util.TreeSet;
 
 import cotacaoEscolar.app.exceptions.FoiNao;
 import cotacaoEscolar.app.exceptions.IllegalError;
@@ -17,7 +19,8 @@ public class ServicoEscolaLocal implements ServicoEscola {
 
    @Override
    public final Collection<Escola> todas() {
-      return this.repository.escolas();
+      final Set<Escola> escolas = new TreeSet<>(this.repository.escolas());
+      return escolas;
    }
 
    @Override

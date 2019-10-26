@@ -55,6 +55,7 @@ public class ListaMaterial implements Serializable {
    }
 
    public List<Item> getItens() {
+      Collections.sort(this.itens);
       return this.itens;
    }
 

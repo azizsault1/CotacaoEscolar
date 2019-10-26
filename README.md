@@ -63,7 +63,7 @@ E para o FrontEnd:
 #### Casos de teste:
 
 | Id |   Cenário    |                                                                 Fluxo                                                                         |
-|----|:------------:|----------------------------------------------------------------------------------------------------------------------------------------------:|
+|----|:------------:|-----------------------------------------------------------------------------------------------------------------------------------------------|
 | 01 |   Sucesso    | O usuário insere a escola e a série, o sistema carrega a lista da escola, o usuário requisita o resultado, o sistema apresenta-o com sucesso. |
 | 02 |   Sucesso    | O usuário insere a escola e a série, o sistema não encontra a lista da escola.                                                                |
 | 03 |   Sucesso    | Após não encontrar o produto na lista de retorno da pesquisa, o usuário informa o produto e adiciona-os na lista da escola e serie pesquisada.|   

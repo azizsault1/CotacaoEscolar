@@ -68,8 +68,7 @@ E para o FrontEnd:
 | 02 |   Sucesso    | O usuário insere a escola e a série, o sistema não encontra a lista da escola.                                                                |
 | 03 |   Sucesso    | Após não encontrar o produto na lista de retorno da pesquisa, o usuário informa o produto e adiciona-os na lista da escola e serie pesquisada.|   
 | 04 |   Sucesso    | Seleciona os produtos e adiciona-o na lista de produtos e realiza a busca, o sistema.                                                         |
-| 05 |   Sucesso    | O usuário insere a escola e a série, o sistema carrega a lista da escola, o usuário adiciona produtos na lista de produtos, o usuário <br>    | 
-|    |              | seleciona a busca do resultado e o sistema apresenta-o com sucesso.                                                                           |
+| 05 |   Sucesso    | O usuário insere a escola e a série, o sistema carrega a lista da escola, o usuário adiciona produtos na lista de produtos, o usuário seleciona a busca do resultado e o sistema apresenta-o com sucesso. |
 | 06 |    Erro      | Buscar resultado sem produto cadastrado no sistema.                                                                                           |
 | 07 |    Erro      | Salvar uma escola vazia.                                                                                                                      |
 | 08 |    Erro      | Salvar uma série sem escola.                                                                                                                  |

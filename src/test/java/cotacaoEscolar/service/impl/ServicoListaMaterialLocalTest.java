@@ -181,7 +181,7 @@ public class ServicoListaMaterialLocalTest {
       Mockito.when(listaMaterial.pertenceASerie(serie)).thenReturn(true);
       Mockito.when(listaMaterial.getItens()).thenReturn(itens);
 
-      this.servico.remover(escola, serie, itemARemover);
+      this.servico.alterarQuantidade(escola, serie, itemARemover);
       assertTrue(itens.isEmpty());
       Mockito.verify(this.repository, Mockito.never()).salvaSaPorra(Mockito.any(ListaMaterial.class));
    }

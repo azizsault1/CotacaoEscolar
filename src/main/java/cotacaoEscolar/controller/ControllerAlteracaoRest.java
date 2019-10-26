@@ -4,10 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -110,12 +111,11 @@ public class ControllerAlteracaoRest {
 
    @CrossOrigin(origins = "*")
    @ApiOperation(value = "Remove um item em uma escola e serie.")
-   @DeleteMapping(value = "item/{escola}/{serie}/{descricaoItem}/{quantidade}", produces = "application/json", consumes = "application/json")
-   public Item removerItem(@PathVariable final String escola, @PathVariable final String serie, @PathVariable final String descricaoItem,
-         @PathVariable final int quantidade) throws FoiNao {
+   @PutMapping(value = "item/{escola}/{serie}/{descricaoItem}/{quantidade}", produces = "application/json", consumes = { MediaType.APPLICATION_JSON_VALUE,
+         MediaType.APPLICATION_JSON_UTF8_VALUE })
+   public Item removerItem(@PathVariable final String escola, @PathVariable final String serie, @RequestBody final Item item) throws FoiNao {
       final Serie serieModel = new Serie(escola, serie);
-      final Item item = new Item(descricaoItem, quantidade);
-      this.servicoListaMaterial.remover(serieModel.getEscolaModel(), serie, item);
+      this.servicoListaMaterial.alterarQuantidade(serieModel.getEscolaModel(), serie, item);
       return item;
    }
 

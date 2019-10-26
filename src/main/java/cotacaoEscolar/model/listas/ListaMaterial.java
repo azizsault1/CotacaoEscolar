@@ -81,4 +81,11 @@ public class ListaMaterial implements Serializable {
       this.itens.remove(item);
    }
 
+   public void alterarItem(final Item item) {
+      if ((item.getQuantidade() == 0) || this.itens.contains(item)) {
+         this.removerItem(item);
+         return;
+      }
+      this.itens.add(item);
+   }
 }

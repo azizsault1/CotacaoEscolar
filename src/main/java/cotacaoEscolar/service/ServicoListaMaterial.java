@@ -24,4 +24,6 @@ public interface ServicoListaMaterial {
 
    Collection<String> selecioneSeriesPor(Escola escolaEncontrada);
 
+   void alterarQuantidade(Escola escolaModel, String serie, Item item) throws FoiNao;
+
 }

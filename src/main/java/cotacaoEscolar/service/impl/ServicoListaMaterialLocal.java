@@ -61,7 +61,6 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
    public void remover(final Escola escola, final String serie, final Item item) throws FoiNao {
       final ListaMaterial lista = this.selecionePor(escola, serie);
       lista.removerItem(item);
-      this.repository.salvaSaPorra(lista);
    }
 
    @Override
@@ -78,6 +77,13 @@ public class ServicoListaMaterialLocal implements ServicoListaMaterial {
 
    private Collection<ListaMaterial> protegerDoBanco(final Collection<ListaMaterial> materiais) {
       return materiais == null ? Collections.emptyList() : materiais;
+   }
+
+   @Override
+   public void alterarQuantidade(final Escola escola, final String serie, final Item item) throws FoiNao {
+      final ListaMaterial lista = this.selecionePor(escola, serie);
+      lista.alterarItem(item);
+      this.repository.salvaSaPorra(lista);
    }
 
 }

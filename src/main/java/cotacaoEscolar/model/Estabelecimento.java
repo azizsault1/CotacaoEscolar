@@ -46,7 +46,7 @@ public class Estabelecimento {
    }
 
    public ResultadoCotacaoEstabelecimento cotar(final ListaMaterial lista) {
-      final ResultadoCotacaoEstabelecimento resultado = new ResultadoCotacaoEstabelecimento(this.nome);
+      final ResultadoCotacaoEstabelecimento resultado = new ResultadoCotacaoEstabelecimento(this.logo, this.nome);
 
       lista.getItens().forEach(item -> {
          final Optional<Produto> produtoOpt = this.produtos.quero(item);

@@ -16,11 +16,11 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
    private final List<Item> itensNaoEncontrados;
    private BigDecimal total;
 
-   public ResultadoCotacaoEstabelecimento(final String nome) {
+   public ResultadoCotacaoEstabelecimento(final String logo, final String nome) {
       this.produtosEncontrados = new ArrayList<>();
       this.itensNaoEncontrados = new ArrayList<>();
       this.nome = nome;
-      this.logo = nome + "_logo.png";
+      this.logo = logo;
       this.total = BigDecimal.ZERO;
    }
 
@@ -31,6 +31,10 @@ public class ResultadoCotacaoEstabelecimento implements Comparable<ResultadoCota
 
    public void naoEncontrei(final Item item) {
       this.itensNaoEncontrados.add(item);
+   }
+
+   public String getLogo() {
+      return this.logo;
    }
 
    public String getNome() {

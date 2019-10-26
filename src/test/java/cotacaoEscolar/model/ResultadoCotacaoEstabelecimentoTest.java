@@ -10,7 +10,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado0e200QuandoComparados200TemQueSerMenorQue0() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("logo", "Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
 
       Mockito.when(resultadoCotacao2.getTotal()).thenReturn(BigDecimal.valueOf(200));
@@ -21,7 +21,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado200e0QuandoComparados200TemQueSerMenorQue0() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("logo", "Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
 
       final int quantidadeProcurada = 2;
@@ -39,7 +39,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado0e0QuandoComparadosTemQueRetornarIguais() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("logo", "Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
 
       Mockito.when(resultadoCotacao2.getTotal()).thenReturn(BigDecimal.valueOf(0));
@@ -50,7 +50,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado200e300QuandoComparadosTemQueRetornar200MenorQue300() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("logo", "Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
       final int quantidadeProcurada = 2;
       final int quantidadeEncontrada = 2;
@@ -67,7 +67,7 @@ public class ResultadoCotacaoEstabelecimentoTest {
 
    @Test
    public void dado200e100QuandoComparadosTemQueRetornar200MenorQue300() {
-      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("Estabelecimento 1");
+      final ResultadoCotacaoEstabelecimento resultadoCotacao = new ResultadoCotacaoEstabelecimento("logo", "Estabelecimento 1");
       final ResultadoCotacaoEstabelecimento resultadoCotacao2 = Mockito.mock(ResultadoCotacaoEstabelecimento.class);
       final int quantidadeProcurada = 2;
       final int quantidadeEncontrada = 2;

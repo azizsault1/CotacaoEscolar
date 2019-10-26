@@ -127,9 +127,10 @@ public class ControllerAlteracaoRest {
 
    @CrossOrigin(origins = "*")
    @ApiOperation(value = "Remove um item em uma escola e serie.")
-   @DeMapping(value = "item/{escola}/{serie}", produces = "application/json", consumes = "application/json")
-   public Item removerItem(@PathVariable final String escola, @PathVariable final String serie, @RequestBody final Item item) throws FoiNao {
+   @DeMapping(value = "item/{escola}/{serie}/{descricaoItem}/{quantidade}", produces = "application/json", consumes = "application/json")
+   public Item removerItem(@PathVariable final String escola, @PathVariable final String serie, @PathVariable final String descricaoItem, @PathVariable final int quantidade) throws FoiNao {
       final Serie serieModel = new Serie(escola, serie);
+      final Item item = new Item(descricaoItem, quantidade);
       this.servicoListaMaterial.remover(serieModel.getEscolaModel(), serie, item);
       return item;
    }

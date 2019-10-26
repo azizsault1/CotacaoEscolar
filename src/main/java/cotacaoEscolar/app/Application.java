@@ -8,6 +8,8 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import cotacaoEscolar.app.ApplicationSwing.TipoDessaPorra;
+import cotacaoEscolar.repository.LocalDb;
 import cotacaoEscolar.repository.json.JsonRepository;
 import cotacaoEscolar.service.ServicoDescricaoMaterialEscolar;
 import cotacaoEscolar.service.ServicoEscola;
@@ -24,30 +26,39 @@ import io.swagger.annotations.Api;
 @SpringBootApplication(scanBasePackages = { "cotacaoEscolar" })
 public class Application {
 
-   private static JsonRepository tamburete;
+   private static EscolhaUmBancoNessaPorra oowww;
 
    @Bean
    public ServicoEscola servicoEscola() {
-      return new ServicoEscolaLocal(tamburete.meDaUmBancoDeEscola());
+      return new ServicoEscolaLocal(oowww.meDaUmBancoDeEscola());
    }
 
    @Bean
    public ServicoListaMaterial getMaterial() {
-      return new ServicoListaMaterialLocal(tamburete.meDaUmBancoDeListaMaterial());
+      return new ServicoListaMaterialLocal(oowww.meDaUmBancoDeListaMaterial());
    }
 
    @Bean
    public ServicoEstabelecimento getEstabelecimento() {
-      return new ServicoEstabelecimentoLocal(tamburete.meDaUmBancoDeestabelecimentos());
+      return new ServicoEstabelecimentoLocal(oowww.meDaUmBancoDeestabelecimentos());
    }
 
    @Bean
    public ServicoDescricaoMaterialEscolar getDescricao() {
-      return new ServicoDescricaoMaterialEscolarLocal(tamburete.meDaUmBancoDeMaterial());
+      return new ServicoDescricaoMaterialEscolarLocal(oowww.meDaUmBancoDeMaterial());
    }
 
    public static void main(final String[] args) throws IOException, GeneralSecurityException {
-      tamburete = new JsonRepository("src/main/resources/dbfiles/");
+      final TipoDessaPorra bancoEscolhido = TipoDessaPorra.LOCAL;
+
+      switch (bancoEscolhido) {
+      case JSON:
+         oowww = new JsonRepository("src/main/resources/dbfiles/");
+         break;
+      default:
+         oowww = new LocalDb();
+      }
+
       SpringApplication.run(Application.class, args);
    }
 

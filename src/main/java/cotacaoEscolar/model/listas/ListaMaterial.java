@@ -1,6 +1,7 @@
 package cotacaoEscolar.model.listas;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class ListaMaterial implements Serializable {
 
       this.escola = escola;
       this.serie = serie;
-      this.itens = itens;
+      this.itens = new ArrayList<>(itens);
    }
 
    public Escola getEscola() {

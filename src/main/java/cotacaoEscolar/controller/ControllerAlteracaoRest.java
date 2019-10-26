@@ -115,7 +115,7 @@ public class ControllerAlteracaoRest {
       return estabelecimento;
 
    }
-   
+
    @CrossOrigin(origins = "*")
    @ApiOperation(value = "Adiciona um item em uma escola e serie.")
    @PostMapping(value = "item/{escola}/{serie}", produces = "application/json", consumes = "application/json")

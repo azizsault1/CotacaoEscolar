@@ -47,7 +47,7 @@ public class JsonEstabelecimentosTest {
       final Produto produto2 = Produto.create(materialEscolar2, valor2, quantidade2);
       final List<Produto> produtos = Arrays.asList(produto1, produto2);
       final ListaProduto listaProduto = new ListaProduto(produtos);
-      final Estabelecimento estabelecimento = Estabelecimento.create("Estabelecimento1", listaProduto);
+      final Estabelecimento estabelecimento = Estabelecimento.create("logo", "Estabelecimento1", listaProduto);
       this.tamburete.salvaSaPorra(estabelecimento);
 
       final ListaEstabelecimento result = this.tamburete.estabelecimentos();
@@ -67,7 +67,7 @@ public class JsonEstabelecimentosTest {
       final Produto produto2 = Produto.create(materialEscolar2, valor2, quantidade2);
       final List<Produto> produtos = Arrays.asList(produto1, produto2);
       final ListaProduto listaProduto = new ListaProduto(produtos);
-      final Estabelecimento estabelecimento = Estabelecimento.create("Estabelecimento1", listaProduto);
+      final Estabelecimento estabelecimento = Estabelecimento.create("logo", "Estabelecimento1", listaProduto);
       this.tamburete.salvaSaPorra(estabelecimento);
 
       final Optional<Estabelecimento> result = this.tamburete.selecionePor(estabelecimento);
@@ -76,7 +76,7 @@ public class JsonEstabelecimentosTest {
 
    @Test
    public void testeBuscarEstabelecimentoInexistente() {
-      final Estabelecimento estabelecimento = Estabelecimento.create("CantinaZezinho");
+      final Estabelecimento estabelecimento = Estabelecimento.createParaBusca("CantinaZezinho");
       this.tamburete.selecionePor(estabelecimento);
    }
 }

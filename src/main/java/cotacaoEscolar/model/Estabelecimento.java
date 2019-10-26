@@ -15,20 +15,30 @@ import io.swagger.annotations.ApiModel;
 @JsonSerialize
 public class Estabelecimento {
 
+   private final String logo;
    private final String nome;
    private final ListaProduto produtos;
 
    private Estabelecimento(final String nome) {
-      this(nome, new ListaProduto());
+      this("", nome);
    }
 
-   private Estabelecimento(final String nome, final ListaProduto produtos) {
+   private Estabelecimento(final String logo, final String nome) {
+      this(logo, nome, new ListaProduto());
+   }
+
+   private Estabelecimento(final String logo, final String nome, final ListaProduto produtos) {
+      this.logo = logo;
       this.produtos = produtos;
       this.nome = nome;
    }
 
    public String getNome() {
       return this.nome;
+   }
+
+   public String getLogo() {
+      return this.logo;
    }
 
    public List<Produto> getProdutos() {
@@ -88,19 +98,25 @@ public class Estabelecimento {
    }
 
    @JsonCreator
-   public static Estabelecimento create(@JsonProperty("nome") final String nome) {
+   public static Estabelecimento createParaBusca(@JsonProperty("nome") final String nome) {
       validarNome(nome);
       return new Estabelecimento(nome);
    }
 
-   public static Estabelecimento create(final String nome, final ListaProduto listaProduto) {
+   public static Estabelecimento create(final String logo, final String nome, final ListaProduto listaProduto) {
       validarNome(nome);
 
       if (listaProduto == null) {
          throw new IllegalArgumentException("Porra velho, se não quiser passar uma lista de produto, chame: Estabelecimento.create(String)");
       }
 
-      return new Estabelecimento(nome, listaProduto);
+      return new Estabelecimento(logo, nome, listaProduto);
+   }
+
+   public static Estabelecimento create(final String logo, final String nome) {
+      validarNome(nome);
+
+      return new Estabelecimento(logo, nome);
    }
 
    private static void validarNome(final String nome) {

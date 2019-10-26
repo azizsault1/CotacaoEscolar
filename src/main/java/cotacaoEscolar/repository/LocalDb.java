@@ -111,23 +111,23 @@ public class LocalDb implements EscolhaUmBancoNessaPorra {
 
       // Estabelecimento1
       final ListaProduto produtosEstabelecimento1 = new ListaProduto(todos.get(0), todos.get(1));
-      final Estabelecimento estabelecimento1 = Estabelecimento.create("Estabelecimento1", produtosEstabelecimento1);
+      final Estabelecimento estabelecimento1 = Estabelecimento.create("luiza_logo.png", "Magazine Luiza", produtosEstabelecimento1);
 
       // Estabelecimento2
       final ListaProduto produtosEstabelecimento2 = new ListaProduto(todos);
-      final Estabelecimento estabelecimento2 = Estabelecimento.create("Estabelecimento2", produtosEstabelecimento2);
+      final Estabelecimento estabelecimento2 = Estabelecimento.create("lebiscuit_logo.png", "Le Biscuit", produtosEstabelecimento2);
 
       // Estabelecimento3
       final ListaProduto produtosEstabelecimento3 = new ListaProduto(todos.get(9), todos.get(8), todos.get(7), todos.get(6), todos.get(5), todos.get(4));
-      final Estabelecimento estabelecimento3 = Estabelecimento.create("Estabelecimento3", produtosEstabelecimento3);
+      final Estabelecimento estabelecimento3 = Estabelecimento.create("saraiva_logo.png", "Saraiva", produtosEstabelecimento3);
 
       // Estabelecimento4
       final ListaProduto produtosEstabelecimento4 = new ListaProduto(todos.get(0), todos.get(2), todos.get(4), todos.get(6), todos.get(8));
-      final Estabelecimento estabelecimento4 = Estabelecimento.create("Estabelecimento4", produtosEstabelecimento4);
+      final Estabelecimento estabelecimento4 = Estabelecimento.create("americanas_logo.png", "Americanas", produtosEstabelecimento4);
 
       // Estabelecimento5
       final ListaProduto produtosEstabelecimento5 = new ListaProduto(todos.get(1), todos.get(3), todos.get(5), todos.get(7), todos.get(9));
-      final Estabelecimento estabelecimento5 = Estabelecimento.create("Estabelecimento5", produtosEstabelecimento5);
+      final Estabelecimento estabelecimento5 = Estabelecimento.create("livrariacultura_logo.png", "Livraria Cultura", produtosEstabelecimento5);
 
       this.estabelecimentos = new ListaEstabelecimento(Arrays.asList(estabelecimento1, estabelecimento2, estabelecimento3, estabelecimento4, estabelecimento5));
    }

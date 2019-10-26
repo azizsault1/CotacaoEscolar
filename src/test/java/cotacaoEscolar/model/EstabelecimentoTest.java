@@ -21,7 +21,7 @@ public class EstabelecimentoTest {
 
    public EstabelecimentoTest() {
       this.produtos = Mockito.mock(ListaProduto.class);
-      this.estabelecimento = Estabelecimento.create("Estabelecimento1", this.produtos);
+      this.estabelecimento = Estabelecimento.create("Logo", "Estabelecimento1", this.produtos);
    }
 
    @Test

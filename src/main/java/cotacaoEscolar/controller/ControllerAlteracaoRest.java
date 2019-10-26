@@ -91,9 +91,9 @@ public class ControllerAlteracaoRest {
 
    @CrossOrigin(origins = "*")
    @ApiOperation(value = "Salva um estabelecimento.")
-   @PostMapping(value = "estabelcimento", produces = "application/json", consumes = "application/json")
-   public Estabelecimento estabelecimento(@RequestBody final String nome) throws FoiNao {
-      final Estabelecimento estabelecimento = Estabelecimento.create(nome);
+   @PostMapping(value = "estabelcimento/{logo}", produces = "application/json", consumes = "application/json")
+   public Estabelecimento estabelecimento(@PathVariable final String logo, @RequestBody final String nome) throws FoiNao {
+      final Estabelecimento estabelecimento = Estabelecimento.create(logo, nome);
       this.servicoEstabelecimento.salvar(estabelecimento);
       return estabelecimento;
    }
@@ -102,7 +102,7 @@ public class ControllerAlteracaoRest {
    @ApiOperation(value = "Adiciona uma lista de produtos em um estabelecimento.")
    @PostMapping(value = "estabelcimento/{nome}/produtos", produces = "application/json", consumes = "application/json")
    public Estabelecimento adicionarProduto(@PathVariable final String nome, @RequestBody final List<Produto> produtos) throws FoiNao {
-      final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.create(nome);
+      final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.createParaBusca(nome);
       final Optional<Estabelecimento> estabelecimentoEncontradoOpt = this.servicoEstabelecimento.selecionePor(vouProcurarEstabelecimento);
 
       if (!estabelecimentoEncontradoOpt.isPresent()) {
@@ -129,7 +129,7 @@ public class ControllerAlteracaoRest {
    @ApiOperation(value = "Adiciona um produto no estabelecimento.")
    @PostMapping(value = "estabelcimento/{nome}/produto", produces = "application/json", consumes = "application/json")
    public Estabelecimento adicionarProduto(@PathVariable final String nome, @RequestBody final Produto produto) throws FoiNao {
-      final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.create(nome);
+      final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.createParaBusca(nome);
       final Optional<Estabelecimento> estabelecimentoEncontradoOpt = this.servicoEstabelecimento.selecionePor(vouProcurarEstabelecimento);
 
       if (!estabelecimentoEncontradoOpt.isPresent()) {

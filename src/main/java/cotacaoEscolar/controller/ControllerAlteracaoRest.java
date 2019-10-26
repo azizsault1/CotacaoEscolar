@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -99,26 +100,8 @@ public class ControllerAlteracaoRest {
    }
 
    @CrossOrigin(origins = "*")
-   @ApiOperation(value = "Adiciona uma lista de produtos em um estabelecimento.")
-   @PostMapping(value = "estabelcimento/{nome}/produtos", produces = "application/json", consumes = "application/json")
-   public Estabelecimento adicionarProduto(@PathVariable final String nome, @RequestBody final List<Produto> produtos) throws FoiNao {
-      final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.createParaBusca(nome);
-      final Optional<Estabelecimento> estabelecimentoEncontradoOpt = this.servicoEstabelecimento.selecionePor(vouProcurarEstabelecimento);
-
-      if (!estabelecimentoEncontradoOpt.isPresent()) {
-         throw new IllegalError("Tah moscando pivete? Que estabelecimento eh esse? [" + nome + "]");
-      }
-
-      final Estabelecimento estabelecimento = estabelecimentoEncontradoOpt.get();
-      produtos.forEach(produto -> estabelecimento.adicioneMaisUmProdutoAe(produto));
-      this.servicoEstabelecimento.salvar(estabelecimento);
-      return estabelecimento;
-
-   }
-
-   @CrossOrigin(origins = "*")
    @ApiOperation(value = "Adiciona um item em uma escola e serie.")
-   @DeleteMapping(value = "item/{escola}/{serie}", produces = "application/json", consumes = "application/json")
+   @PostMapping(value = "item/{escola}/{serie}", produces = "application/json", consumes = "application/json")
    public Item adicionarItem(@PathVariable final String escola, @PathVariable final String serie, @RequestBody final Item item) throws FoiNao {
       final Serie serieModel = new Serie(escola, serie);
       this.servicoListaMaterial.adicionar(serieModel.getEscolaModel(), serie, item);
@@ -127,8 +110,9 @@ public class ControllerAlteracaoRest {
 
    @CrossOrigin(origins = "*")
    @ApiOperation(value = "Remove um item em uma escola e serie.")
-   @DeMapping(value = "item/{escola}/{serie}/{descricaoItem}/{quantidade}", produces = "application/json", consumes = "application/json")
-   public Item removerItem(@PathVariable final String escola, @PathVariable final String serie, @PathVariable final String descricaoItem, @PathVariable final int quantidade) throws FoiNao {
+   @DeleteMapping(value = "item/{escola}/{serie}/{descricaoItem}/{quantidade}", produces = "application/json", consumes = "application/json")
+   public Item removerItem(@PathVariable final String escola, @PathVariable final String serie, @PathVariable final String descricaoItem,
+         @PathVariable final int quantidade) throws FoiNao {
       final Serie serieModel = new Serie(escola, serie);
       final Item item = new Item(descricaoItem, quantidade);
       this.servicoListaMaterial.remover(serieModel.getEscolaModel(), serie, item);
@@ -149,6 +133,24 @@ public class ControllerAlteracaoRest {
       final Estabelecimento estabelecimento = estabelecimentoEncontradoOpt.get();
 
       estabelecimento.adicioneMaisUmProdutoAe(produto);
+      this.servicoEstabelecimento.salvar(estabelecimento);
+      return estabelecimento;
+
+   }
+
+   @CrossOrigin(origins = "*")
+   @ApiOperation(value = "Adiciona uma lista de produtos em um estabelecimento.")
+   @PostMapping(value = "estabelcimento/{nome}/produtos", produces = "application/json", consumes = "application/json")
+   public Estabelecimento adicionarProdutos(@PathVariable final String nome, @RequestBody final List<Produto> produtos) throws FoiNao {
+      final Estabelecimento vouProcurarEstabelecimento = Estabelecimento.createParaBusca(nome);
+      final Optional<Estabelecimento> estabelecimentoEncontradoOpt = this.servicoEstabelecimento.selecionePor(vouProcurarEstabelecimento);
+
+      if (!estabelecimentoEncontradoOpt.isPresent()) {
+         throw new IllegalError("Tah moscando pivete? Que estabelecimento eh esse? [" + nome + "]");
+      }
+
+      final Estabelecimento estabelecimento = estabelecimentoEncontradoOpt.get();
+      produtos.forEach(produto -> estabelecimento.adicioneMaisUmProdutoAe(produto));
       this.servicoEstabelecimento.salvar(estabelecimento);
       return estabelecimento;
 

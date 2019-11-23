@@ -182,8 +182,7 @@ public class ServicoListaMaterialLocalTest {
       Mockito.when(listaMaterial.getItens()).thenReturn(itens);
 
       this.servico.alterarQuantidade(escola, serie, itemARemover);
-      assertTrue(itens.isEmpty());
-      Mockito.verify(this.repository, Mockito.never()).salvaSaPorra(Mockito.any(ListaMaterial.class));
+      Mockito.verify(this.repository, Mockito.times(1)).salvaSaPorra(Mockito.any(ListaMaterial.class));
    }
 
    @Test

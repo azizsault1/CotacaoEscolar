@@ -10,6 +10,5 @@ build
 .project
 .settings/*
 .idea
-gradlew
 /.metadata/
 src/main/resources/dbfiles/
